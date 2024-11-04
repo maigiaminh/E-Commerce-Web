@@ -88,11 +88,71 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\about\1.mp4" />
+    <Content Include="Content\img\about\a1.png" />
+    <Content Include="Content\img\about\a2.jpg" />
+    <Content Include="Content\img\about\a3.png" />
+    <Content Include="Content\img\about\a4.png" />
+    <Content Include="Content\img\about\a5.jpg" />
+    <Content Include="Content\img\about\a6.jpg" />
+    <Content Include="Content\img\about\banner.png" />
+    <Content Include="Content\img\banner\b1.jpg" />
+    <Content Include="Content\img\banner\b10.jpg" />
+    <Content Include="Content\img\banner\b14.png" />
+    <Content Include="Content\img\banner\b16.jpg" />
+    <Content Include="Content\img\banner\b17.jpg" />
+    <Content Include="Content\img\banner\b18.jpg" />
+    <Content Include="Content\img\banner\b19.jpg" />
+    <Content Include="Content\img\banner\b2.jpg" />
+    <Content Include="Content\img\banner\b20.jpg" />
+    <Content Include="Content\img\banner\b4.jpg" />
+    <Content Include="Content\img\banner\b7.jpg" />
+    <Content Include="Content\img\blog\b1.jpg" />
+    <Content Include="Content\img\blog\b2.jpg" />
+    <Content Include="Content\img\blog\b3.jpg" />
+    <Content Include="Content\img\blog\b4.jpg" />
+    <Content Include="Content\img\blog\b5.jpg" />
+    <Content Include="Content\img\blog\b6.jpg" />
+    <Content Include="Content\img\blog\b7.jpg" />
+    <Content Include="Content\img\button.png" />
+    <Content Include="Content\img\features\f1.png" />
+    <Content Include="Content\img\features\f2.png" />
+    <Content Include="Content\img\features\f3.png" />
+    <Content Include="Content\img\features\f4.png" />
+    <Content Include="Content\img\features\f5.png" />
+    <Content Include="Content\img\features\f6.png" />
+    <Content Include="Content\img\hero4.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\pay\app.jpg" />
+    <Content Include="Content\img\pay\pay.png" />
+    <Content Include="Content\img\pay\play.jpg" />
+    <Content Include="Content\img\people\1.png" />
+    <Content Include="Content\img\people\2.png" />
+    <Content Include="Content\img\people\3.png" />
+    <Content Include="Content\img\products\f1.jpg" />
+    <Content Include="Content\img\products\f2.jpg" />
+    <Content Include="Content\img\products\f3.jpg" />
+    <Content Include="Content\img\products\f4.jpg" />
+    <Content Include="Content\img\products\f5.jpg" />
+    <Content Include="Content\img\products\f6.jpg" />
+    <Content Include="Content\img\products\f7.jpg" />
+    <Content Include="Content\img\products\f8.jpg" />
+    <Content Include="Content\img\products\n1.jpg" />
+    <Content Include="Content\img\products\n2.jpg" />
+    <Content Include="Content\img\products\n3.jpg" />
+    <Content Include="Content\img\products\n4.jpg" />
+    <Content Include="Content\img\products\n5.jpg" />
+    <Content Include="Content\img\products\n6.jpg" />
+    <Content Include="Content\img\products\n7.jpg" />
+    <Content Include="Content\img\products\n8.jpg" />
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -101,6 +161,9 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -110,7 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
