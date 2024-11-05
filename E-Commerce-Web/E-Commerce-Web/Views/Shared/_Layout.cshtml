@@ -12,17 +12,23 @@
 </head>
 <body>
     <!-- Header chung cho mọi trang -->
+
     <section id="header">
         <a href="#"><img src="@Url.Content("~/Content/img/logo.png")" class="logo" alt=""></a>
 
+        @{
+            string currentController = ViewContext.RouteData.Values["controller"].ToString();
+            string currentAction = ViewContext.RouteData.Values["action"].ToString();
+        }
+
         <div>
             <ul id="navbar">
-                <li><a class="active" href="@Url.Action("Index", "Home")">Home</a></li>
-                <li><a href="@Url.Action("Shop", "Home")">Shop</a></li>
-                <li><a href="@Url.Action("Blog", "Home")">Blog</a></li>
-                <li><a href="@Url.Action("About", "Home")">About</a></li>
-                <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
-                <li id="lg-bag"><a href="@Url.Action("Cart", "Home")"><i class="far fa-shopping-bag"></i></a></li>
+                <li><a class="@(currentController == "Home" && currentAction == "Index" ? "active" : "")" href="@Url.Action("Index", "Home")">Home</a></li>
+                <li><a class="@(currentController == "Home" && (currentAction == "Shop" || currentAction == "ProductDetails") ? "active" : "")" href="@Url.Action("Shop", "Home")">Shop</a></li>
+                <li><a class="@(currentController == "Home" && currentAction == "Blog" ? "active" : "")" href="@Url.Action("Blog", "Home")">Blog</a></li>
+                <li><a class="@(currentController == "Home" && currentAction == "About" ? "active" : "")" href="@Url.Action("About", "Home")">About</a></li>
+                <li><a class="@(currentController == "Home" && currentAction == "Contact" ? "active" : "")" href="@Url.Action("Contact", "Home")">Contact</a></li>
+                <li id="lg-bag"><a class="@(currentController == "Home" && currentAction == "Cart" ? "active" : "")" href="@Url.Action("Cart", "Home")"><i class="far fa-shopping-bag"></i></a></li>
                 <a href="#" id="close"><i class="far fa-times"></i></a>
             </ul>
         </div>
