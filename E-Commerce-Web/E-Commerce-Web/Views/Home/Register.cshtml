@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<section id="page-header" class="register-header">
+    <h2>Register</h2>
+    <p>Create a new account to join us.</p>
+</section>
+
+<section id="form-details" class="section-p1 register">
+    <div class="form-image register">
+        <img src="@Url.Content("~/Content/img/about/a6.jpg")" alt="">
+    </div>
+    <form action="@Url.Action("Register", "Home")" method="post" class="register-form">
+        <span>CREATE YOUR ACCOUNT</span>
+        <h2>Enter your information</h2>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+        <button type="submit" class="normal">Register</button>
+        <p>Already have an account? <a href="@Url.Action("Login", "Home")">Login here</a></p>
+    </form>
+</section>

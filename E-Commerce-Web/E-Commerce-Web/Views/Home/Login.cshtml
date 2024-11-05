@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="page-header" class="login-header">
+    <h2>Login</h2>
+    <p>Welcome back! Please log in to continue.</p>
+</section>
+
+<section id="form-details" class="section-p1">
+    <form action="@Url.Action("Login", "Home")" method="post" class="login-form">
+        <span>LOGIN TO YOUR ACCOUNT</span>
+        <h2>Enter your credentials</h2>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" class="normal">Login</button>
+        <p>Don't have an account? <a href="@Url.Action("Register", "Home")">Register here</a></p>
+    </form>
+
+    <div class="form-image">
+        <img src="@Url.Content("~/Content/img/about/a6.jpg")" alt="">
+    </div>
+</section>
