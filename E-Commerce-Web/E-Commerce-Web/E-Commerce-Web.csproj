@@ -88,10 +88,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\img\about\1.mp4" />
-    <Content Include="Content\img\about\a1.png" />
-    <Content Include="Content\img\about\a2.jpg" />
-    <Content Include="Content\img\about\a3.png" />
     <Content Include="Content\img\about\a4.png" />
     <Content Include="Content\img\about\a5.jpg" />
     <Content Include="Content\img\about\a6.jpg" />
@@ -153,6 +149,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -172,6 +169,7 @@
     <Content Include="Views\Home\ProductDetails.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

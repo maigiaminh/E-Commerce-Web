@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="user-dashboard" class="section-p1">
+    <nav class="tab-nav">
+        <ul>
+            <li class="tab-link active" onclick="openTab(event, 'update-info')">Update Information</li>
+            <li class="tab-link" onclick="openTab(event, 'change-password')">Change Password</li>
+            <li class="tab-link" onclick="openTab(event, 'order-history')">Order History</li>
+            <div class="tab-indicator"></div>
+
+        </ul>
+    </nav>
+
+    <section id="form-details" class="profile">
+        <div class="tab-content">
+            <div id="update-info" class="tab-pane active">
+                <h2>Update Information</h2>
+                <form>
+                    <input type="text" name="fullname" placeholder="Full Name" required="">
+                    <input type="email" name="email" placeholder="Email" required="">
+                    <input type="text" name="phone" placeholder="Phone Number" required="">
+                    <textarea name="address" placeholder="Address"></textarea>
+                    <button type="submit" class="normal">Save Changes</button>
+                </form>
+            </div>
+
+            <div id="change-password" class="tab-pane">
+                <h2>Change Password</h2>
+                <form>
+                    <input type="password" name="oldPassword" placeholder="Current Password" required="">
+                    <input type="password" name="newPassword" placeholder="New Password" required="">
+                    <input type="password" name="confirmPassword" placeholder="Confirm New Password" required="">
+                    <button type="submit" class="normal">Change Password</button>
+                </form>
+            </div>
+
+            <div id="order-history" class="tab-pane order-history">
+                <h2>Order History</h2>
+                <p>Your recent orders will appear here.</p>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+
+<script>
+    function openTab(event, tabId) {
+        var tabContent = document.getElementsByClassName("tab-pane");
+        for (var i = 0; i < tabContent.length; i++) {
+            tabContent[i].classList.remove("active");
+        }
+
+        var tabLinks = document.getElementsByClassName("tab-link");
+        for (var i = 0; i < tabLinks.length; i++) {
+            tabLinks[i].classList.remove("active");
+        }
+
+        document.getElementById(tabId).classList.add("active");
+        event.currentTarget.classList.add("active");
+
+        var tabIndex = Array.from(tabLinks).indexOf(event.currentTarget);
+        document.querySelector(".tab-indicator").style.left = (tabIndex * 33.33) + "%";
+    }
+</script>
