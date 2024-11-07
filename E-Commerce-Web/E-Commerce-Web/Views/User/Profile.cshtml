@@ -19,14 +19,21 @@
         <div class="tab-content">
             <div id="update-info" class="tab-pane active">
                 <h2>Update Information</h2>
-                <form action="@Url.Action("UpdateInformation", "User")" method="post">
+                <form action="@Url.Action("UpdateInformation", "User")" method="post" enctype="multipart/form-data">
+                    <div class="avatar-upload">
+                        <div class="avatar-preview">
+                            <img src="@Url.Content("~/Content/img/avt/" + Model.Avatar.ToString())" id="avatarPreview" alt="Current Avatar" class="profile-avt">
+                        </div>
+                    </div>
+                    <input type="file" name="avatar" id="avatarUpload" accept="image/*" onchange="previewAvatar(event)">
+
                     <input value="@Model.FullName" type="text" name="fullname" placeholder="Full Name" required="">
                     <input value="@Model.Email" type="email" name="email" placeholder="Email" required="" disabled>
                     <input value="@Model.Phone" type="number" name="phone" placeholder="Phone Number" required="">
                     <select name="city" required>
                         @if (Model.City == null)
                         {
-                            <option disabled selected value> -- Select your city -- </option>
+                            <option disabled selected value=""> -- Select your city -- </option>
                         }
                         else if (Model.City == "Ho Chi Minh")
                         {
@@ -50,7 +57,7 @@
                         <option value="Dong Nai">Dong Nai</option>
 
                     </select>
-                    <textarea value="@Model.Address" name="address" placeholder="Address"></textarea>
+                    <textarea style="resize:none" value="@Model.Address" name="address" placeholder="Address">@Model.Address</textarea>
                     <button type="submit" class="normal">Save Changes</button>
                 </form>
             </div>
@@ -138,5 +145,13 @@
 
     function closeSuccessModal() {
         document.getElementById("successModal").style.display = "none";
+    }
+
+    function previewAvatar(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById("avatarPreview").src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
     }
 </script>

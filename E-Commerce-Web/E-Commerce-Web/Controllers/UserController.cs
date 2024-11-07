@@ -144,6 +144,8 @@ namespace E_Commerce_Web.Controllers
 
             return RedirectToAction("Login", "User");
         }
+        [HttpGet]
+
         public ActionResult Profile()
         {
             if (Session["UserID"] == null)
@@ -160,13 +162,16 @@ namespace E_Commerce_Web.Controllers
         [HttpPost]
         public ActionResult ChangePassword(string oldPass, string newPass, string confirmPass)
         {
+            int userID = Convert.ToInt32(Session["UserID"]);
+            var user = _context.Users.FirstOrDefault(u => u.UserID == userID);
+
             if (newPass != confirmPass)
             {
                 ViewBag.ErrorMessage = "Passwords do not match. Please try again!";
                 ViewBag.OldPassword = oldPass;
                 ViewBag.NewPassword = newPass;
                 ViewBag.ConfirmPassword = confirmPass;
-                return View("Profile");
+                return View("Profile", user);
             }
 
             else if (newPass.Length < 8)
@@ -175,11 +180,9 @@ namespace E_Commerce_Web.Controllers
                 ViewBag.OldPassword = oldPass;
                 ViewBag.NewPassword = newPass;
                 ViewBag.ConfirmPassword = confirmPass;
-                return View("Profile");
+                return View("Profile", user);
             }
 
-            int userID = Convert.ToInt32(Session["UserID"]);
-            var user = _context.Users.FirstOrDefault(u => u.UserID == userID);
             if (user != null)
             {
                 if(!PasswordHasher.VerifyPassword(oldPass, user.PasswordHash))
@@ -188,7 +191,7 @@ namespace E_Commerce_Web.Controllers
                     ViewBag.OldPassword = oldPass;
                     ViewBag.NewPassword = newPass;
                     ViewBag.ConfirmPassword = confirmPass;
-                    return View("Profile");
+                    return View("Profile", user);
                 }
                 else
                 {
@@ -199,7 +202,51 @@ namespace E_Commerce_Web.Controllers
                 }
             }
 
-            return View("Profile");
+            return View("Profile", user);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateInformation(string fullname, string phone, string email, string city, string address, HttpPostedFileBase avatar)
+        {
+            int userID = Convert.ToInt32(Session["UserID"]);
+            var user = _context.Users.FirstOrDefault(u => u.UserID == userID);
+            if (city == "")
+            {
+                ViewBag.ErrorMessage = "Please select your city";
+                return View("Profile", user);
+            }
+
+            else if (phone.Length < 10)
+            {
+                ViewBag.ErrorMessage = "Phone must greater or equals 10 number. Please try again!";
+                return View("Profile", user);
+            }
+
+            if (user != null)
+            {
+                user.FullName = fullname;
+                user.Phone = phone;
+                user.City = city;
+                user.Address = address;
+
+                if (avatar != null && avatar.ContentLength > 0)
+                {
+                    string path = Server.MapPath("~/Content/img/avt/");
+
+                    string fileName = $"{userID}{System.IO.Path.GetExtension(avatar.FileName)}";
+                    string fullPath = System.IO.Path.Combine(path, fileName);
+
+                    avatar.SaveAs(fullPath);
+
+                    user.Avatar = fileName;
+
+                    Session["Avatar"] = user.Avatar;
+                }
+                ViewBag.SuccessMessage = "Update Information successfully!";
+                _context.SaveChanges();
+            }
+
+            return View("Profile", user);
         }
     }
 }
