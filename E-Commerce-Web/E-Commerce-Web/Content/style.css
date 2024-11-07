@@ -98,35 +98,45 @@ body {
     justify-content: center;
 }
 
-    #navbar li {
-        list-style: none;
-        padding: 0 20px;
-        position: relative;
+#navbar li {
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+}
+
+#navbar li a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    transition: 0.3s ease;
+}
+
+#navbar li a:hover,
+#navbar li a.active {
+    color: #088178
+}
+
+#navbar li a.active::after,
+#navbar li a:hover::after {
+    content: "";
+    width: 30%;
+    height: 2px;
+    background: #088178;
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
+
+#navbar .avatar-img{
+    width: 32px;
+    border-radius: 16px;
+}
+
+    #navbar li a.avt-img:hover::after {
+        height: 0px;
+        bottom: 0px;
     }
-
-        #navbar li a {
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            color: #1a1a1a;
-            transition: 0.3s ease;
-        }
-
-            #navbar li a:hover,
-            #navbar li a.active {
-                color: #088178
-            }
-
-                #navbar li a.active::after,
-                #navbar li a:hover::after {
-                    content: "";
-                    width: 30%;
-                    height: 2px;
-                    background: #088178;
-                    position: absolute;
-                    bottom: -4px;
-                    left: 20px;
-                }
 
 #mobile {
     display: none;
@@ -1162,11 +1172,16 @@ footer {
         align-items: center;
     }
 
-        #mobile i {
-            color: #1a1a1a;
-            font-size: 24px;
-            padding-left: 20px;
-        }
+    #mobile i {
+        color: #1a1a1a;
+        font-size: 24px;
+        padding-left: 20px;
+    }
+
+    #mobile img {
+        width: 24px;
+        border-radius: 12px;
+    }
 
     #close {
         display: initial;

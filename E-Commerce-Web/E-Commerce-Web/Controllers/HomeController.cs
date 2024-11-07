@@ -2,6 +2,7 @@
 using E_Commerce_Web.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -51,14 +52,45 @@ namespace E_Commerce_Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Login()
         {
+            if (Session["UserID"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string email, string password)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (user != null && PasswordHasher.VerifyPassword(password, user.PasswordHash))
+            {
+                Session["UserID"] = user.UserID;
+                Session["Username"] = user.FullName;
+                Session["Avatar"] = user.Avatar;  
+                return RedirectToAction("Index", "Home"); 
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Invalid username or password.";
+                ViewBag.Email = email;
+                ViewBag.Password = password;
+                return View();
+            }
         }
 
         [HttpGet]
         public ActionResult Register()
         {
+            if (Session["UserID"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -93,7 +125,7 @@ namespace E_Commerce_Web.Controllers
                 Email = email,
                 PasswordHash = PasswordHasher.HashPassword(password),
                 CreatedAt = DateTime.Now,
-                Avatar = "~/Content/img/avt/default_avt.png" 
+                Avatar = "default_avt.jpg" 
             };
 
             _context.Users.Add(newUser);

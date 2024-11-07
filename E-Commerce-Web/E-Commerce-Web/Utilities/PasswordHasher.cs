@@ -16,5 +16,13 @@ namespace E_Commerce_Web.Utilities
                 return builder.ToString();
             }
         }
+
+        public static bool VerifyPassword(string enteredPassword, string storedHashedPassword)
+        {
+            string hashedEnteredPassword = PasswordHasher.HashPassword(enteredPassword);
+
+            return hashedEnteredPassword == storedHashedPassword;
+        }
+
     }
 }

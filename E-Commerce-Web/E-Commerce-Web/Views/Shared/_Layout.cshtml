@@ -29,13 +29,35 @@
                 <li><a class="@(currentController == "Home" && currentAction == "About" ? "active" : "")" href="@Url.Action("About", "Home")">About</a></li>
                 <li><a class="@(currentController == "Home" && currentAction == "Contact" ? "active" : "")" href="@Url.Action("Contact", "Home")">Contact</a></li>
                 <li id="lg-bag"><a class="@(currentController == "Home" && currentAction == "Cart" ? "active" : "")" href="@Url.Action("Cart", "Home")"><i class="far fa-shopping-bag"></i></a></li>
-                <li id="lg-bag"><a class="@(currentController == "Home" && currentAction == "Login" ? "active" : "")" href="@Url.Action("Login", "Home")"><i class="far fa-user"></i></a></li>
+                @if (Session["UserID"] != null)
+                {
+                    <li id="lg-bag">
+                        <a href="@Url.Action("Profile", "User")" class="avt-img">
+                            <img src="@Url.Content("~/Content/img/avt/" + Session["Avatar"].ToString())" alt="Avatar" class="avatar-img">
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li id="lg-bag"><a class="@(currentController == "Home" && currentAction == "Login" ? "active" : "")" href="@Url.Action("Login", "Home")"><i class="far fa-user"></i></a></li>
+                }
+
+
                 <a href="#" id="close"><i class="far fa-times"></i></a>
             </ul>
         </div>
 
         <div id="mobile">
-            <a href="@Url.Action("Login", "Home")"><i class="far fa-user"></i></a>
+            @if (Session["UserID"] != null)
+            {
+                <a href="@Url.Action("Profile", "User")">
+                    <img src="@Url.Content("~/Content/img/avt/" + Session["Avatar"].ToString())" alt="Avatar" class="avatar-img">
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Home")"><i class="far fa-user"></i></a>
+            }
             <a href="@Url.Action("Cart", "Home")"><i class="far fa-shopping-bag"></i></a>
             <i id="bar" class="fas fa-outdent"></i>
         </div>
