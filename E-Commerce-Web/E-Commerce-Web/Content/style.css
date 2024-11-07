@@ -49,6 +49,11 @@ p {
     margin: 40px 0;
 }
 
+.section-logout{
+    padding: 0px 110px 50px 0px;
+    justify-items: flex-end;
+}
+
 button.normal {
     font-size: 14px;
     font-weight: 600;
@@ -70,6 +75,20 @@ button.white {
     background-color: transparent;
     cursor: pointer;
     border: 1px solid #fff;
+    outline: none;
+    transition: 0.2s;
+}
+
+button.logout {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 15px 30px;
+    color: #fff;
+    background-color: #EC1A2D;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
     outline: none;
     transition: 0.2s;
 }
@@ -801,30 +820,31 @@ footer {
     overflow: hidden;
 }
 
-    #form-details.register {
-        justify-content: flex-end;
-    }
+#form-details.register {
+    justify-content: flex-end;
+}
 
-    #form-details form {
-        width: 65%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+#form-details form {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
-        #form-details form input,
-        #form-details form textarea {
-            width: 100%;
-            padding: 12px 15px;
-            outline: none;
-            margin-bottom: 20px;
-            border: 1px solid #e1e1e1
-        }
+#form-details form input,
+#form-details form textarea,
+#form-details form select {
+    width: 100%;
+    padding: 12px 15px;
+    outline: none;
+    margin-bottom: 20px;
+    border: 1px solid #e1e1e1
+}
 
-        #form-details form button {
-            background-color: #088178;
-            color: #fff;
-        }
+#form-details form button {
+    background-color: #088178;
+    color: #fff;
+}
 
     #form-details .people div {
         padding-bottom: 25px;
@@ -1120,7 +1140,7 @@ footer {
     color: #606063;
 }
 
-#form-details form button.modal-button {
+button.modal-button {
     width: 100%;
     background-color: #EC1A2D;
     color: #fff;
@@ -1132,8 +1152,16 @@ footer {
     font-size: 16px;
 }
 
-#form-details form button.modal-button:hover {
+button.modal-button.button-success {
+    background-color: #21c179;
+}
+
+button.modal-button:hover {
     background-color: #e46b75;
+}
+
+button.modal-button.button-success:hover {
+    background-color: #5fbc92;
 }
 
 
@@ -1141,6 +1169,10 @@ footer {
 @media (max-width:799px) {
     .section-p1 {
         padding: 40px 40px;
+    }
+
+    .section-logout {
+        padding: 0px 70px 20px 0px;
     }
 
     #navbar {
@@ -1253,6 +1285,10 @@ footer {
 @media (max-width: 477px) {
     .section-p1 {
         padding: 20px;
+    }
+
+    .section-logout {
+        padding: 0px 30px 20px 0px;
     }
 
     #header {

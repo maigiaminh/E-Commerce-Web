@@ -16,6 +16,9 @@ namespace E_Commerce_Web.Models
         public string PasswordHash { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
+        public string City { get; set; }
+        public bool Active { get; set; }
+        public string VerificationToken { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public string Avatar { get; set; }
     }

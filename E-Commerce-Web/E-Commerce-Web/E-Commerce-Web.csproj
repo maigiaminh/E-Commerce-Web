@@ -171,6 +171,14 @@
     <Compile Include="Migrations\202411070830158_InitialCreate.Designer.cs">
       <DependentUpon>202411070830158_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202411071659442_AddActiveColumnInUser.cs" />
+    <Compile Include="Migrations\202411071659442_AddActiveColumnInUser.Designer.cs">
+      <DependentUpon>202411071659442_AddActiveColumnInUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411071955087_AddColumnCityInUser.cs" />
+    <Compile Include="Migrations\202411071955087_AddColumnCityInUser.Designer.cs">
+      <DependentUpon>202411071955087_AddColumnCityInUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Order.cs" />
@@ -181,6 +189,7 @@
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\EmailHelper.cs" />
     <Compile Include="Utilities\PasswordHasher.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -195,9 +204,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Shop.cshtml" />
     <Content Include="Views\Home\ProductDetails.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\User\ConfirmEmail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -208,6 +218,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202411070830158_InitialCreate.resx">
       <DependentUpon>202411070830158_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411071659442_AddActiveColumnInUser.resx">
+      <DependentUpon>202411071659442_AddActiveColumnInUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411071955087_AddColumnCityInUser.resx">
+      <DependentUpon>202411071955087_AddColumnCityInUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

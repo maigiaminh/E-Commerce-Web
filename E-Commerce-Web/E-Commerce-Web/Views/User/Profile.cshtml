@@ -1,4 +1,6 @@
-﻿@{
+﻿@model E_Commerce_Web.Models.User
+
+@{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -17,21 +19,48 @@
         <div class="tab-content">
             <div id="update-info" class="tab-pane active">
                 <h2>Update Information</h2>
-                <form>
-                    <input type="text" name="fullname" placeholder="Full Name" required="">
-                    <input type="email" name="email" placeholder="Email" required="">
-                    <input type="text" name="phone" placeholder="Phone Number" required="">
-                    <textarea name="address" placeholder="Address"></textarea>
+                <form action="@Url.Action("UpdateInformation", "User")" method="post">
+                    <input value="@Model.FullName" type="text" name="fullname" placeholder="Full Name" required="">
+                    <input value="@Model.Email" type="email" name="email" placeholder="Email" required="" disabled>
+                    <input value="@Model.Phone" type="number" name="phone" placeholder="Phone Number" required="">
+                    <select name="city" required>
+                        @if (Model.City == null)
+                        {
+                            <option disabled selected value> -- Select your city -- </option>
+                        }
+                        else if (Model.City == "Ho Chi Minh")
+                        {
+                            <option value="Ho Chi Minh" selected>Ho Chi Minh</option>
+                        }
+                        else if (Model.City == "Binh Duong")
+                        {
+                            <option value="Binh Duong" selected>Binh Duong</option>
+                        }
+                        else if (Model.City == "Ben Tre")
+                        {
+                            <option value="Ben Tre" selected>Ben Tre</option>
+                        }
+                        else if (Model.City == "Dong Nai")
+                        {
+                            <option value="Dong Nai" selected>Dong Nai</option>
+                        }
+                        <option value="Ho Chi Minh">Ho Chi Minh</option>
+                        <option value="Binh Duong">Binh Duong</option>
+                        <option value="Ben Tre">Ben Tre</option>
+                        <option value="Dong Nai">Dong Nai</option>
+
+                    </select>
+                    <textarea value="@Model.Address" name="address" placeholder="Address"></textarea>
                     <button type="submit" class="normal">Save Changes</button>
                 </form>
             </div>
 
             <div id="change-password" class="tab-pane">
                 <h2>Change Password</h2>
-                <form>
-                    <input type="password" name="oldPassword" placeholder="Current Password" required="">
-                    <input type="password" name="newPassword" placeholder="New Password" required="">
-                    <input type="password" name="confirmPassword" placeholder="Confirm New Password" required="">
+                <form action="@Url.Action("ChangePassword", "User")" method="post">
+                    <input value="@ViewBag.OldPassword" type="password" name="oldPass" placeholder="Current Password" required="">
+                    <input value="@ViewBag.NewPassword" type="password" name="newPass" placeholder="New Password" required="">
+                    <input value="@ViewBag.ConfirmPassword" type="password" name="confirmPass" placeholder="Confirm New Password" required="">
                     <button type="submit" class="normal">Change Password</button>
                 </form>
             </div>
@@ -42,9 +71,32 @@
             </div>
         </div>
     </section>
+    <div class="modal" id="errorModal">
+        <div class="modal-content">
+            <img src="@Url.Content("~/Content/img/icon/error.png")" alt="Error Icon" class="modal-icon">
+            <h1 class="modal-title">
+                Error</h2>
+                <p id="errorMessage">There was an error with your registration.</p>
+                <button type="reset" onclick="closeErrorModal()" class="modal-button">Close</button>
+        </div>
+    </div>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <img src="@Url.Content("~/Content/img/icon/success.png")" alt="Success Icon" class="modal-icon">
+            <h1 class="modal-title success-title">
+                Success</h2>
+                <p id="successMessage">Registration successful, please verify your account via the email sent to you.</p>
+                <button type="reset" onclick="closeSuccessModal()" class="modal-button button-success">Close</button>
+        </div>
+    </div>
+</section>
+<section class="section-logout">
+    <form action="@Url.Action("Logout", "User")" method="post">
+        <button type="submit" class="logout">LOGOUT</button>
+    </form>
 
 </section>
-
 
 <script>
     function openTab(event, tabId) {
@@ -63,5 +115,28 @@
 
         var tabIndex = Array.from(tabLinks).indexOf(event.currentTarget);
         document.querySelector(".tab-indicator").style.left = (tabIndex * 33.33) + "%";
+    }
+
+
+    window.onload = function () {
+        var errorMessage = '@ViewBag.ErrorMessage';
+        var successMessage = '@ViewBag.SuccessMessage';
+        if (errorMessage) {
+            document.getElementById("errorMessage").innerText = errorMessage;
+            document.getElementById("errorModal").style.display = "flex";
+        }
+
+        else if (successMessage) {
+            document.getElementById("successMessage").innerText = successMessage;
+            document.getElementById("successModal").style.display = "flex";
+        }
+    }
+
+    function closeErrorModal() {
+        document.getElementById("errorModal").style.display = "none";
+    }
+
+    function closeSuccessModal() {
+        document.getElementById("successModal").style.display = "none";
     }
 </script>

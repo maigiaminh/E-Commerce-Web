@@ -39,7 +39,7 @@
                 }
                 else
                 {
-                    <li id="lg-bag"><a class="@(currentController == "Home" && currentAction == "Login" ? "active" : "")" href="@Url.Action("Login", "Home")"><i class="far fa-user"></i></a></li>
+                    <li id="lg-bag"><a class="@(currentController == "User" && currentAction == "Login" ? "active" : "")" href="@Url.Action("Login", "User")"><i class="far fa-user"></i></a></li>
                 }
 
 
@@ -56,7 +56,7 @@
             }
             else
             {
-                <a href="@Url.Action("Login", "Home")"><i class="far fa-user"></i></a>
+                <a href="@Url.Action("Login", "User")"><i class="far fa-user"></i></a>
             }
             <a href="@Url.Action("Cart", "Home")"><i class="far fa-shopping-bag"></i></a>
             <i id="bar" class="fas fa-outdent"></i>
