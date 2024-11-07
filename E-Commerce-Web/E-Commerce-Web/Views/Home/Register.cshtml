@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml"; 
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section id="page-header" class="register-header">
@@ -15,11 +15,37 @@
     <form action="@Url.Action("Register", "Home")" method="post" class="register-form">
         <span>CREATE YOUR ACCOUNT</span>
         <h2>Enter your information</h2>
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+        <input type="text" name="username" placeholder="Username" value="@ViewBag.Username" required>
+        <input type="email" name="email" placeholder="Email" value="@ViewBag.Email" required>
+        <input type="password" name="password" placeholder="Password" value="@ViewBag.Password" required>
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" value="@ViewBag.ConfirmPassword" required>
         <button type="submit" class="normal">Register</button>
         <p>Already have an account? <a href="@Url.Action("Login", "Home")">Login here</a></p>
+
+        <div class="modal" id="errorModal">
+            <div class="modal-content">
+                <img src="@Url.Content("~/Content/img/icon/error.png")" alt="Error Icon" class="modal-icon">
+                <h1 class="modal-title">
+                    Error</h2>
+                    <p id="errorMessage">There was an error with your registration.</p>
+                    <button type="reset" onclick="closeModal()" class="modal-button">Close</button>
+            </div>
+        </div>
+
+
     </form>
 </section>
+
+<script>
+    window.onload = function () {
+        var errorMessage = '@ViewBag.ErrorMessage';
+        if (errorMessage) {
+            document.getElementById("errorMessage").innerText = errorMessage;
+            document.getElementById("errorModal").style.display = "flex";
+        }
+    }
+
+    function closeModal() {
+        document.getElementById("errorModal").style.display = "none";
+    }
+</script>
