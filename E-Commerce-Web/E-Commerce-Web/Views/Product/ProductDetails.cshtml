@@ -11,37 +11,29 @@
 </section>
 
 <section id="prodetails" class="section-p1">
-    <div class="single-pro-image">
+    <div class="single-pro-image"">
         <img src="@Url.Content("~/Content/img/products/" + Model.ImagePath)" width="100%" id="MainImg" alt="">
-
-        <div class="small-img-group">
-            <div class="small-img-col">
-                <img src="@Url.Content("~/f1.jpg")" width="100%" class="small-img" alt="">
-            </div>
-            <div class="small-img-col">
-                <img src="@Url.Content("~/f2.jpg")" width="100%" class="small-img" alt="">
-            </div>
-            <div class="small-img-col">
-                <img src="@Url.Content("~/f3.jpg")" width="100%" class="small-img" alt="">
-            </div>
-            <div class="small-img-col">
-                <img src="@Url.Content("~/f4.jpg")" width="100%" class="small-img" alt="">
-            </div>
-        </div>
     </div>
-
     <div class="single-pro-details">
         <h6>Home / @Model.Category.CategoryName</h6>
         <h4 style="font-size: 32px">@Model.ProductName</h4>
         <h2 style="color: #088178">@Model.Price.ToString("C")</h2>
         <select>
-            <option>Select Size</option>
-            <option>XL</option>
-            <option>XXL</option>
-            <option>Small</option>
-            <option>Large</option>
+            <option disabled selected value=""> -- Select size -- </option>
+
+            @foreach (var size in Model.ProductSizes)
+            {
+                <option value="@size.SizeID" @(size.Stock <= 0 ? "disabled" : "")>
+                    @size.Size.Name 
+
+                    @if (size.Stock <= 0)
+                    {
+                        @: (Out of Stock)
+                    }
+                </option>
+            }
         </select>
-        <input type="number" value="1">
+        <input type="number" value="1" min="1" max="99">
         <button class="normal">Add To Cart</button>
         <h4>Product Details</h4>
         <span>@Model.Description</span>
@@ -84,21 +76,3 @@
         <button class="normal">Sign Up</button>
     </div>
 </section>
-
-<script>
-    var MainImg = document.getElementById("MainImg");
-    var smallimg = document.getElementsByClassName("small-img");
-
-    smallimg[0].onclick = function () {
-        MainImg.src = smallimg[0].src;
-    }
-    smallimg[1].onclick = function () {
-        MainImg.src = smallimg[1].src;
-    }
-    smallimg[2].onclick = function () {
-        MainImg.src = smallimg[2].src;
-    }
-    smallimg[3].onclick = function () {
-        MainImg.src = smallimg[3].src;
-    }
-</script>

@@ -204,6 +204,10 @@
     <Compile Include="Migrations\202411072122278_AddColumnImageInProduct.Designer.cs">
       <DependentUpon>202411072122278_AddColumnImageInProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202411081550012_AddProductSizes.cs" />
+    <Compile Include="Migrations\202411081550012_AddProductSizes.Designer.cs">
+      <DependentUpon>202411081550012_AddProductSizes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Order.cs" />
@@ -212,6 +216,8 @@
     <Compile Include="Models\EcommerceContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\ProductSize.cs" />
+    <Compile Include="Models\Size.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\EmailHelper.cs" />
@@ -227,7 +233,7 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Shop.cshtml" />
+    <Content Include="Views\Product\Shop.cshtml" />
     <Content Include="Views\Product\ProductDetails.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202411072122278_AddColumnImageInProduct.resx">
       <DependentUpon>202411072122278_AddColumnImageInProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411081550012_AddProductSizes.resx">
+      <DependentUpon>202411081550012_AddProductSizes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

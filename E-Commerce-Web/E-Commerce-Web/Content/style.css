@@ -280,6 +280,21 @@ body {
     position: relative;
 }
 
+#product1 .title-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+#product1 .title-bar h2{
+    font-size: 24px;
+}
+
+#product1 .title-bar select {
+    padding: 12px 15px;
+    outline: none;
+    margin-bottom: 20px;
+    border: 1px solid #e1e1e1
+}
 #product1 .pro:hover {
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
 }
@@ -592,25 +607,37 @@ footer {
     text-align: center;
 }
 
-    #pagination a {
-        text-decoration: none;
-        background-color: #088178;
-        padding: 15px 20px;
-        border-radius: 4px;
-        color: #fff;
-        font-weight: 600;
-    }
+#pagination a {
+    text-decoration: none;
+    background-color: #088178;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+}
 
-        #pagination a i {
-            font-weight: 16px;
-            font-weight: 600;
-        }
+#pagination a.selected {
+    padding: 22px 24px;
+}
 
+#pagination a i {
+    font-weight: 600;
+}
+
+#pagination a.prev {
+    background-color: #fff;
+    border: 2px solid #088178
+}
+
+#pagination a.prev i {
+    color: #088178;
+}
 
 /*Single Product */
 #prodetails {
     display: flex;
     margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 #prodetails .single-pro-image {
@@ -618,9 +645,8 @@ footer {
     margin-right: 50px;
 }
 
-
 #prodetails .single-pro-image img {
-    height: 400px;
+    height: 480px;
     object-fit: contain;
 }
 
@@ -1270,6 +1296,10 @@ button.modal-button.button-success:hover {
         margin: 15px;
     }
 
+    #product1 .title-bar {
+        padding: 0px 80px;
+    }
+
     #banner {
         height: 20vh;
     }
@@ -1378,15 +1408,28 @@ button.modal-button.button-success:hover {
         flex-direction: column;
     }
 
-        #prodetails .single-pro-image {
-            width: 100%;
-            margin-right: 0px;
-        }
+    #prodetails .single-pro-image {
+        width: 100%;
+        margin-right: 0px;
+    }
 
-        #prodetails .single-pro-details {
-            width: 100%;
-        }
+    #prodetails .single-pro-details {
+        width: 100%;
+    }
 
+    #product1 .title-bar {
+        padding: 0px 20px;
+    }
+
+    #product1 .title-bar h2{
+        font-size: 12px
+    }
+
+    #product1 .title-bar select {
+        font-size: 8px;
+        padding: 8px;
+        margin-bottom: 0px;
+    }
     /* Blog Page */
     #blog {
         padding: 100px 20px 0 20px;

@@ -13,5 +13,7 @@ namespace E_Commerce_Web.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
     }
 }

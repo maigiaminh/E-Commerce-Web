@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -19,5 +20,6 @@ namespace E_Commerce_Web.Models
         [MaxLength(255)]
         public string ImagePath { get; set; }
         public virtual Category Category { get; set; }
+        public virtual ICollection<ProductSize> ProductSizes { get; set; } = new List<ProductSize>();
     }
 }

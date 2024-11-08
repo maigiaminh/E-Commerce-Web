@@ -50,11 +50,6 @@ namespace E_Commerce_Web.Controllers
             return View();
         }
 
-        public ActionResult Shop()
-        {
-            return View();
-        }
-
         public ActionResult ProductDetails()
         {
             return View();
