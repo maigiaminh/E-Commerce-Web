@@ -16,6 +16,8 @@ namespace E_Commerce_Web.Models
         public int Stock { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        [MaxLength(255)]
+        public string ImagePath { get; set; }
         public virtual Category Category { get; set; }
     }
 }

@@ -19,6 +19,14 @@ namespace E_Commerce_Web.Controllers
 
         public ActionResult Index()
         {
+            var featuredProducts = _context.Products.Take(8).ToList(); 
+            var newArrivals = _context.Products
+                                      .OrderByDescending(p => p.CreatedAt)
+                                      .Take(8)
+                                      .ToList();
+
+            ViewBag.FeaturedProducts = featuredProducts;
+            ViewBag.NewArrivals = newArrivals; 
             return View();
         }
 

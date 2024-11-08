@@ -139,6 +139,11 @@
     <Content Include="Content\img\people\1.png" />
     <Content Include="Content\img\people\2.png" />
     <Content Include="Content\img\people\3.png" />
+    <Content Include="Content\img\products\boots.png" />
+    <Content Include="Content\img\products\cargo_pants.jpg" />
+    <Content Include="Content\img\products\cocktail_dress.jpg" />
+    <Content Include="Content\img\products\denim_jacket.jpg" />
+    <Content Include="Content\img\products\evening_gown.png" />
     <Content Include="Content\img\products\f1.jpg" />
     <Content Include="Content\img\products\f2.jpg" />
     <Content Include="Content\img\products\f3.jpg" />
@@ -147,6 +152,12 @@
     <Content Include="Content\img\products\f6.jpg" />
     <Content Include="Content\img\products\f7.jpg" />
     <Content Include="Content\img\products\f8.jpg" />
+    <Content Include="Content\img\products\formal_shoes.jpg" />
+    <Content Include="Content\img\products\graphic_tshirt.jpg" />
+    <Content Include="Content\img\products\hoodie.jpg" />
+    <Content Include="Content\img\products\khaki_shorts.jpg" />
+    <Content Include="Content\img\products\leather_jacket.jpg" />
+    <Content Include="Content\img\products\maxi_dress.jpg" />
     <Content Include="Content\img\products\n1.jpg" />
     <Content Include="Content\img\products\n2.jpg" />
     <Content Include="Content\img\products\n3.jpg" />
@@ -155,6 +166,15 @@
     <Content Include="Content\img\products\n6.jpg" />
     <Content Include="Content\img\products\n7.jpg" />
     <Content Include="Content\img\products\n8.jpg" />
+    <Content Include="Content\img\products\puffer_jacket.jpg" />
+    <Content Include="Content\img\products\rain_jacket.jpg" />
+    <Content Include="Content\img\products\regular_fit_jeans.png" />
+    <Content Include="Content\img\products\running_shoes.png" />
+    <Content Include="Content\img\products\slim_fit_jeans.png" />
+    <Content Include="Content\img\products\sneakers.png" />
+    <Content Include="Content\img\products\striped_polo.jpg" />
+    <Content Include="Content\img\products\summer_dress.jpg" />
+    <Content Include="Content\img\products\white_tshirt.png" />
     <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\script.js" />
@@ -178,6 +198,10 @@
     <Compile Include="Migrations\202411071955087_AddColumnCityInUser.cs" />
     <Compile Include="Migrations\202411071955087_AddColumnCityInUser.Designer.cs">
       <DependentUpon>202411071955087_AddColumnCityInUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411072122278_AddColumnImageInProduct.cs" />
+    <Compile Include="Migrations\202411072122278_AddColumnImageInProduct.Designer.cs">
+      <DependentUpon>202411072122278_AddColumnImageInProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\OrderDetail.cs" />
@@ -224,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202411071955087_AddColumnCityInUser.resx">
       <DependentUpon>202411071955087_AddColumnCityInUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411072122278_AddColumnImageInProduct.resx">
+      <DependentUpon>202411072122278_AddColumnImageInProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
