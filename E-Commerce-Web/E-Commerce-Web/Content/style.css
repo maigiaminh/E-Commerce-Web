@@ -583,10 +583,10 @@ footer {
     padding: 14px;
 }
 
-    #page-header h2,
-    #page-header p {
-        color: #fff;
-    }
+#page-header h2,
+#page-header p {
+    color: #fff;
+}
 
 #pagination {
     text-align: center;
@@ -613,10 +613,16 @@ footer {
     margin-top: 20px;
 }
 
-    #prodetails .single-pro-image {
-        width: 40%;
-        margin-right: 50px;
-    }
+#prodetails .single-pro-image {
+    width: 40%;
+    margin-right: 50px;
+}
+
+
+#prodetails .single-pro-image img {
+    height: 400px;
+    object-fit: contain;
+}
 
 .small-img-group {
     display: flex;

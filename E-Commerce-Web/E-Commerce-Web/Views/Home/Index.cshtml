@@ -52,7 +52,7 @@
     <div class="pro-container">
         @foreach (var product in ViewBag.FeaturedProducts)
         {
-            <div class="pro">
+            <div class="pro" onclick="window.location.href='@Url.Action("ProductDetails", "Product", new { productId = product.ProductID })'">
                 <img src="@Url.Content("~/Content/img/products/" + product.ImagePath)" alt="">
                 <div class="des">
                     <span>@product.Category.CategoryName</span>
@@ -86,7 +86,7 @@
     <div class="pro-container">
         @foreach (var product in ViewBag.NewArrivals)
         {
-            <div class="pro">
+            <div class="pro" onclick="window.location.href='@Url.Action("ProductDetails", "Product", new { productId = product.ProductID })'">
                 <img src="@Url.Content("~/Content/img/products/" + product.ImagePath)" alt="">
                 <div class="des">
                     <span>@product.Category.CategoryName</span>
