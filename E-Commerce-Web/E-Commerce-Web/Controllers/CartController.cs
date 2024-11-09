@@ -1,8 +1,10 @@
 ﻿using E_Commerce_Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace E_Commerce_Web.Controllers
@@ -18,6 +20,30 @@ namespace E_Commerce_Web.Controllers
         public ActionResult Index()
         {
             var cart = GetCart();
+            decimal cartSubtotal = cart.Sum(item => item.Subtotal);
+            decimal shipping = 0;
+            decimal discount = 0;
+            decimal total = 0;
+
+
+            if (Session["UserID"] != null)
+            {
+                int userID = Convert.ToInt32(Session["UserID"]);
+                var user = _context.Users.FirstOrDefault(u => u.UserID == userID);
+
+                if (user.City != "Ho Chi Minh" && cartSubtotal > 0)
+                {
+                    shipping = 30;
+                }
+            }
+            
+            total = cartSubtotal + shipping - discount;
+
+            ViewBag.CartSubtotal = cartSubtotal;
+            ViewBag.Shipping = shipping;
+            ViewBag.Discount = discount;
+            ViewBag.Total = total;
+
             return View(cart);
         }
 
