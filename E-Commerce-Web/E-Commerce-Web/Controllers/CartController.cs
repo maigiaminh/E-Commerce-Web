@@ -61,5 +61,20 @@ namespace E_Commerce_Web.Controllers
         {
             Session["Cart"] = cart;
         }
+
+        [HttpPost]
+        public ActionResult RemoveFromCart(int productId, string size)
+        {
+            var cart = GetCart();
+            var itemToRemove = cart.FirstOrDefault(c => c.ProductId == productId && c.Size == size);
+
+            if (itemToRemove != null)
+            {
+                cart.Remove(itemToRemove);
+                SaveCart(cart);
+            }
+
+            return RedirectToAction("Index", "Cart");
+        }
     }
 }

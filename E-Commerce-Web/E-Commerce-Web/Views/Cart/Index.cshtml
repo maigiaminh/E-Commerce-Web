@@ -26,7 +26,15 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
+                    <td>
+                        <form action="@Url.Action("RemoveFromCart", "Cart")" method="post" style="display:inline;">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <input type="hidden" name="size" value="@item.Size" />
+                            <button type="submit" style="border: none; background: none;">
+                                <i class="far fa-times-circle" style="color: red; cursor: pointer;"></i>
+                            </button>
+                        </form>
+                    </td>
                     <td><img src="@Url.Content("~/Content/img/products/" + item.ImagePath)" alt=""></td>
                     <td>@item.ProductName &nbsp;<span style="font-weight: 600; font-style: italic">(@item.Size.ToString())</span></td>
                     <td>@item.Price.ToString("C")</td>
