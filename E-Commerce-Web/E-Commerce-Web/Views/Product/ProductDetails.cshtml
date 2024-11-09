@@ -15,7 +15,11 @@
         <img src="@Url.Content("~/Content/img/products/" + Model.ImagePath)" width="100%" id="MainImg" alt="">
     </div>
     <div class="single-pro-details">
-        <h6>Home / @Model.Category.CategoryName</h6>
+        <h6>
+            <a href="@Url.Action("Shop", "Product")">Shop</a>  
+            / 
+            <a href="@Url.Action("Shop", new { categoryId = @Model.Category.CategoryID})">@Model.Category.CategoryName</a>
+        </h6>
         <h4 style="font-size: 32px">@Model.ProductName</h4>
         <h2 style="color: #088178">@Model.Price.ToString("C")</h2>
         <select>

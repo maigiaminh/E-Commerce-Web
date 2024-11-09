@@ -13,16 +13,28 @@
 <section id="product1" class="section-p1">
     <div class="title-bar">
         <h2>All Products</h2>
+        <div>
+            <select id="categoryFilter" onchange="filterByCategory(this)">
+                <option value="">All Categories</option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.CategoryID" @(ViewBag.SelectedCategoryId == category.CategoryID ? "selected" : "")>
+                        @category.CategoryName
+                    </option>
+                }
+            </select>
 
-        <select id="sortOptions" onchange="sortProducts(this)">
-            <option value="priceAsc">Default Sorting</option>
-            <option value="priceAsc">Sort by Price: Low to High</option>
-            <option value="priceDesc">Sort by Price: High to Low</option>
-            <option value="nameAsc">Sort by Name: A to Z</option>
-            <option value="nameDesc">Sort by Name: Z to A</option>
-            <option value="dateAsc">Sort by Date: Oldest to Newest</option>
-            <option value="dateDesc">Sort by Date: Newest to Oldest</option>
-        </select>
+            <select id="sortOptions" onchange="sortProducts(this)">
+                <option value="default" @(ViewBag.SortOption == "default" ? "selected" : "")>Default Sorting</option>
+                <option value="priceAsc" @(ViewBag.SortOption == "priceAsc" ? "selected" : "")>Sort by Price: Low to High</option>
+                <option value="priceDesc" @(ViewBag.SortOption == "priceDesc" ? "selected" : "")>Sort by Price: High to Low</option>
+                <option value="nameAsc" @(ViewBag.SortOption == "nameAsc" ? "selected" : "")>Sort by Name: A to Z</option>
+                <option value="nameDesc" @(ViewBag.SortOption == "nameDesc" ? "selected" : "")>Sort by Name: Z to A</option>
+                <option value="dateAsc" @(ViewBag.SortOption == "dateAsc" ? "selected" : "")>Sort by Date: Oldest to Newest</option>
+                <option value="dateDesc" @(ViewBag.SortOption == "dateDesc" ? "selected" : "")>Sort by Date: Newest to Oldest</option>
+            </select>
+        </div>
+        
     </div>
     <div class="pro-container">
         @foreach (var product in Model)
@@ -49,7 +61,13 @@
 <section id="pagination" class="section-p1">
     @if (ViewBag.CurrentPage > 1)
     {
-        <a class="prev" href="@Url.Action("Shop", new { page = ViewBag.CurrentPage - 1 })"><i class="fal fa-long-arrow-alt-left"></i></a>
+        <a class="prev" href="@Url.Action("Shop", new {
+                             page = ViewBag.CurrentPage - 1, 
+                             sortOption = ViewBag.SortOption, 
+                             categoryId = ViewBag.SelectedCategoryId 
+                         })">
+            <i class="fal fa-long-arrow-alt-left"></i>
+        </a>
     }
 
     @{
@@ -71,12 +89,18 @@
 
     @for (int i = startPage; i <= endPage; i++)
     {
-        <a class="@(i == ViewBag.CurrentPage ? "selected" : "")" href="@Url.Action("Shop", new { page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        <a class="@(i == ViewBag.CurrentPage ? "selected" : "")" href="@Url.Action("Shop", new { page = i, sortOption = ViewBag.SortOption, categoryId = ViewBag.SelectedCategoryId })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
     }
 
     @if (ViewBag.CurrentPage < ViewBag.TotalPages)
     {
-        <a href="@Url.Action("Shop", new { page = ViewBag.CurrentPage + 1 })"><i class="fal fa-long-arrow-alt-right"></i></a>
+        <a href="@Url.Action("Shop", new { 
+                page = ViewBag.CurrentPage + 1, 
+                sortOption = ViewBag.SortOption, 
+                categoryId = ViewBag.SelectedCategoryId 
+            })">
+            <i class="fal fa-long-arrow-alt-right"></i>
+        </a>
     }
 </section>
 
@@ -90,3 +114,21 @@
         <button class="normal">Sign Up</button>
     </div>
 </section>
+
+<script>
+    function sortProducts(select) {
+        const sortOption = select.value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('sortOption', sortOption);
+        url.searchParams.set('page', 1);
+        window.location.href = url;
+    }
+
+    function filterByCategory(select) {
+        const categoryId = select.value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('categoryId', categoryId);
+        url.searchParams.set('page', 1);
+        window.location.href = url;
+    }
+</script>
