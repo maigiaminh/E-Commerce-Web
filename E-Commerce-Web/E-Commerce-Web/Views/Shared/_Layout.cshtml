@@ -28,7 +28,7 @@
                 <li><a class="@(currentController == "Home" && currentAction == "Blog" ? "active" : "")" href="@Url.Action("Blog", "Home")">Blog</a></li>
                 <li><a class="@(currentController == "Home" && currentAction == "About" ? "active" : "")" href="@Url.Action("About", "Home")">About</a></li>
                 <li><a class="@(currentController == "Home" && currentAction == "Contact" ? "active" : "")" href="@Url.Action("Contact", "Home")">Contact</a></li>
-                <li id="lg-bag"><a class="@(currentController == "Home" && currentAction == "Cart" ? "active" : "")" href="@Url.Action("Cart", "Home")"><i class="far fa-shopping-bag"></i></a></li>
+                <li id="lg-bag"><a class="@(currentController == "Cart" && currentAction == "Index" ? "active" : "")" href="@Url.Action("Index", "Cart")"><i class="far fa-shopping-bag"></i></a></li>
                 @if (Session["UserID"] != null)
                 {
                     <li id="lg-bag">
@@ -58,7 +58,7 @@
             {
                 <a href="@Url.Action("Login", "User")"><i class="far fa-user"></i></a>
             }
-            <a href="@Url.Action("Cart", "Home")"><i class="far fa-shopping-bag"></i></a>
+            <a href="@Url.Action("Index", "Cart")"><i class="far fa-shopping-bag"></i></a>
             <i id="bar" class="fas fa-outdent"></i>
         </div>
     </section>

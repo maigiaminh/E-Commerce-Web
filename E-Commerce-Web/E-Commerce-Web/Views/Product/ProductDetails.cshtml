@@ -22,24 +22,27 @@
         </h6>
         <h4 style="font-size: 32px">@Model.ProductName</h4>
         <h2 style="color: #088178">@Model.Price.ToString("C")</h2>
-        <select>
-            <option disabled selected value=""> -- Select size -- </option>
+        <form action="@Url.Action("AddToCart", "Cart")" method="post">
+            <select id="size-select" name="size" required>
+                <option disabled selected value=""> -- Select size -- </option>
 
-            @foreach (var size in Model.ProductSizes)
-            {
-                <option value="@size.SizeID" @(size.Stock <= 0 ? "disabled" : "")>
-                    @size.Size.Name 
+                @foreach (var size in Model.ProductSizes)
+                {
+                    <option value="@size.Size.Name" @(size.Stock <= 0 ? "disabled" : "")>
+                        @size.Size.Name
 
-                    @if (size.Stock <= 0)
-                    {
-                        @: (Out of Stock)
-                    }
-                </option>
-            }
-        </select>
-        <input type="number" value="1" min="1" max="99">
-        <button class="normal">Add To Cart</button>
-        <h4>Product Details</h4>
+                        @if (size.Stock <= 0)
+                        {
+                            @: (Out of Stock)
+                        }
+                    </option>
+                }
+            </select>
+            <input type="number" id="quantity" value="1" min="1" max="99" name="quantity">
+            <input type="hidden" name="productId" value="@Model.ProductID">
+            <button class="normal" type="submit">Add To Cart</button>
+        </form>
+            <h4>Product Details</h4>
         <span>@Model.Description</span>
     </div>
 </section>

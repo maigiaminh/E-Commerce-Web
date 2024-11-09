@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<E_Commerce_Web.Models.CartItem>
+
+@{
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -21,32 +23,17 @@
         </thead>
 
         <tbody>
-            <tr>
-                <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                <td><img src="@Url.Content("~/f1.jpg")" alt=""></td>
-                <td>Cartoon Astronaut T-Shirts</td>
-                <td>$118.19</td>
-                <td><input type="number" value="1"></td>
-                <td>$118.19</td>
-            </tr>
-
-            <tr>
-                <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                <td><img src="@Url.Content("~/f1.jpg")" alt=""></td>
-                <td>Cartoon Astronaut T-Shirts</td>
-                <td>$118.19</td>
-                <td><input type="number" value="1"></td>
-                <td>$118.19</td>
-            </tr>
-
-            <tr>
-                <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                <td><img src="@Url.Content("~/f1.jpg")" alt=""></td>
-                <td>Cartoon Astronaut T-Shirts</td>
-                <td>$118.19</td>
-                <td><input type="number" value="1"></td>
-                <td>$118.19</td>
-            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
+                    <td><img src="@Url.Content("~/Content/img/products/" + item.ImagePath)" alt=""></td>
+                    <td>@item.ProductName &nbsp;<span style="font-weight: 600; font-style: italic">(@item.Size.ToString())</span></td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Subtotal.ToString("C")</td>
+                </tr>
+            }
         </tbody>
     </table>
 </section>
