@@ -49,10 +49,24 @@
 <section id="cart-add" class="section-p1">
     <div id="coupon">
         <h3>Apply Coupon</h3>
-        <div>
-            <input type="text" placeholder="Enter Your Coupon">
-            <button class="normal">Apply</button>
-        </div>
+        <form action="@Url.Action("ApplyCoupon", "Cart")" method="post">
+            <div>
+                <input type="text" name="couponCode" placeholder="Enter Your Coupon">
+                <button type="submit" class="normal">Apply</button>
+            </div>
+        </form>
+
+        @if (Session["CouponCode"] != null)
+        {
+            <p>Coupon "<strong>@Session["CouponCode"]</strong>" applied!</p>
+            <form action="@Url.Action("RemoveCoupon", "Cart")" method="post">
+                <button type="submit" class="normal">Remove Coupon</button>
+            </form>
+        }
+        else if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <p style="color: red;">@ViewBag.Message</p>
+        }
     </div>
     <div id="subtotal">
         <h3>Cart Totals</h3>

@@ -24,19 +24,21 @@ namespace E_Commerce_Web.Controllers
             decimal shipping = 0;
             decimal discount = 0;
             decimal total = 0;
-
-
-            if (Session["UserID"] != null)
+            
+            if(cart.Count > 0)
             {
-                int userID = Convert.ToInt32(Session["UserID"]);
-                var user = _context.Users.FirstOrDefault(u => u.UserID == userID);
+                shipping = GetShippingCost();
 
-                if (user.City != "Ho Chi Minh" && cartSubtotal > 0)
+                if (Session["Discount"] != null)
                 {
-                    shipping = 30;
+                    discount = (decimal)Session["Discount"] * cartSubtotal / 100;
+
+                    if (Session["CouponCode"].ToString().ToUpper() == "FREESHIP")
+                        shipping = 0;
                 }
             }
-            
+
+
             total = cartSubtotal + shipping - discount;
 
             ViewBag.CartSubtotal = cartSubtotal;
@@ -101,6 +103,84 @@ namespace E_Commerce_Web.Controllers
             }
 
             return RedirectToAction("Index", "Cart");
+        }
+
+        [HttpPost]
+        public ActionResult ApplyCoupon(string couponCode)
+        {
+            var cartItems = GetCart();
+            decimal cartSubtotal = cartItems.Sum(item => item.Subtotal);
+            decimal shipping = 0;
+            decimal discount = 0;
+
+            if(cartItems.Count > 0)
+            {
+                var coupon = _context.Coupons
+                        .FirstOrDefault(c =>
+                        c.Code.ToUpper() == couponCode.ToUpper() &&
+                        c.IsActive &&
+                        (c.ExpirationDate == null || c.ExpirationDate >= DateTime.Now));
+
+                shipping = GetShippingCost();
+
+                if (coupon != null)
+                {
+                    if(coupon.Code == "FREESHIP")
+                    {
+                        shipping = 0;
+                    }
+                    discount = coupon.Discount * cartSubtotal / 100;
+                    Session["Discount"] = coupon.Discount;
+                    Session["CouponCode"] = coupon.Code;
+                }
+                else
+                {
+                    Session.Remove("Discount");
+                    Session.Remove("CouponCode");
+                    ViewBag.Message = "Coupon is invalid or expired.";
+                }
+            }
+            
+            decimal total = cartSubtotal + shipping - discount;
+
+            ViewBag.CartSubtotal = cartSubtotal;
+            ViewBag.Shipping = shipping;
+            ViewBag.Discount = discount;
+            ViewBag.Total = total;
+
+            return View("Index", cartItems);
+        }
+
+        public ActionResult RemoveCoupon()
+        {
+            Session.Remove("Discount");
+            Session.Remove("CouponCode");
+            return RedirectToAction("Index");
+        }
+
+        private decimal GetShippingCost()
+        {
+            if (Session["UserID"] != null)
+            {
+                int userID = Convert.ToInt32(Session["UserID"]);
+                var user = _context.Users.FirstOrDefault(u => u.UserID == userID);
+
+                if (user.City != "Ho Chi Minh")
+                {
+                    return 30;
+                }
+            }
+
+            return 0;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
