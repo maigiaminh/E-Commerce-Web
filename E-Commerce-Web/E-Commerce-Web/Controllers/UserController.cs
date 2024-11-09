@@ -206,17 +206,12 @@ namespace E_Commerce_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateInformation(string fullname, string phone, string email, string city, string address, HttpPostedFileBase avatar)
+        public ActionResult UpdateInformation(string fullname, string phone, string email, string province, string district, string address, HttpPostedFileBase avatar)
         {
             int userID = Convert.ToInt32(Session["UserID"]);
             var user = _context.Users.FirstOrDefault(u => u.UserID == userID);
-            if (city == "")
-            {
-                ViewBag.ErrorMessage = "Please select your city";
-                return View("Profile", user);
-            }
 
-            else if (phone.Length < 10)
+            if (phone.Length < 10)
             {
                 ViewBag.ErrorMessage = "Phone must greater or equals 10 number. Please try again!";
                 return View("Profile", user);
@@ -226,7 +221,8 @@ namespace E_Commerce_Web.Controllers
             {
                 user.FullName = fullname;
                 user.Phone = phone;
-                user.City = city;
+                user.Province = province;
+                user.District = district;
                 user.Address = address;
 
                 if (avatar != null && avatar.ContentLength > 0)

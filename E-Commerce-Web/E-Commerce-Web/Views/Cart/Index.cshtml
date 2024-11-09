@@ -4,10 +4,6 @@
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section id="page-header" class="about-header">
-    <h2>#let's_talk</h2>
-    <p>Please leave a message, We would like to hear from you!</p>
-</section>
 
 <section id="cart" class="section-p1">
     <table width="100%">
@@ -46,30 +42,60 @@
     </table>
 </section>
 
-<section id="cart-add" class="section-p1">
-    <div id="coupon">
-        <h3>Apply Coupon</h3>
-        <form action="@Url.Action("ApplyCoupon", "Cart")" method="post">
-            <div>
-                <input type="text" name="couponCode" placeholder="Enter Your Coupon">
-                <button type="submit" class="normal">Apply</button>
-            </div>
-        </form>
 
-        @if (Session["CouponCode"] != null)
-        {
-            <p>Coupon "<strong>@Session["CouponCode"]</strong>" applied!</p>
-            <form action="@Url.Action("RemoveCoupon", "Cart")" method="post">
-                <button type="submit" class="normal">Remove Coupon</button>
-            </form>
-        }
-        else if (!string.IsNullOrEmpty(ViewBag.Message))
-        {
-            <p style="color: red;">@ViewBag.Message</p>
-        }
-    </div>
+<section id="cart-add" class="section-p1">
+    @*
+
+            <div id="coupon">
+                <h3>Apply Coupon</h3>
+                <form action="@Url.Action("ApplyCoupon", "Cart")" method="post">
+                    <div>
+                        <input type="text" name="couponCode" placeholder="Enter Your Coupon">
+                        <button type="submit" class="normal">Apply</button>
+                    </div>
+                </form>
+
+                @if (Session["CouponCode"] != null)
+                {
+                    <p>Coupon "<strong>@Session["CouponCode"]</strong>" applied!</p>
+                    <form action="@Url.Action("RemoveCoupon", "Cart")" method="post">
+                        <button type="submit" class="normal">Remove Coupon</button>
+                    </form>
+                }
+                else if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                    <p style="color: red;">@ViewBag.Message</p>
+                }
+            </div>
+
+        <div id="subtotal">
+            <h3>Cart Totals</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td>@ViewBag.CartSubtotal.ToString("C")</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>@ViewBag.Shipping.ToString("C")</td>
+                </tr>
+                <tr>
+                    <td>Discount</td>
+                    <td>@ViewBag.Discount.ToString("C")</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>@ViewBag.Total.ToString("C")</strong></td>
+                </tr>
+            </table>
+
+            <button class="normal">Proceed to checkout</button>
+        </div>
+    *@
+    <div></div>
     <div id="subtotal">
         <h3>Cart Totals</h3>
+        <h6>Excluding discounts and shipping fees</h6>
         <table>
             <tr>
                 <td>Cart Subtotal</td>
@@ -91,4 +117,5 @@
 
         <button class="normal">Proceed to checkout</button>
     </div>
+
 </section>

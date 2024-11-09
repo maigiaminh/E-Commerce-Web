@@ -30,33 +30,17 @@
                     <input value="@Model.FullName" type="text" name="fullname" placeholder="Full Name" required="">
                     <input value="@Model.Email" type="email" name="email" placeholder="Email" required="" disabled>
                     <input value="@Model.Phone" type="number" name="phone" placeholder="Phone Number" required="">
-                    <select name="city" required>
-                        @if (Model.City == null)
-                        {
-                            <option disabled selected value=""> -- Select your city -- </option>
-                        }
-                        else if (Model.City == "Ho Chi Minh")
-                        {
-                            <option value="Ho Chi Minh" selected>Ho Chi Minh</option>
-                        }
-                        else if (Model.City == "Binh Duong")
-                        {
-                            <option value="Binh Duong" selected>Binh Duong</option>
-                        }
-                        else if (Model.City == "Ben Tre")
-                        {
-                            <option value="Ben Tre" selected>Ben Tre</option>
-                        }
-                        else if (Model.City == "Dong Nai")
-                        {
-                            <option value="Dong Nai" selected>Dong Nai</option>
-                        }
-                        <option value="Ho Chi Minh">Ho Chi Minh</option>
-                        <option value="Binh Duong">Binh Duong</option>
-                        <option value="Ben Tre">Ben Tre</option>
-                        <option value="Dong Nai">Dong Nai</option>
+                    
+                    <div style="display:flex; flex-direction: row">
+                        <select class="css_select" id="tinh" name="province" style="margin-right: 10px;" required>
+                            <option value="" selected disabled>-- Select your Province --</option>
+                        </select>
 
-                    </select>
+                        <select class="css_select" id="quan" name="district" style="margin-left: 10px;" required>
+                            <option value="" selected disabled>-- Select your District --</option>
+                        </select>
+                    </div>
+                    
                     <textarea style="resize:none" value="@Model.Address" name="address" placeholder="Address">@Model.Address</textarea>
                     <button type="submit" class="normal">Save Changes</button>
                 </form>
@@ -154,4 +138,42 @@
         }
         reader.readAsDataURL(event.target.files[0]);
     }
+</script>
+
+<script src="https://esgoo.net/scripts/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var selectedProvince = "@Model.Province";
+
+        $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm', function (data_tinh) {
+            if (data_tinh.error == 0) {
+                $.each(data_tinh.data, function (key_tinh, val_tinh) {
+                    var isSelected = (val_tinh.id == selectedProvince) ? 'selected' : '';
+                    $("#tinh").append('<option value="' + val_tinh.id + '" ' + isSelected + ' > ' + val_tinh.name_en + '</option > ');
+                });
+
+                if (selectedProvince) {
+                    loadDistricts(selectedProvince, "@Model.District");
+                }
+            }
+        });
+
+        $("#tinh").change(function () {
+            var idtinh = $(this).val();
+            loadDistricts(idtinh);
+        });
+
+        function loadDistricts(provinceId, districtId = null) {
+            $.getJSON('https://esgoo.net/api-tinhthanh/2/' + provinceId + '.htm', function (data_quan) {
+                if (data_quan.error == 0) {
+                    $("#quan").html('<option value="0" selected disabled>-- Select your District --</option>');
+                    $.each(data_quan.data, function (key_quan, val_quan) {
+
+                        var isSelected = (val_quan.id == districtId) ? 'selected' : '';
+                        $("#quan").append('<option value="' + val_quan.id + '" ' + isSelected + '>' + val_quan.name_en + '</option>');
+                    });
+                }
+            });
+        }
+    });
 </script>

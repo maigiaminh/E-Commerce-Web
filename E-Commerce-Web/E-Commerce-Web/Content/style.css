@@ -45,6 +45,11 @@ p {
     padding: 40px 80px;
 }
 
+
+.section-p2 {
+    padding: 40px 360px;
+}
+
 .section-m1 {
     margin: 40px 0;
 }
@@ -217,43 +222,43 @@ body {
         margin: 15px 0;
     }
 
-        #feature .fe-box:hover {
-            box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.1);
-        }
+#feature .fe-box:hover {
+    box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.1);
+}
 
-        #feature .fe-box img {
-            width: 100%;
-            margin-bottom: 10px;
-        }
+#feature .fe-box img {
+    width: 100%;
+    margin-bottom: 10px;
+}
 
-        #feature .fe-box h6 {
-            display: inline-block;
-            padding: 9px 8px 6px 8px;
-            line-height: 1;
-            border-radius: 4px;
-            color: #088178;
-            background-color: #fddde4;
-        }
+#feature .fe-box h6 {
+    display: inline-block;
+    padding: 9px 8px 6px 8px;
+    line-height: 1;
+    border-radius: 4px;
+    color: #088178;
+    background-color: #fddde4;
+}
 
-        #feature .fe-box:nth-child(2) h6 {
-            background-color: #cdebbc;
-        }
+#feature .fe-box:nth-child(2) h6 {
+    background-color: #cdebbc;
+}
 
-        #feature .fe-box:nth-child(3) h6 {
-            background-color: #d1e8f2;
-        }
+#feature .fe-box:nth-child(3) h6 {
+    background-color: #d1e8f2;
+}
 
-        #feature .fe-box:nth-child(4) h6 {
-            background-color: #cdd4f8;
-        }
+#feature .fe-box:nth-child(4) h6 {
+    background-color: #cdd4f8;
+}
 
-        #feature .fe-box:nth-child(5) h6 {
-            background-color: #f6dbf6;
-        }
+#feature .fe-box:nth-child(5) h6 {
+    background-color: #f6dbf6;
+}
 
-        #feature .fe-box:nth-child(6) h6 {
-            background-color: #fff2e5;
-        }
+#feature .fe-box:nth-child(6) h6 {
+    background-color: #fff2e5;
+}
 
 #product1 {
     text-align: center;
@@ -1027,18 +1032,25 @@ footer {
     padding: 30px;
 }
 
-    #subtotal table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-bottom: 20px;
-    }
+#subtotal table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-        #subtotal table td {
-            width: 50%;
-            border: 1px solid #e2e9e1;
-            padding: 10px;
-            font-size: 13px;
-        }
+#subtotal table td {
+    width: 50%;
+    border: 1px solid #e2e9e1;
+    padding: 10px;
+    font-size: 13px;
+}
+
+#subtotal h6 {
+    font-size: 12px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: #EC1A2D
+}
 
 /* Login & Register Page */
 #form-details form.login-form {
@@ -1093,30 +1105,30 @@ footer {
     padding: 0px 30px
 }
 
-    .tab-nav ul {
-        display: flex;
-        justify-content: space-between;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        position: relative;
-        border-bottom: 2px solid #ccc;
-    }
+.tab-nav ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    border-bottom: 2px solid #ccc;
+}
 
-    .tab-nav li {
-        flex: 1;
-        text-align: center;
-        padding: 20px 20px;
-        cursor: pointer;
-        font-weight: bold;
-        color: #555;
-        transition: color 0.3s ease;
-    }
+.tab-nav li {
+    flex: 1;
+    text-align: center;
+    padding: 20px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+    transition: color 0.3s ease;
+}
 
-        .tab-nav li:hover,
-        .tab-nav li.active {
-            color: #088178;
-        }
+.tab-nav li:hover,
+.tab-nav li.active {
+    color: #088178;
+}
 
 .tab-indicator {
     position: absolute;
@@ -1226,12 +1238,100 @@ button.modal-button.button-success:hover {
     background-color: #5fbc92;
 }
 
+/* Checkout Page*/
+#checkout_pane {
+    background-color: #F4F6F8;
+}
 
+#checkout_pane h4 {
+    text-align: center;
+}
+
+#checkout_pane div.underline {
+    margin-top: 20px;
+    width: 90%;
+    justify-self: center;
+    height: 1px;
+    background-color: #ccc;
+    opacity: 0.5
+}
+
+#checkout_pane h5{
+    color: #088178;
+    padding: 60px 0px 0px 30px;
+    font-weight: 600;
+}
+
+#checkout_pane .tab-nav li:hover{
+    color: #555;
+}
+
+#checkout_pane .tab-nav li.active:hover {
+    color: #088178;
+}
+
+#checkout_pane .tab-nav ul {
+    border-bottom: 0px;
+}
+
+#checkout_pane .tab-nav li {
+    border-bottom: 4px solid #555;
+    padding: 10px;
+    margin: 0px 20px;
+}
+
+#checkout_pane .tab-nav li.active {
+    border-bottom: 4px solid #088178;
+}
+
+#checkout_pane .tab-pane.active {
+    justify-content: center;
+}
+
+#checkout_pane #form-details {
+    margin-top: 10px;
+    padding: 20px 40px;
+    justify-content: center;
+    border: 2px solid #088178;
+    /*box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);*/
+    border-radius: 16px;
+    background-color: #fff;
+}
+
+#checkout_pane #form-details input,
+#checkout_pane #form-details select {
+    font-weight: 500;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+#checkout_pane #form-details input::placeholder{
+
+}
+
+#checkout_pane #form-details form {
+    width: 100%;
+}
+
+#checkout_pane .input-flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+#checkout_pane .input-flex-row div{
+    width: 50%
+}
 /* Start Media Query */
 @media (max-width:799px) {
     .section-p1 {
         padding: 40px 40px;
     }
+
+    .section-p2 {
+        padding: 40px 180px;
+    }
+
 
     .section-logout {
         padding: 0px 70px 20px 0px;
@@ -1360,6 +1460,10 @@ button.modal-button.button-success:hover {
 
 @media (max-width: 477px) {
     .section-p1 {
+        padding: 20px;
+    }
+
+    .section-p2 {
         padding: 20px;
     }
 

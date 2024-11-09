@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<section id="checkout_pane" class="section-p2">
+    @*<h4>Checkout <div class="underline"></div></h4>*@
+    <nav class="tab-nav">
+        <ul>
+            <li class="tab-link active" onclick="openTab(event, 'update-info')">1. INFORMATION</li>
+            <li class="tab-link" onclick="openTab(event, 'change-password')">2. PAYMENT</li>
+        </ul>
+    </nav>
+
+    <h5>CUSTOMER INFORMATION</h5>
+    <section id="form-details" class="user">
+        <div class="tab-content" style="width: 100%">
+            <div id="update-info" class="tab-pane active">
+                <form action="" method="post">
+                    <input value="" type="text" name="fullname" placeholder="Full Name" readonly>
+                    <input value="" type="email" name="email" placeholder="Email" readonly>
+                    <input value="" type="number" name="userPhone" placeholder="Phone Number" readonly>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <h5>DELIVERY INFORMATION</h5>
+    <section id="form-details" class="user">
+        <div class="tab-content" style="width: 100%">
+            <div id="update-info" class="tab-pane active">
+                <form action="" method="post">
+
+                    <div>
+                        <div class="input-flex-row">
+                            <input value="" type="text" name="name" placeholder="Recipient's Full Name" style="margin-right: 10px;" required>
+                            <input value="" type="number" name="recipientPhone" placeholder="Recipient's Phone" style="margin-left: 10px;" required>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-flex-row">
+                            <select class="css_select no-border" id="tinh" name="province" style="margin-right: 10px;" required>
+                                <option value="" selected disabled>-- Select your Province --</option>
+                            </select>
+
+                            <select class="css_select no-border" id="quan" name="district" style="margin-left: 10px;" required>
+                                <option value="" selected disabled>-- Select your District --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-flex-row">
+                            <select class="css_select" id="phuong" name="ward" style="margin-right: 10px;" required>
+                                <option value="" selected disabled>-- Select your Ward --</option>
+                            </select>
+
+                            <input value="" type="text" name="address" placeholder="Recipient's Address" style="margin-left: 10px;" required>
+                        </div>
+                    </div>
+
+                    <input value="" type="text" name="note" placeholder="Other notes">
+
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+    <div class="modal" id="errorModal">
+        <div class="modal-content">
+            <img src="@Url.Content("~/Content/img/icon/error.png")" alt="Error Icon" class="modal-icon">
+            <h2 class="modal-title">
+                Error
+            </h2>
+            <p id="errorMessage">There was an error with your registration.</p>
+            <button type="reset" onclick="closeErrorModal()" class="modal-button">Close</button>
+        </div>
+    </div>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <img src="@Url.Content("~/Content/img/icon/success.png")" alt="Success Icon" class="modal-icon">
+            <h2 class="modal-title success-title">
+                Success
+            </h2>
+            <p id="successMessage">Registration successful, please verify your account via the email sent to you.</p>
+            <button type="reset" onclick="closeSuccessModal()" class="modal-button button-success">Close</button>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://esgoo.net/scripts/jquery.js"></script>
+<script>
+    $(document).ready(function() {
+        $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm',function(data_tinh){
+            if(data_tinh.error==0){
+               $.each(data_tinh.data, function (key_tinh,val_tinh) {
+                  $("#tinh").append('<option value="'+val_tinh.id+'">'+val_tinh.name_en+'</option>');
+               });
+               $("#tinh").change(function(e){
+                    var idtinh=$(this).val();
+                    $.getJSON('https://esgoo.net/api-tinhthanh/2/'+idtinh+'.htm',function(data_quan){
+                        if(data_quan.error==0){
+                            $("#quan").html('<option value="0">-- Select your District --</option>');
+                            $("#phuong").html('<option value="0">-- Select your Ward --</option>');
+                           $.each(data_quan.data, function (key_quan,val_quan) {
+                               $("#quan").append('<option value="' + val_quan.id + '">' + val_quan.name_en +'</option>');
+                           });
+                           $("#quan").change(function(e){
+                                var idquan=$(this).val();
+                                $.getJSON('https://esgoo.net/api-tinhthanh/3/'+idquan+'.htm',function(data_phuong){
+                                    if(data_phuong.error==0){
+                                        $("#phuong").html('<option value="0">-- Select your Ward --</option>');
+                                       $.each(data_phuong.data, function (key_phuong,val_phuong) {
+                                           $("#phuong").append('<option value="' + val_phuong.id + '">' + val_phuong.name_en +'</option>');
+                                       });
+                                    }
+                                });
+                           });
+
+                        }
+                    });
+               });
+
+            }
+        });
+     });
+</script>

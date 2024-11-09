@@ -208,6 +208,10 @@
     <Compile Include="Migrations\202411081550012_AddProductSizes.Designer.cs">
       <DependentUpon>202411081550012_AddProductSizes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202411091620094_user.cs" />
+    <Compile Include="Migrations\202411091620094_user.Designer.cs">
+      <DependentUpon>202411091620094_user.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\OrderDetail.cs" />
@@ -240,6 +244,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\User\ConfirmEmail.cshtml" />
+    <Content Include="Views\Cart\Checkout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -262,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202411081550012_AddProductSizes.resx">
       <DependentUpon>202411081550012_AddProductSizes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411091620094_user.resx">
+      <DependentUpon>202411091620094_user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -27,7 +27,7 @@ namespace E_Commerce_Web.Controllers
             
             if(cart.Count > 0)
             {
-                shipping = GetShippingCost();
+                //shipping = GetShippingCost();
 
                 if (Session["Discount"] != null)
                 {
@@ -121,7 +121,7 @@ namespace E_Commerce_Web.Controllers
                         c.IsActive &&
                         (c.ExpirationDate == null || c.ExpirationDate >= DateTime.Now));
 
-                shipping = GetShippingCost();
+                //shipping = GetShippingCost();
 
                 if (coupon != null)
                 {
@@ -158,6 +158,7 @@ namespace E_Commerce_Web.Controllers
             return RedirectToAction("Index");
         }
 
+        /*
         private decimal GetShippingCost()
         {
             if (Session["UserID"] != null)
@@ -173,7 +174,12 @@ namespace E_Commerce_Web.Controllers
 
             return 0;
         }
+        */
 
+        public ActionResult Checkout()
+        {
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
