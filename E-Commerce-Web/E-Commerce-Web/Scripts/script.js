@@ -14,3 +14,24 @@ if(close){
         nav.classList.remove('active')
     })
 }
+
+function openPaymentModal() {
+    document.getElementById("payment-modal").style.display = "flex";
+}
+
+function closePaymentModal() {
+    document.getElementById("payment-modal").style.display = "none";
+}
+
+function updatePaymentMethod(title, imgSrc) {
+    document.getElementById("payment-title").textContent = title;
+    document.getElementById("payment-image").src = "/Content/img/pay/" + imgSrc;
+    closePaymentModal();
+}
+
+window.onclick = function (event) {
+    const modal = document.getElementById("payment-modal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}

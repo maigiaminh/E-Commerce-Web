@@ -134,8 +134,12 @@
     <Content Include="Content\img\icon\success.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\pay\app.jpg" />
+    <Content Include="Content\img\pay\cod.png" />
+    <Content Include="Content\img\pay\momo.png" />
     <Content Include="Content\img\pay\pay.png" />
+    <Content Include="Content\img\pay\payment.png" />
     <Content Include="Content\img\pay\play.jpg" />
+    <Content Include="Content\img\pay\zalopay.png" />
     <Content Include="Content\img\people\1.png" />
     <Content Include="Content\img\people\2.png" />
     <Content Include="Content\img\products\boots.png" />
