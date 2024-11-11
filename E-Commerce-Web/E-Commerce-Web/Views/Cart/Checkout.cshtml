@@ -1,26 +1,31 @@
 ﻿
 @{
     ViewBag.Title = "Checkout";
+    var userId = Session["UserID"];
+    if (userId == null)
+    {
+        Response.Redirect(Url.Action("Login", "User"));
+    }
 }
 
 <section id="checkout_pane" class="section-p2">
     @*<h4>Checkout <div class="underline"></div></h4>*@
     <nav class="tab-nav">
         <ul>
-            <li class="tab-link" onclick="openTab(event, 'update-info')">1. INFORMATION</li>
-            <li class="tab-link active" onclick="openTab(event, 'change-password')">2. PAYMENT</li>
+            <li class="tab-link active">1. INFORMATION</li>
+            <li class="tab-link">2. PAYMENT</li>
         </ul>
     </nav>
-    
-    <div style="display: none">
+
+    <div>
         <h5>CUSTOMER INFORMATION</h5>
         <section id="form-details" class="user">
             <div class="tab-content" style="width: 100%">
                 <div id="update-info" class="tab-pane active">
                     <form action="" method="post">
-                        <input value="" type="text" name="fullname" placeholder="Full Name" readonly>
-                        <input value="" type="email" name="email" placeholder="Email" readonly>
-                        <input value="" type="number" name="userPhone" placeholder="Phone Number" readonly>
+                        <input value="@ViewBag.Name" type="text" name="fullname" placeholder="Full Name" readonly>
+                        <input value="@ViewBag.Email" type="email" name="email" placeholder="Email" readonly>
+                        <input value="@ViewBag.Phone" type="number" name="userPhone" placeholder="Phone Number" readonly>
                     </form>
                 </div>
 
@@ -31,7 +36,7 @@
         <section id="form-details" class="user">
             <div class="tab-content" style="width: 100%">
                 <div id="update-info" class="tab-pane active">
-                    <form action="" method="post">
+                    <form action="@Url.Action("Payment", "Cart")" method="post" id="deliveryForm">
 
                         <div>
                             <div class="input-flex-row">
@@ -61,8 +66,6 @@
                         </div>
 
                         <input value="" type="text" name="note" placeholder="Other notes">
-
-
                     </form>
                 </div>
 
@@ -77,102 +80,11 @@
                         <h6 class="warning">Excluding discounts and shipping fees</h6>
                     </div>
                     <div>
-                        <h3 style="font-size: 17px; font-weight: 500">$300.4</h3>
+                        <h3 style="font-size: 17px; font-weight: 500">@ViewBag.Total.ToString("C")</h3>
                     </div>
                 </div>
-                <button class="pay-btn">Continue</button>
-
+                <button class="pay-btn" type="button" onclick="submitForm()">Continue</button>
             </div>
-        </section>
-    </div>
-    <div>
-        <h5>DELIVERY INFORMATION</h5>
-        <section id="form-details" class="user">
-            <div class="tab-content" style="width: 100%">
-                <div class="payment">
-                    <h3>User</h3>
-                    <h3 class="content">Mai Gia Minh</h3>
-                </div>
-                <div class="payment">
-                    <h3>User's Phone</h3>
-                    <h3 class="content">0903614342</h3>
-                </div>
-                <div class="payment">
-                    <h3>Email</h3>
-                    <h3 class="content">minh.mgia@gmail.com</h3>
-                </div>
-                <div class="payment">
-                    <h3>Receive At</h3>
-                    <h3 class="content">63 Pham Van Chieu, F.14, Go Vap District</h3>
-                </div>
-                <div class="payment">
-                    <h3>Recipient</h3>
-                    <h3 class="content">Mai Gia Minh - 0903614342</h3>
-                </div>
-                <div class="payment">
-                    <h3>Note</h3>
-                    <h3 class="content"></h3>
-                </div>
-
-            </div>
-        </section>
-
-        <h5>PAYMENT INFO</h5>
-        <section id="form-details" class="user">
-            <div class="tab-content horizontal-box" onclick="openPaymentModal()" style="width: 100%">
-                <img id="payment-image" src="@Url.Content("~/Content/img/pay/payment.png")" alt="Image description">
-                <div id="payment-title" class="pay-title">Choose payment method</div>
-                <div class="right-text">Change &nbsp; <i class="fas fa-angle-right"></i></div>
-            </div>
-        </section>
-
-        <h5>PAYMENT TOTALS</h5>
-        <section id="form-details" class="checkout">
-            <section id="cart-add" class="">
-                <div id="subtotal" style="width: 100%">
-                    <div id="coupon" style="width: 100%">
-                        <h3>Apply Coupon</h3>
-                        <form action="@Url.Action("ApplyCoupon", "Cart")" method="post">
-                            <div style="display: flex; width: 100%">
-                                <input type="text" name="couponCode" placeholder="Enter Your Coupon">
-                                <button type="submit" class="normal" style="width: 30%; margin-bottom: 20px;">Apply</button>
-                            </div>
-                        </form>
-                        @if (Session["CouponCode"] != null)
-                        {
-                            <p>Coupon "<strong>@Session["CouponCode"]</strong>" applied!</p>
-                            <form action="@Url.Action("RemoveCoupon", "Cart")" method="post">
-                                <button type="submit" class="normal">Remove Coupon</button>
-                            </form>
-                        }
-                        else if (!string.IsNullOrEmpty(ViewBag.Message))
-                        {
-                            <p style="color: red;">@ViewBag.Message</p>
-                        }
-                    </div>
-                    <h3>Cart Totals</h3>
-                    <table>
-                        <tr>
-                            <td>Cart Subtotal</td>
-                            <td style="text-align:end">$399.00</td>
-                        </tr>
-                        <tr>
-                            <td>Shipping</td>
-                            <td style="text-align:end">$399.00</tdstyle="text-align:end">
-                        </tr>
-                        <tr>
-                            <td>Discount</td>
-                            <td style="text-align:end">$399.00</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Total</strong></td>
-                            <td style="text-align:end"><strong>$399.00</strong></td>
-                        </tr>
-                    </table>
-
-                    <button class="normal">Proceed to checkout</button>
-                </div>
-            </section>
         </section>
     </div>
 </section>
@@ -201,40 +113,67 @@
     </div>
 </div>
 
+<div id="deliveryModal" class="modal">
+    <div class="modal-content" style="margin: 15% auto;">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <h3 style="color: #EC1A2D ">Missing information</h3>
+        <p id="errorMessage"></p>
+        <button onclick="closeModal()" class="modal-button">Close</button>
+    </div>
+</div>
+
 <script src="https://esgoo.net/scripts/jquery.js"></script>
 <script>
-    $(document).ready(function() {
-        $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm',function(data_tinh){
-            if(data_tinh.error==0){
-               $.each(data_tinh.data, function (key_tinh,val_tinh) {
-                  $("#tinh").append('<option value="'+val_tinh.id+'">'+val_tinh.name_en+'</option>');
-               });
-               $("#tinh").change(function(e){
-                    var idtinh=$(this).val();
-                    $.getJSON('https://esgoo.net/api-tinhthanh/2/'+idtinh+'.htm',function(data_quan){
-                        if(data_quan.error==0){
+    $(document).ready(function () {
+        $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm', function (data_tinh) {
+            if (data_tinh.error == 0) {
+                $.each(data_tinh.data, function (key_tinh, val_tinh) {
+                    $("#tinh").append('<option value="' + val_tinh.id + '">' + val_tinh.name_en + '</option>');
+                });
+                $("#tinh").change(function (e) {
+                    var idtinh = $(this).val();
+                    $.getJSON('https://esgoo.net/api-tinhthanh/2/' + idtinh + '.htm', function (data_quan) {
+                        if (data_quan.error == 0) {
                             $("#quan").html('<option value="0">-- Select your District --</option>');
                             $("#phuong").html('<option value="0">-- Select your Ward --</option>');
-                           $.each(data_quan.data, function (key_quan,val_quan) {
-                               $("#quan").append('<option value="' + val_quan.id + '">' + val_quan.name_en +'</option>');
-                           });
-                           $("#quan").change(function(e){
-                                var idquan=$(this).val();
-                                $.getJSON('https://esgoo.net/api-tinhthanh/3/'+idquan+'.htm',function(data_phuong){
-                                    if(data_phuong.error==0){
+                            $.each(data_quan.data, function (key_quan, val_quan) {
+                                $("#quan").append('<option value="' + val_quan.id + '">' + val_quan.name_en + '</option>');
+                            });
+                            $("#quan").change(function (e) {
+                                var idquan = $(this).val();
+                                $.getJSON('https://esgoo.net/api-tinhthanh/3/' + idquan + '.htm', function (data_phuong) {
+                                    if (data_phuong.error == 0) {
                                         $("#phuong").html('<option value="0">-- Select your Ward --</option>');
-                                       $.each(data_phuong.data, function (key_phuong,val_phuong) {
-                                           $("#phuong").append('<option value="' + val_phuong.id + '">' + val_phuong.name_en +'</option>');
-                                       });
+                                        $.each(data_phuong.data, function (key_phuong, val_phuong) {
+                                            $("#phuong").append('<option value="' + val_phuong.id + '">' + val_phuong.name_en + '</option>');
+                                        });
                                     }
                                 });
-                           });
+                            });
 
                         }
                     });
-               });
+                });
 
             }
         });
-     });
+    });
+</script>
+
+<script>
+    function submitForm() {
+        var recipientName = document.getElementsByName("name")[0].value.trim();
+        var recipientPhone = document.getElementsByName("recipientPhone")[0].value.trim();
+        var province = document.getElementsByName("province")[0].value;
+        var district = document.getElementsByName("district")[0].value;
+        var ward = document.getElementsByName("ward")[0].value;
+        var address = document.getElementsByName("address")[0].value.trim();
+
+        if (!recipientName || !recipientPhone || !province || !district || !ward || !address) {
+            document.getElementById('deliveryModal').style.display = 'block';
+            document.getElementById("errorMessage").innerText = "Please complete all required fields in the section.";
+        } else {
+            document.getElementById("deliveryForm").submit();
+        }
+    }
 </script>

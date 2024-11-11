@@ -135,6 +135,7 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\pay\app.jpg" />
     <Content Include="Content\img\pay\cod.png" />
+    <Content Include="Content\img\pay\creditcard.png" />
     <Content Include="Content\img\pay\momo.png" />
     <Content Include="Content\img\pay\pay.png" />
     <Content Include="Content\img\pay\payment.png" />
@@ -249,6 +250,7 @@
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\User\ConfirmEmail.cshtml" />
     <Content Include="Views\Cart\Checkout.cshtml" />
+    <Content Include="Views\Cart\Payment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

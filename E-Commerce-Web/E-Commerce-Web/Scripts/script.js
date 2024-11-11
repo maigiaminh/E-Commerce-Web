@@ -30,8 +30,32 @@ function updatePaymentMethod(title, imgSrc) {
 }
 
 window.onclick = function (event) {
-    const modal = document.getElementById("payment-modal");
-    if (event.target === modal) {
+    const payModal = document.getElementById("payment-modal");
+    const emptyModal = document.getElementById("emptyCartModal");
+    const deliveryModal = document.getElementById("deliveryModal");
+    if (event.target === payModal || event.target === emptyModal || event.target === deliveryModal) {
         modal.style.display = "none";
+    }
+}
+
+function proceedToCheckout(count) {
+    var cartItemsExist = count > 0 ? "true" : "false";
+
+    if (cartItemsExist === "false") {
+        document.getElementById('emptyCartModal').style.display = 'block';
+    }
+
+    return cartItemsExist === "true";
+}
+
+function closeModal() {
+    var cart = document.getElementById('emptyCartModal');
+    if (cart != null) {
+        cart.style.display = 'none';
+    }
+
+    var delivery = document.getElementById('deliveryModal');
+    if (delivery != null) {
+        delivery.style.display = 'none';
     }
 }

@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+    var userId = Session["UserID"];
+    if (userId == null)
+    {
+        Response.Redirect(Url.Action("Login", "User"));
+    }
+}
+
+<section id="checkout_pane" class="section-p2">
+    @*<h4>Checkout <div class="underline"></div></h4>*@
+    <nav class="tab-nav">
+        <ul>
+            <li class="tab-link">1. INFORMATION</li>
+            <li class="tab-link active">2. PAYMENT</li>
+        </ul>
+    </nav>
+
+    <div>
+        <h5>DELIVERY INFORMATION</h5>
+        <section id="form-details" class="user">
+            <div class="tab-content" style="width: 100%">
+                <div class="payment">
+                    <h3>User</h3>
+                    <h3 class="content">@ViewBag.Name</h3>
+                </div>
+                <div class="payment">
+                    <h3>User's Phone</h3>
+                    <h3 class="content">@ViewBag.Phone</h3>
+                </div>
+                <div class="payment">
+                    <h3>Email</h3>
+                    <h3 class="content">@ViewBag.Email</h3>
+                </div>
+                <div class="payment">
+                    <h3>Receive At</h3>
+                    <h3 class="content">@ViewBag.Address</h3>
+                </div>
+                <div class="payment">
+                    <h3>Recipient</h3>
+                    <h3 class="content">@ViewBag.RecipientName - @ViewBag.RecipientPhone</h3>
+                </div>
+                <div class="payment">
+                    <h3>Note</h3>
+                    <h3 class="content">@ViewBag.Note</h3>
+                </div>
+
+            </div>
+        </section>
+
+        <h5>PAYMENT INFO</h5>
+        <section id="form-details" class="user">
+            <div class="tab-content horizontal-box" onclick="openPaymentModal()" style="width: 100%">
+                <img id="payment-image" src="@Url.Content("~/Content/img/pay/payment.png")" alt="Image description">
+                <div id="payment-title" class="pay-title">Choose payment method</div>
+                <div class="right-text">Change &nbsp; <i class="fas fa-angle-right"></i></div>
+            </div>
+        </section>
+
+        <h5>PAYMENT TOTALS</h5>
+        <section id="form-details" class="checkout">
+            <section id="cart-add" class="">
+                <div id="subtotal" style="width: 100%">
+                    <div id="coupon" style="width: 100%">
+                        <h3>Apply Coupon</h3>
+                        <form action="@Url.Action("Checkout", "Cart")" method="post">
+                            <div style="display: flex; width: 100%">
+                                <input type="text" name="couponCode" placeholder="Enter Your Coupon">
+                                <button type="submit" class="normal" style="width: 30%; margin-bottom: 20px;">Apply</button>
+                            </div>
+                        </form>
+                        @if (Session["CouponCode"] != null)
+                        {
+                            <p>Coupon "<strong>@Session["CouponCode"]</strong>" applied!</p>
+                            <form action="@Url.Action("RemoveCoupon", "Cart")" method="post">
+                                <button type="submit" class="normal">Remove Coupon</button>
+                            </form>
+                        }
+                        else if (!string.IsNullOrEmpty(ViewBag.Message))
+                        {
+                            <p style="color: red;">@ViewBag.Message</p>
+                        }
+                    </div>
+                    <h3>Cart Totals</h3>
+                    <table>
+                        <tr>
+                            <td>Cart Subtotal</td>
+                            <td style="text-align:end">$399.00</td>
+                        </tr>
+                        <tr>
+                            <td>Shipping</td>
+                            <td style="text-align:end">$399.00</td>
+                        </tr>
+                        <tr>
+                            <td>Discount</td>
+                            <td style="text-align:end">$399.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td style="text-align:end"><strong>$399.00</strong></td>
+                        </tr>
+                    </table>
+
+                    <button class="normal">Proceed to checkout</button>
+                </div>
+            </section>
+        </section>
+    </div>
+</section>
+
+<div id="payment-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closePaymentModal()">&times;</span>
+        <h3>Select Payment Method</h3>
+
+        <div class="payment-option" onclick="updatePaymentMethod('Momo E-wallet', 'momo.png')">
+            <img src="@Url.Content("~/Content/img/pay/momo.png")" alt="Momo E-wallet">
+            <span>Momo E-wallet</span>
+        </div>
+        <div class="payment-option" onclick="updatePaymentMethod('ZaloPay E-wallet', 'zalopay.png')">
+            <img src="@Url.Content("~/Content/img/pay/zalopay.png")" alt="ZaloPay">
+            <span>ZaloPay E-wallet</span>
+        </div>
+        <div class="payment-option" onclick="updatePaymentMethod('Credit Card', 'creditcard.png')">
+            <img src="@Url.Content("~/Content/img/pay/creditcard.png")" alt="Credit Card">
+            <span>Credit Card</span>
+        </div>
+        <div class="payment-option" onclick="updatePaymentMethod('Cash On Delivery (COD)', 'cod.png')">
+            <img src="@Url.Content("~/Content/img/pay/cod.png")" alt="Credit Card">
+            <span>Cash On Delivery (COD)</span>
+        </div>
+    </div>
+</div>

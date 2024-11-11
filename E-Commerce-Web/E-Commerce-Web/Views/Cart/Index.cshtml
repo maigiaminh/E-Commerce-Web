@@ -114,8 +114,18 @@
                 <td><strong>@ViewBag.Total.ToString("C")</strong></td>
             </tr>
         </table>
-
-        <button class="normal">Proceed to checkout</button>
+        <form action="@Url.Action("Checkout", "Cart")" method="post" onsubmit="return proceedToCheckout(@Model.Count);">
+            <button class="normal" type="submit" >Proceed to checkout</button>
+        </form>
     </div>
 
 </section>
+
+<div id="emptyCartModal" class="modal">
+    <div class="modal-content" style="margin: 15% auto;">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <h3 style="color: #EC1A2D ">Cart is Empty</h3>
+        <p>Your cart is empty. Please add items before proceeding to checkout.</p>
+        <button onclick="closeModal()" class="modal-button">Close</button>
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿using E_Commerce_Web.Models;
+﻿using E_Commerce_Web.Migrations;
+using E_Commerce_Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.WebParts;
 
 namespace E_Commerce_Web.Controllers
 {
@@ -176,7 +178,33 @@ namespace E_Commerce_Web.Controllers
         }
         */
 
+        [HttpPost]
         public ActionResult Checkout()
+        {
+            if (Session["UserID"] != null)
+            {
+                int userID = Convert.ToInt32(Session["UserID"]);
+                var user = _context.Users.FirstOrDefault(u => u.UserID == userID);
+
+                ViewBag.Name = user.FullName;
+                ViewBag.Email = user.Email;
+                ViewBag.Phone = user.Phone;
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var cartItems = GetCart();
+            decimal cartSubtotal = cartItems.Sum(item => item.Subtotal);
+
+            ViewBag.CartItems = cartItems;
+            ViewBag.Total = cartSubtotal;
+
+            return View();
+        }
+
+        public ActionResult Payment()
         {
             return View();
         }
