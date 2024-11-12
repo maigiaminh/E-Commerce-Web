@@ -23,27 +23,27 @@
             <div class="tab-content" style="width: 100%">
                 <div class="payment">
                     <h3>User</h3>
-                    <h3 class="content">@ViewBag.Name</h3>
+                    <h3 class="content" id="userName">@ViewBag.Name</h3>
                 </div>
                 <div class="payment">
                     <h3>User's Phone</h3>
-                    <h3 class="content">@ViewBag.Phone</h3>
+                    <h3 class="content" id="userPhone">@ViewBag.Phone</h3>
                 </div>
                 <div class="payment">
                     <h3>Email</h3>
-                    <h3 class="content">@ViewBag.Email</h3>
+                    <h3 class="content" id="userEmail">@ViewBag.Email</h3>
                 </div>
                 <div class="payment">
                     <h3>Receive At</h3>
-                    <h3 class="content">@ViewBag.Address</h3>
+                    <h3 class="content" id="Address">@ViewBag.Address</h3>
                 </div>
                 <div class="payment">
                     <h3>Recipient</h3>
-                    <h3 class="content">@ViewBag.RecipientName - @ViewBag.RecipientPhone</h3>
+                    <h3 class="content" id="recipient">@ViewBag.RecipientName - @ViewBag.RecipientPhone</h3>
                 </div>
                 <div class="payment">
                     <h3>Note</h3>
-                    <h3 class="content">@ViewBag.Note</h3>
+                    <h3 class="content" id="note">@ViewBag.Note</h3>
                 </div>
 
             </div>
@@ -64,7 +64,11 @@
                 <div id="subtotal" style="width: 100%">
                     <div id="coupon" style="width: 100%">
                         <h3>Apply Coupon</h3>
-                        <form action="@Url.Action("Checkout", "Cart")" method="post">
+                        <form action="@Url.Action("Payment", "Cart")" method="post">
+                            <input type="hidden" name="name" value="@ViewBag.RecipientName" />
+                            <input type="hidden" name="recipientPhone" value="@ViewBag.RecipientPhone" />
+                            <input type="hidden" name="fullAddress" value="@ViewBag.Address" />
+                            <input type="hidden" name="note" value="@ViewBag.Note" />
                             <div style="display: flex; width: 100%">
                                 <input type="text" name="couponCode" placeholder="Enter Your Coupon">
                                 <button type="submit" class="normal" style="width: 30%; margin-bottom: 20px;">Apply</button>
@@ -73,7 +77,12 @@
                         @if (Session["CouponCode"] != null)
                         {
                             <p>Coupon "<strong>@Session["CouponCode"]</strong>" applied!</p>
-                            <form action="@Url.Action("RemoveCoupon", "Cart")" method="post">
+                            <form action="@Url.Action("Payment", "Cart")" method="post">
+                                <input type="hidden" name="name" value="@ViewBag.RecipientName" />
+                                <input type="hidden" name="recipientPhone" value="@ViewBag.RecipientPhone" />
+                                <input type="hidden" name="fullAddress" value="@ViewBag.Address" />
+                                <input type="hidden" name="note" value="@ViewBag.Note" />
+                                <input type="hidden" name="removeCoupon" value=true />
                                 <button type="submit" class="normal">Remove Coupon</button>
                             </form>
                         }
@@ -86,19 +95,19 @@
                     <table>
                         <tr>
                             <td>Cart Subtotal</td>
-                            <td style="text-align:end">$399.00</td>
+                            <td style="text-align:end">@ViewBag.CartSubtotal.ToString("C")</td>
                         </tr>
                         <tr>
                             <td>Shipping</td>
-                            <td style="text-align:end">$399.00</td>
+                            <td style="text-align:end">@ViewBag.Shipping.ToString("C")</td>
                         </tr>
                         <tr>
                             <td>Discount</td>
-                            <td style="text-align:end">$399.00</td>
+                            <td style="text-align:end">@ViewBag.Discount.ToString("C")</td>
                         </tr>
                         <tr>
                             <td><strong>Total</strong></td>
-                            <td style="text-align:end"><strong>$399.00</strong></td>
+                            <td style="text-align:end"><strong>@ViewBag.Total.ToString("C")</strong></td>
                         </tr>
                     </table>
 

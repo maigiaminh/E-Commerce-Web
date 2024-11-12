@@ -164,16 +164,35 @@
     function submitForm() {
         var recipientName = document.getElementsByName("name")[0].value.trim();
         var recipientPhone = document.getElementsByName("recipientPhone")[0].value.trim();
-        var province = document.getElementsByName("province")[0].value;
-        var district = document.getElementsByName("district")[0].value;
-        var ward = document.getElementsByName("ward")[0].value;
+        var province = document.getElementsByName("province")[0].selectedOptions[0].text;
+        var district = document.getElementsByName("district")[0].selectedOptions[0].text;
+        var ward = document.getElementsByName("ward")[0].selectedOptions[0].text;
         var address = document.getElementsByName("address")[0].value.trim();
+        var note = document.getElementsByName("note")[0].value.trim();
 
-        if (!recipientName || !recipientPhone || !province || !district || !ward || !address) {
+        if (!recipientName || !recipientPhone || province === "-- Select your Province --" || district === "-- Select your District --" || ward === "-- Select your Ward --" || !address) {
             document.getElementById('deliveryModal').style.display = 'block';
             document.getElementById("errorMessage").innerText = "Please complete all required fields in the section.";
-        } else {
-            document.getElementById("deliveryForm").submit();
+            return;
+        }
+        else {
+            var fullAddress = `${address}, ${ward}, ${district}, ${province}`;
+
+            var form = document.getElementById("deliveryForm");
+
+            var hiddenAddressInput = document.createElement("input");
+            hiddenAddressInput.type = "hidden";
+            hiddenAddressInput.name = "fullAddress";
+            hiddenAddressInput.value = fullAddress;
+
+            var existingAddressInput = form.querySelector('input[name="fullAddress"]');
+            if (existingAddressInput) {
+                existingAddressInput.value = fullAddress;
+            } else {
+                form.appendChild(hiddenAddressInput);
+            }
+
+            form.submit();
         }
     }
 </script>
