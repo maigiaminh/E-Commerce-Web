@@ -1174,6 +1174,41 @@ footer {
     justify-items:center;
     padding-bottom: 20px;
 }
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-table th, .order-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.order-table th {
+    color: #fff;
+    background-color: #088178;
+}
+
+.order-table td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.order-table td a:hover {
+    text-decoration: underline;
+}
+
+.order-history h2{
+    margin-bottom: 40px;
+}
+
+#form-details.profile {
+    display: block;
+}
+
 /* Modals */
 .modal {
     display: none;
@@ -1792,6 +1827,16 @@ button.modal-button.button-success:hover {
         margin: 40px 0;
         font-size: 14px;
     }
+
+    .order-history h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    #order-history tr,
+    #order-history tbody {
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 477px) {
@@ -2076,5 +2121,19 @@ button.modal-button.button-success:hover {
     .customer-info {
         margin: 40px 0;
         font-size: 12px;
+    }
+
+    .order-history h2 {
+        margin-bottom: 0px;
+        font-size: 14px;
+    }
+
+    .order-table{
+        margin-top: 0px;
+    }
+
+    #order-history tr,
+    #order-history tbody {
+        font-size: 6px;
     }
 }

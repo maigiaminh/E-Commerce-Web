@@ -20,11 +20,8 @@ namespace E_Commerce_Web.Controllers
         {
             var order = _context.Orders.FirstOrDefault(o => o.OrderID == id);
 
-            if (order == null)
+            if (order == null || order.UserID != Convert.ToInt32(Session["UserID"]))
             {
-                return HttpNotFound();
-            }
-            else if (order.UserID != Convert.ToInt32(Session["UserID"])) {
                 return HttpNotFound();
             }
 

@@ -25,7 +25,7 @@
             <h1 class="modal-title">
                 Error</h2>
                 <p id="errorMessage">There was an error with your registration.</p>
-                <button type="reset" onclick="closeModal()" class="modal-button">Close</button>
+                <button type="button" onclick="closeModal()" class="modal-button">Close</button>
         </div>
     </div>
     <div class="form-image">
@@ -40,9 +40,5 @@
             document.getElementById("errorMessage").innerText = errorMessage;
             document.getElementById("errorModal").style.display = "flex";
         }
-    }
-
-    function closeModal() {
-        document.getElementById("errorModal").style.display = "none";
     }
 </script>

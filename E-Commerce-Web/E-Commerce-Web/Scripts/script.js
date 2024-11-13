@@ -68,4 +68,10 @@ function closeModal() {
     if (emptyPayment != null) {
         emptyPayment.style.display = 'none';
     }
+
+    var loginError = document.getElementById("errorModal");
+    if (loginError != null) {
+        loginError.style.display = "none";
+    }
+
 }

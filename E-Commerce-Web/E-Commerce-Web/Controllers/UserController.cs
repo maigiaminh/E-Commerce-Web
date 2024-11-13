@@ -1,4 +1,5 @@
-﻿using E_Commerce_Web.Models;
+﻿using E_Commerce_Web.Migrations;
+using E_Commerce_Web.Models;
 using E_Commerce_Web.Utilities;
 using System;
 using System.Collections.Generic;
@@ -155,6 +156,12 @@ namespace E_Commerce_Web.Controllers
 
             int userID = Convert.ToInt32(Session["UserID"]);
             var user = _context.Users.FirstOrDefault(u => u.UserID == userID);
+            var orders = _context.Orders
+                            .Where(o => o.UserID == userID)
+                            .OrderByDescending(o => o.OrderDate)
+                            .ToList();
+
+            ViewBag.OrderHistory = orders;
 
             return View("Profile", user);
         }
