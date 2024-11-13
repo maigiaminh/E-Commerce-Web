@@ -38,13 +38,15 @@ namespace E_Commerce_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddToCart(int productId, int quantity, string size)
+        public ActionResult AddToCart(int productId, int quantity, int sizeID)
         {
             var product = _context.Products.Find(productId);
+            var productSize = _context.Sizes.Find(sizeID);
+
             if (product == null) return HttpNotFound();
 
             var cart = GetCart();
-            var cartItem = cart.FirstOrDefault(c => c.ProductId == productId && c.Size == size);
+            var cartItem = cart.FirstOrDefault(c => c.ProductId == productId && c.SizeID == sizeID);
 
             if (cartItem != null)
             {
@@ -56,11 +58,12 @@ namespace E_Commerce_Web.Controllers
                 {
                     ProductId = product.ProductID,
                     ProductName = product.ProductName,
-                    Size = size,
+                    Size = productSize.Name,
+                    SizeID = sizeID,
                     Price = product.Price,
                     Quantity = quantity,
                     ImagePath = product.ImagePath
-                });
+                });;
             }
 
             SaveCart(cart);
@@ -190,6 +193,7 @@ namespace E_Commerce_Web.Controllers
 
             return View();
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

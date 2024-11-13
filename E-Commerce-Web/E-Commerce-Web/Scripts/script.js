@@ -24,6 +24,8 @@ function closePaymentModal() {
 }
 
 function updatePaymentMethod(title, imgSrc) {
+    selectedPaymentMethod = title;
+    document.getElementById('paymentMethod').value = selectedPaymentMethod;
     document.getElementById("payment-title").textContent = title;
     document.getElementById("payment-image").src = "/Content/img/pay/" + imgSrc;
     closePaymentModal();
@@ -33,8 +35,11 @@ window.onclick = function (event) {
     const payModal = document.getElementById("payment-modal");
     const emptyModal = document.getElementById("emptyCartModal");
     const deliveryModal = document.getElementById("deliveryModal");
-    if (event.target === payModal || event.target === emptyModal || event.target === deliveryModal) {
-        modal.style.display = "none";
+    const emptyPaymentModal = document.getElementById("emptyPaymentModal");
+
+    if (event.target === payModal || event.target === emptyModal || event.target === deliveryModal || event.target === emptyPaymentModal) {
+
+        event.target.style.display = "none";
     }
 }
 
@@ -57,5 +62,10 @@ function closeModal() {
     var delivery = document.getElementById('deliveryModal');
     if (delivery != null) {
         delivery.style.display = 'none';
+    }
+
+    var emptyPayment = document.getElementById('emptyPaymentModal');
+    if (emptyPayment != null) {
+        emptyPayment.style.display = 'none';
     }
 }

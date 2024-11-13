@@ -23,12 +23,12 @@
         <h4 style="font-size: 32px">@Model.ProductName</h4>
         <h2 style="color: #088178">@Model.Price.ToString("C")</h2>
         <form action="@Url.Action("AddToCart", "Cart")" method="post">
-            <select id="size-select" name="size" required>
+            <select id="size-select" name="sizeID" required>
                 <option disabled selected value=""> -- Select size -- </option>
 
                 @foreach (var size in Model.ProductSizes)
                 {
-                    <option value="@size.Size.Name" @(size.Stock <= 0 ? "disabled" : "")>
+                    <option value="@size.SizeID" @(size.Stock <= 0 ? "disabled" : "")>
                         @size.Size.Name
 
                         @if (size.Stock <= 0)

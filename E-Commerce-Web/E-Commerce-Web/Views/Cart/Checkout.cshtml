@@ -170,11 +170,13 @@
         var address = document.getElementsByName("address")[0].value.trim();
         var note = document.getElementsByName("note")[0].value.trim();
 
+        
         if (!recipientName || !recipientPhone || province === "-- Select your Province --" || district === "-- Select your District --" || ward === "-- Select your Ward --" || !address) {
             document.getElementById('deliveryModal').style.display = 'block';
             document.getElementById("errorMessage").innerText = "Please complete all required fields in the section.";
             return;
         }
+        
         else {
             var fullAddress = `${address}, ${ward}, ${district}, ${province}`;
 

@@ -133,6 +133,18 @@
     <Content Include="Content\img\icon\error.png" />
     <Content Include="Content\img\icon\success.png" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\order\active_line.png" />
+    <Content Include="Content\img\order\confirm-bill-active.png" />
+    <Content Include="Content\img\order\confirm-bill-selected.png" />
+    <Content Include="Content\img\order\delivered-selected.png" />
+    <Content Include="Content\img\order\delivered-unactive.png" />
+    <Content Include="Content\img\order\delivering-active.png" />
+    <Content Include="Content\img\order\delivering-selected.png" />
+    <Content Include="Content\img\order\delivering-unactive.png" />
+    <Content Include="Content\img\order\pay-active.png" />
+    <Content Include="Content\img\order\pay-selected.png" />
+    <Content Include="Content\img\order\pay-unactive.png" />
+    <Content Include="Content\img\order\unactive_line.png" />
     <Content Include="Content\img\pay\app.jpg" />
     <Content Include="Content\img\pay\cod.png" />
     <Content Include="Content\img\pay\creditcard.png" />
@@ -218,6 +230,22 @@
     <Compile Include="Migrations\202411091620094_user.Designer.cs">
       <DependentUpon>202411091620094_user.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202411121656416_UpdateOrderTable.cs" />
+    <Compile Include="Migrations\202411121656416_UpdateOrderTable.Designer.cs">
+      <DependentUpon>202411121656416_UpdateOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411130749221_AddNote.cs" />
+    <Compile Include="Migrations\202411130749221_AddNote.Designer.cs">
+      <DependentUpon>202411130749221_AddNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411130837590_AddSubtotal.cs" />
+    <Compile Include="Migrations\202411130837590_AddSubtotal.Designer.cs">
+      <DependentUpon>202411130837590_AddSubtotal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411130842361_paymentmethod.cs" />
+    <Compile Include="Migrations\202411130842361_paymentmethod.Designer.cs">
+      <DependentUpon>202411130842361_paymentmethod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\OrderDetail.cs" />
@@ -252,7 +280,7 @@
     <Content Include="Views\User\ConfirmEmail.cshtml" />
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Payment.cshtml" />
-    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\OrderDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -278,6 +306,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202411091620094_user.resx">
       <DependentUpon>202411091620094_user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411121656416_UpdateOrderTable.resx">
+      <DependentUpon>202411121656416_UpdateOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411130749221_AddNote.resx">
+      <DependentUpon>202411130749221_AddNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411130837590_AddSubtotal.resx">
+      <DependentUpon>202411130837590_AddSubtotal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411130842361_paymentmethod.resx">
+      <DependentUpon>202411130842361_paymentmethod.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

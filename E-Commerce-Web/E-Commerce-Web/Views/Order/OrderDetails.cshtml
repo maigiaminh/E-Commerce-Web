@@ -1,0 +1,198 @@
+﻿@model E_Commerce_Web.Models.Order
+
+@{
+    ViewBag.Title = "Order Details";
+    decimal paid = 0;
+}
+
+<div class="order-bg">
+    <div class="section-p1 order-container">
+
+        <h3><strong>Order Details</strong></h3>
+
+        <div class="order-header">
+            <div>
+                <p>Order ID: <strong>@Model.OrderID</strong></p>
+                <p>Date Order: <strong>@Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</strong></p>
+            </div>
+            <a style="color: @(Model.Status == "Delivered" ? "#4CAF50" : "#f1c232")" href="#">@Model.Status</a>
+        </div>
+
+        <div class="status-icons">
+            @if (Model.Status == "Pending")
+            {
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/confirm-bill-selected.png")" alt="Order Placed Icon">
+                    <p style="color: #4CAF50">Order</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/unactive_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/pay-unactive.png")" alt="Confirmed Icon">
+                    <p>Paid</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/unactive_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/delivering-unactive.png")" alt="Shipped Icon">
+                    <p>Shipping</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/unactive_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img style="padding-left: 10px" src="@Url.Content("~/Content/img/order/delivered-unactive.png")" alt="Delivered Icon">
+                    <p>Delivered</p>
+                </div>
+            }
+            else if (Model.Status == "Confirmed")
+            {
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/confirm-bill-active.png")" alt="Order Placed Icon">
+                    <p>Order</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/active_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/pay-selected.png")" alt="Confirmed Icon">
+                    <p style="color: #4CAF50">Paid</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/unactive_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/delivering-unactive.png")" alt="Shipped Icon">
+                    <p>Shipping</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/unactive_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img style="padding-left: 10px" src="@Url.Content("~/Content/img/order/delivered-unactive.png")" alt="Delivered Icon">
+                    <p>Delivered</p>
+                </div>
+            }
+            else if (Model.Status == "Delivering")
+            {
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/confirm-bill-active.png")" alt="Order Placed Icon">
+                    <p>Order</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/active_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/pay-active.png")" alt="Confirmed Icon">
+                    <p>Paid</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/active_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/delivering-selected.png")" alt="Shipped Icon">
+                    <p style="color: #4CAF50">Shipping</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/unactive_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img style="padding-left: 10px" src="@Url.Content("~/Content/img/order/delivered-unactive.png")" alt="Delivered Icon">
+                    <p>Delivered</p>
+                </div>
+            }
+
+            else if (Model.Status == "Delivered")
+            {
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/confirm-bill-active.png")" alt="Order Placed Icon">
+                    <p>Order</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/active_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/pay-active.png")" alt="Confirmed Icon">
+                    <p>Paid</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/active_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img src="@Url.Content("~/Content/img/order/delivering-active.png")" alt="Shipped Icon">
+                    <p>Shipping</p>
+                </div>
+                <div class="status-item">
+                    <img style="margin-bottom: 30px" src="@Url.Content("~/Content/img/order/active_line.png")" alt="Order Placed Icon">
+                    <p></p>
+                </div>
+                <div class="status-item">
+                    <img style="padding-left: 10px" src="@Url.Content("~/Content/img/order/delivered-selected.png")" alt="Delivered Icon">
+                    <p style="color: #4CAF50">Delivered</p>
+                </div>
+            }
+        </div>
+
+        <div class="order-info">
+            @foreach (var item in Model.OrderDetails)
+            {
+                <div class="order-item">
+                    <img src="@Url.Content("~/Content/img/products/" + item.Product.ImagePath)" alt="Product Image">
+                    <div>
+                        <a href="@Url.Action("ProductDetails", "Product", new { productId = item.Product.ProductID })"><h4>@item.Product.ProductName &nbsp;<span style="font-weight: 600; font-style: italic">(@item.Size.Name.ToString())</span></h4></a>
+                        <p>Quantity: @item.Quantity</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="payment-info">
+            <h3>Payment Information</h3>
+            <div class="detail"><span>Subtotal:</span> <span>@Model.Subtotal.ToString("C")</span></div>
+            <div class="detail"><span>Discount:</span> <span>-@Model.Discount.ToString("C")</span></div>
+            <div class="detail"><span>Shipping fee:</span> <span>@Model.ShippingFee.ToString("C")</span></div>
+            <div class="line"></div>
+            <div class="detail"><span>Payment Total:</span> <span class="total">@Model.TotalAmount.ToString("C")</span></div>
+            <div class="detail"><span>Paid Total:</span> 
+                <span class="total" style="color: #4CAF50">
+                    @if(Model.PaymentMethod != "Cash On Delivery (COD)")
+                    {
+                        paid = Model.TotalAmount;
+                    }
+                    else
+                    {
+                        if (Model.Status == "Delivered")
+                        {
+                            paid = Model.TotalAmount;
+                        }
+                    }
+                    @paid.ToString("C")
+                </span>
+            </div>
+        </div>
+
+        <div class="customer-info">
+            <h3>Delivery Information</h3>
+            <div class="detail"><span>Recipient's Name:</span> <span>@Model.RecipientName</span></div>
+            <div class="detail"><span>Recipient's Phone:</span> <span>@Model.RecipientPhone</span></div>
+            <div class="detail"><span>Recipient's Address:</span> <span>@Model.RecipientAddress</span></div>
+            <div class="detail">
+                <span>Status:</span> 
+                <span style="color: @(Model.Status == "Delivered" ? "#4CAF50" : "#f1c232")">@Model.Status</span>
+            </div>
+        </div>
+    </div>
+</div>

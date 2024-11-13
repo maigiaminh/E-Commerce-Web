@@ -111,7 +111,7 @@
                         </tr>
                     </table>
 
-                    <button class="normal">Proceed to checkout</button>
+                    <button type="button" class="normal" onclick="checkout();">Proceed to checkout</button>
                 </div>
             </section>
         </section>
@@ -123,21 +123,63 @@
         <span class="close-btn" onclick="closePaymentModal()">&times;</span>
         <h3>Select Payment Method</h3>
 
-        <div class="payment-option" onclick="updatePaymentMethod('Momo E-wallet', 'momo.png')">
+        <div class="payment-option" onclick="updatePaymentMethod('Momo E-wallet', 'momo.png');">
             <img src="@Url.Content("~/Content/img/pay/momo.png")" alt="Momo E-wallet">
             <span>Momo E-wallet</span>
         </div>
-        <div class="payment-option" onclick="updatePaymentMethod('ZaloPay E-wallet', 'zalopay.png')">
+        <div class="payment-option" onclick="updatePaymentMethod('ZaloPay E-wallet', 'zalopay.png');">
             <img src="@Url.Content("~/Content/img/pay/zalopay.png")" alt="ZaloPay">
             <span>ZaloPay E-wallet</span>
         </div>
-        <div class="payment-option" onclick="updatePaymentMethod('Credit Card', 'creditcard.png')">
+        <div class="payment-option" onclick="updatePaymentMethod('Credit Card', 'creditcard.png');">
             <img src="@Url.Content("~/Content/img/pay/creditcard.png")" alt="Credit Card">
             <span>Credit Card</span>
         </div>
-        <div class="payment-option" onclick="updatePaymentMethod('Cash On Delivery (COD)', 'cod.png')">
+        <div class="payment-option" onclick="updatePaymentMethod('Cash On Delivery (COD)', 'cod.png');">
             <img src="@Url.Content("~/Content/img/pay/cod.png")" alt="Credit Card">
             <span>Cash On Delivery (COD)</span>
         </div>
     </div>
 </div>
+
+<div id="emptyPaymentModal" class="modal">
+    <div class="modal-content" style="margin: 15% auto;">
+        <span class="close-button" onclick="closeModal();">&times;</span>
+        <h3 style="color: #EC1A2D ">Unselected Payment</h3>
+        <p id="errorMessage"></p>
+        <button onclick="closeModal()" class="modal-button">Close</button>
+    </div>
+</div>
+
+<form id="checkoutForm" action="@Url.Action("OrderCreate", "Order")" method="post">
+    <input type="hidden" name="paymentMethod" id="paymentMethod">
+    <input type="hidden" name="RecipientName" value="@ViewBag.RecipientName">
+    <input type="hidden" name="RecipientPhone" value="@ViewBag.RecipientPhone">
+    <input type="hidden" name="Address" value="@ViewBag.Address">
+    <input type="hidden" name="Note" value="@ViewBag.Note">
+    <input type="hidden" name="Discount" value="@ViewBag.Discount">
+    <input type="hidden" name="Shipping" value="@ViewBag.Shipping">
+    <input type="hidden" name="Total" value="@ViewBag.Total">
+    <input type="hidden" name="Subtotal" value="@ViewBag.CartSubtotal">
+</form>
+
+<script>
+    let selectedPaymentMethod = '';
+
+    function checkout() {
+        if (!selectedPaymentMethod) {
+            document.getElementById('emptyPaymentModal').style.display = 'block';
+            document.getElementById("errorMessage").innerText = "Please select your payment method before continue.";
+            return;
+        }
+
+        if (selectedPaymentMethod === 'Cash On Delivery (COD)') {
+            document.getElementById("checkoutForm").submit();
+        }
+        else {
+            document.getElementById('emptyPaymentModal').style.display = 'block';
+            document.getElementById("errorMessage").innerText = "Payment via other methods is under development.";
+            return;
+        }
+    }
+</script>
