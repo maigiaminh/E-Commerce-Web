@@ -1,10 +1,18 @@
 ﻿using E_Commerce_Web.Models;
+using iText.Kernel.Pdf;
+using iText.Layout.Element;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using iText.Layout;
+using iText.Kernel.Colors;
+using iText.Layout.Properties;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
+using E_Commerce_Web.Utilities;
 
 namespace E_Commerce_Web.Controllers
 {
@@ -111,6 +119,21 @@ namespace E_Commerce_Web.Controllers
                     return RedirectToAction("Index", "Cart");
                 }
             }
+        }
+
+        public ActionResult PrintSelectedOrderPdf(int orderId)
+        {
+
+            var order = _context.Orders.FirstOrDefault(o => o.OrderID == orderId);
+
+            if (order == null || order.UserID != Convert.ToInt32(Session["UserID"]))
+            {
+                return HttpNotFound();
+            }
+
+            var pdfBytes = PDFGenerator.GenerateOrderPdf(order);
+            var filename = "OrderDetail" + orderId + ".pdf";
+            return File(pdfBytes, "application/pdf", filename);
         }
     }
 }

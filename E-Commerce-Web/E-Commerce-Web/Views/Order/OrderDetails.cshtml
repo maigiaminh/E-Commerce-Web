@@ -296,9 +296,10 @@
             <div class="detail"><span>Shipping fee:</span> <span>@Model.ShippingFee.ToString("C")</span></div>
             <div class="line"></div>
             <div class="detail"><span>Payment Total:</span> <span class="total">@Model.TotalAmount.ToString("C")</span></div>
-            <div class="detail"><span>Paid Total:</span> 
+            <div class="detail">
+                <span>Paid Total:</span>
                 <span class="total" style="color: #4CAF50">
-                    @if(Model.PaymentMethod != "Cash On Delivery (COD)")
+                    @if (Model.PaymentMethod != "Cash On Delivery (COD)")
                     {
                         paid = Model.TotalAmount;
                     }
@@ -320,9 +321,12 @@
             <div class="detail"><span>Recipient's Phone:</span> <span>@Model.RecipientPhone</span></div>
             <div class="detail"><span>Recipient's Address:</span> <span>@Model.RecipientAddress</span></div>
             <div class="detail">
-                <span>Status:</span> 
+                <span>Status:</span>
                 <span style="color: @(Model.Status == "Delivered" ? "#4CAF50" : "#f1c232")">@Model.Status</span>
             </div>
         </div>
+
+        <a href="@Url.Action("PrintSelectedOrderPdf", "Order", new { orderId = Model.OrderID })" class="btn btn-primary" target="_blank">Print PDF</a>
+
     </div>
 </div>
