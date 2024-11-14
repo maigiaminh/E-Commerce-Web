@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using MediatR;
 using E_Commerce_Web.Utilities;
+using E_Commerce_Web.Service.VNPay;
+using System.Web;
 
 namespace E_Commerce_Web.Controllers
 {
@@ -14,10 +16,12 @@ namespace E_Commerce_Web.Controllers
     public class PaymentsController : Controller
     {
         private readonly IMediator mediator;
+        private readonly VnPayService _vnPayService;
 
         public PaymentsController(IMediator mediator)
         {
             this.mediator = mediator;
+            _vnPayService = new VnPayService();
         }
 
 
@@ -58,5 +62,15 @@ namespace E_Commerce_Web.Controllers
 
             return Redirect($"{returnUrl}?{queryString}");
         }
+
+        [HttpGet]
+        [Route("vnpay-return")]
+        public ActionResult PaymentCallbackVnpay()
+        {
+            var response = _vnPayService.PaymentExecute(Request.QueryString);
+
+            return Json(response);
+        }
+
     }
 }

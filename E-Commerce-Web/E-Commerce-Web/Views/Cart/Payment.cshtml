@@ -123,6 +123,14 @@
         <span class="close-btn" onclick="closePaymentModal()">&times;</span>
         <h3>Select Payment Method</h3>
 
+        <div class="payment-option" onclick="updatePaymentMethod('Cash On Delivery (COD)', 'cod.png');">
+            <img src="@Url.Content("~/Content/img/pay/cod.png")" alt="Credit Card">
+            <span>Cash On Delivery (COD)</span>
+        </div>
+        <div class="payment-option" onclick="updatePaymentMethod('VNPay E-wallet', 'vnpay.jpg');">
+            <img src="@Url.Content("~/Content/img/pay/vnpay.jpg")" alt="VNPay">
+            <span>VNPay E-wallet</span>
+        </div>
         <div class="payment-option" onclick="updatePaymentMethod('Momo E-wallet', 'momo.png');">
             <img src="@Url.Content("~/Content/img/pay/momo.png")" alt="Momo E-wallet">
             <span>Momo E-wallet</span>
@@ -134,10 +142,6 @@
         <div class="payment-option" onclick="updatePaymentMethod('Credit Card', 'creditcard.png');">
             <img src="@Url.Content("~/Content/img/pay/creditcard.png")" alt="Credit Card">
             <span>Credit Card</span>
-        </div>
-        <div class="payment-option" onclick="updatePaymentMethod('Cash On Delivery (COD)', 'cod.png');">
-            <img src="@Url.Content("~/Content/img/pay/cod.png")" alt="Credit Card">
-            <span>Cash On Delivery (COD)</span>
         </div>
     </div>
 </div>
@@ -173,7 +177,7 @@
             return;
         }
 
-        if (selectedPaymentMethod === 'Cash On Delivery (COD)' || selectedPaymentMethod === 'Momo E-wallet') {
+        if (selectedPaymentMethod === 'Cash On Delivery (COD)' || selectedPaymentMethod === 'Momo E-wallet' || selectedPaymentMethod === 'VNPay E-wallet') {
             document.getElementById("checkoutForm").submit();
         }
         else {

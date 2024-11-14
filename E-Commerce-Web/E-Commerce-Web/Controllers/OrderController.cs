@@ -18,15 +18,20 @@ using E_Commerce_Web.Utilities.Momo.Config;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System.Configuration;
 using E_Commerce_Web.Models.Result;
+using E_Commerce_Web.Service.VNPay;
 
 namespace E_Commerce_Web.Controllers
 {
     public class OrderController : Controller
     {
         private readonly EcommerceContext _context;
+        private readonly VnPayService _vnPayService;
+
         public OrderController()
         {
             _context = new EcommerceContext();
+            _vnPayService = new VnPayService();
+
         }
 
         public ActionResult OrderDetails(int id)
@@ -163,6 +168,27 @@ namespace E_Commerce_Web.Controllers
                             PaymentUrl = paymentUrl,
                         });
         
+                    }
+
+                    else if (paymentMethod == "VNPay E-wallet")
+                    {
+                        Debug.WriteLine("VN PAY NE");
+                        double amount = (double)Math.Round(newOrder.TotalAmount * 25345);
+
+                        PaymentInformationModel model = new PaymentInformationModel()
+                        {
+                            OrderType = "other",
+                            Amount = 200000.00,
+                            OrderDescription = "Thanh toan qua vnpay a",
+                            Name = "maigiaminh"
+                        };
+
+                        Debug.WriteLine("service" + _vnPayService);
+
+                        var url = _vnPayService.CreatePaymentUrl(model, HttpContext.Request);
+
+                        Debug.WriteLine("url " + url);
+                        return Redirect(url);
                     }
 
                     Session.Remove("Discount");

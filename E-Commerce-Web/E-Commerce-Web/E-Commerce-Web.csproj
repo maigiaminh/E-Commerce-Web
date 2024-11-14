@@ -164,6 +164,15 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc5, Version=1.4.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc5.1.4.0\lib\net45\Unity.Mvc5.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -249,6 +258,7 @@
     <Content Include="Content\img\pay\pay.png" />
     <Content Include="Content\img\pay\payment.png" />
     <Content Include="Content\img\pay\play.jpg" />
+    <Content Include="Content\img\pay\vnpay.jpg" />
     <Content Include="Content\img\pay\zalopay.png" />
     <Content Include="Content\img\people\1.png" />
     <Content Include="Content\img\people\2.png" />
@@ -295,6 +305,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -368,11 +379,17 @@
     <Compile Include="Service\Momo\Request\MomoOneTimePaymentRequest.cs" />
     <Compile Include="Service\Momo\Request\MomoOneTimePaymentResultRequest.cs" />
     <Compile Include="Service\Momo\Response\MomoOneTimePaymentCreateLinkResponse.cs" />
+    <Compile Include="Service\VNPay\Config\PaymentInformationModel.cs" />
+    <Compile Include="Service\VNPay\IVnPayService.cs" />
+    <Compile Include="Service\VNPay\Lib\VNPayLib.cs" />
+    <Compile Include="Service\VNPay\Response\PaymentResponseModel.cs" />
+    <Compile Include="Service\VNPay\VnPayService.cs" />
     <Compile Include="Utilities\EmailHelper.cs" />
     <Compile Include="Service\Momo\Config\MomoConfig.cs" />
     <Compile Include="Utilities\HashHelper.cs" />
     <Compile Include="Utilities\PDFGenerator.cs" />
     <Compile Include="Utilities\QueryStringHelper.cs" />
+    <Compile Include="Utilities\UnityConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
