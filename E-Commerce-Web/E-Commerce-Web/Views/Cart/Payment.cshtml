@@ -173,7 +173,7 @@
             return;
         }
 
-        if (selectedPaymentMethod === 'Cash On Delivery (COD)') {
+        if (selectedPaymentMethod === 'Cash On Delivery (COD)' || selectedPaymentMethod === 'Momo E-wallet') {
             document.getElementById("checkoutForm").submit();
         }
         else {

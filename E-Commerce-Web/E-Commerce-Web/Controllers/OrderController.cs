@@ -13,6 +13,11 @@ using iText.Kernel.Colors;
 using iText.Layout.Properties;
 using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 using E_Commerce_Web.Utilities;
+using E_Commerce_Web.Service.Momo.Request;
+using E_Commerce_Web.Utilities.Momo.Config;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System.Configuration;
+using E_Commerce_Web.Models.Result;
 
 namespace E_Commerce_Web.Controllers
 {
@@ -107,6 +112,62 @@ namespace E_Commerce_Web.Controllers
 
                     _context.SaveChanges();
                     transaction.Commit();
+
+                    if(paymentMethod == "Momo E-wallet")
+                    {
+                        var result = new BaseResultWithData<PaymentLinkDtos>();
+                        var paymentContent = "THANH TOAN DON HANG " + newOrder.OrderID;
+                        var paymentUrl = "";
+                        var requestId = newOrder.OrderID.ToString();
+                        var orderID = "MOMO" + newOrder.OrderID.ToString();
+                        var amount = (long)Math.Round(newOrder.TotalAmount * 25345);
+
+                        Debug.WriteLine("AMOUNT :" + amount + "\nrequestId: " + requestId + "\norderID" + orderID);
+                        var momoOneTimePayRequest = new MomoOneTimePaymentRequest(
+                                ConfigurationManager.AppSettings["Momo:PartnerCode"],
+                                requestId,
+                                amount,
+                                orderID,
+                                paymentContent,
+                                ConfigurationManager.AppSettings["Momo:ReturnUrl"],
+                                ConfigurationManager.AppSettings["Momo:IpnUrl"],
+                                "captureWallet",
+                                string.Empty
+                            );
+
+                        momoOneTimePayRequest.MakeSignature(
+                            ConfigurationManager.AppSettings["Momo:AccessKey"],
+                            ConfigurationManager.AppSettings["Momo:SecretKey"]);
+
+                        Debug.WriteLine("Order ID: " + newOrder.OrderID);
+                        (bool createMomoLinkResult, string createMessage) = momoOneTimePayRequest.GetLink(ConfigurationManager.AppSettings["Momo:PaymentUrl"]);
+                        if (createMomoLinkResult)
+                        {
+                            paymentUrl = createMessage;
+                            TempData["PaymentUrl"] = paymentUrl;
+
+                            Debug.WriteLine("create sucessfully" + createMessage);
+
+                        }
+                        else
+                        {
+                            result.Message = createMessage;
+                            Debug.WriteLine("error" + createMessage);
+
+                            return RedirectToAction("Index", "Cart");
+                        }
+
+                        result.Set(true, "OK", new PaymentLinkDtos()
+                        {
+                            PaymentId = "01",
+                            PaymentUrl = paymentUrl,
+                        });
+        
+                    }
+
+                    Session.Remove("Discount");
+                    Session.Remove("CouponCode");
+                    Session.Remove("Cart");
 
                     return RedirectToAction("OrderDetails", new { id = newOrder.OrderID });
                 }

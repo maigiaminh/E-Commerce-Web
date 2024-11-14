@@ -3,7 +3,18 @@
 @{
     ViewBag.Title = "Order Details";
     decimal paid = 0;
+
 }
+@{
+    var paymentUrl = TempData["PaymentUrl"] as string;
+    if (!string.IsNullOrEmpty(paymentUrl))
+    {
+        <script type="text/javascript">
+            window.open('@paymentUrl', '_blank');
+        </script>
+    }
+}
+
 
 <div class="order-bg">
     <div class="section-p1 order-container">

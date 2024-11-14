@@ -33,7 +33,7 @@ namespace E_Commerce_Web.Controllers
         public ActionResult Login(string email, string password)
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == email);
-            if (user != null && PasswordHasher.VerifyPassword(password, user.PasswordHash))
+            if (user != null && HashHelper.VerifyPassword(password, user.PasswordHash))
             {
                 if (!user.Active)
                 {
@@ -107,7 +107,7 @@ namespace E_Commerce_Web.Controllers
             {
                 FullName = username,
                 Email = email,
-                PasswordHash = PasswordHasher.HashPassword(password),
+                PasswordHash = HashHelper.HashPassword(password),
                 CreatedAt = DateTime.Now,
                 Avatar = "default_avt.jpg",
                 Active = false,
@@ -192,7 +192,7 @@ namespace E_Commerce_Web.Controllers
 
             if (user != null)
             {
-                if(!PasswordHasher.VerifyPassword(oldPass, user.PasswordHash))
+                if(!HashHelper.VerifyPassword(oldPass, user.PasswordHash))
                 {
                     ViewBag.ErrorMessage = "Incorrect old password. Please try again!";
                     ViewBag.OldPassword = oldPass;
@@ -203,7 +203,7 @@ namespace E_Commerce_Web.Controllers
                 else
                 {
                     ViewBag.SuccessMessage = "Change password successfully!";
-                    user.PasswordHash = PasswordHasher.HashPassword(newPass);
+                    user.PasswordHash = HashHelper.HashPassword(newPass);
                     _context.SaveChanges();
 
                 }
