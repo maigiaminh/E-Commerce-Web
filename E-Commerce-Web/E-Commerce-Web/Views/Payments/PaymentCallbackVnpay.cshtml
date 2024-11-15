@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "PaymentCallbackVnpay";
+}
+
+
+<div class="container-payment">
+    <h2>Successful Transaction</h2>
+    <h3>VNPay Successful Transaction</h3>
+
+    <div class="info">
+        <div><span>Order ID: </span>@ViewBag.OrderID </div>
+        <div><span>Order Info: </span>@ViewBag.OrderDescription </div>
+        <div><span>Total Amount: </span>@ViewBag.Amount </div>
+        <div><span>Transaction ID: </span>@ViewBag.TransactionID </div>
+        <div><span>Payment ID: </span>@ViewBag.PaymentID </div>
+        <div><span>Click <a href="@Url.Action("OrderDetails", "Order", new { id = ViewBag.OrderID })">Here</a> to view Order Detail</span></div>
+    </div>
+</div>
+
+<style>
+    
+</style>

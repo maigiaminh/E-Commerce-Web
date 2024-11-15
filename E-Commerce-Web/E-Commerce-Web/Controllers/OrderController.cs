@@ -70,7 +70,7 @@ namespace E_Commerce_Web.Controllers
                         TotalAmount = Total,
                         Subtotal = Subtotal,
                         PaymentMethod = paymentMethod,
-                        Status = paymentMethod == "Cash On Delivery (COD)" ? "Delivering" : "Pending",
+                        Status = paymentMethod == "Cash On Delivery (COD)" ? "Delivering" : "Confirmed",
                         RecipientName = RecipientName,
                         RecipientPhone = RecipientPhone,
                         RecipientAddress = Address,
@@ -175,15 +175,17 @@ namespace E_Commerce_Web.Controllers
                         Debug.WriteLine("VN PAY NE");
                         double amount = (double)Math.Round(newOrder.TotalAmount * 25345);
 
+                        Debug.WriteLine("AMOUNT " + amount);
                         PaymentInformationModel model = new PaymentInformationModel()
                         {
                             OrderType = "other",
-                            Amount = 200000.00,
-                            OrderDescription = "Thanh toan qua vnpay a",
-                            Name = "maigiaminh"
+                            Amount = amount,
+                            OrderDescription = newOrder.OrderID.ToString(),
+                            Name = newOrder.User.FullName
                         };
 
-                        Debug.WriteLine("service" + _vnPayService);
+                        Debug.WriteLine("service vnpay" + _vnPayService);
+                        Debug.WriteLine("model vnpay" + model);
 
                         var url = _vnPayService.CreatePaymentUrl(model, HttpContext.Request);
 

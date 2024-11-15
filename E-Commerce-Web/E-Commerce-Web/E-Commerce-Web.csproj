@@ -410,6 +410,7 @@
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Payment.cshtml" />
     <Content Include="Views\Order\OrderDetails.cshtml" />
+    <Content Include="Views\Payments\PaymentCallbackVnpay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -451,7 +452,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\Momo\Lib\" />
-    <Folder Include="Views\Payments\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

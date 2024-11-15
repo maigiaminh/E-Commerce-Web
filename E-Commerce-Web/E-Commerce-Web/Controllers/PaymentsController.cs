@@ -9,24 +9,27 @@ using MediatR;
 using E_Commerce_Web.Utilities;
 using E_Commerce_Web.Service.VNPay;
 using System.Web;
+using System;
+using E_Commerce_Web.Models;
+using System.Linq;
+using System.Diagnostics;
 
 namespace E_Commerce_Web.Controllers
 {
-    [Route("api/payment")]
     public class PaymentsController : Controller
     {
         private readonly IMediator mediator;
         private readonly VnPayService _vnPayService;
+        private readonly EcommerceContext _context;
 
-        public PaymentsController(IMediator mediator)
+        public PaymentsController()
         {
-            this.mediator = mediator;
             _vnPayService = new VnPayService();
+            _context = new EcommerceContext();
         }
 
 
         [HttpGet]
-        [Route("momo-return")]
         public async Task<ActionResult> MomoReturn(MomoOneTimePaymentResultRequest response)
         {
             string returnUrl = string.Empty;
@@ -64,12 +67,40 @@ namespace E_Commerce_Web.Controllers
         }
 
         [HttpGet]
-        [Route("vnpay-return")]
         public ActionResult PaymentCallbackVnpay()
         {
             var response = _vnPayService.PaymentExecute(Request.QueryString);
 
-            return Json(response);
+            if (response.VnPayResponseCode == "00")
+            {
+                Debug.WriteLine("DESCRIPTION: " + response.OrderDescription);
+                string[] parts = response.OrderDescription.Split(new[] { "ID:" }, StringSplitOptions.None);
+                string id = parts[1].Trim();
+                int orderID = Convert.ToInt32(id);
+                var order = _context.Orders.FirstOrDefault(o => o.OrderID == orderID);
+
+                if (order != null)
+                {
+                    order.Status = "Delivering";
+                    _context.SaveChanges();
+
+                    ViewBag.OrderID = orderID;
+                    ViewBag.OrderDescription = response.OrderDescription;
+                    ViewBag.Amount = order.TotalAmount;
+                    ViewBag.TransactionID = response.TransactionId;
+                    ViewBag.PaymentID = response.PaymentId;
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Cart");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Cart");
+            }
+            return View();
         }
 
     }
