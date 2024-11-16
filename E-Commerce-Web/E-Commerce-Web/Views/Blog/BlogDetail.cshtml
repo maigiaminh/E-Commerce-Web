@@ -1,4 +1,6 @@
-﻿@{
+﻿@model E_Commerce_Web.Models.Blog
+
+@{
     ViewBag.Title = "Blog Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -11,7 +13,7 @@
             <span>16/11/2024</span>
         </div>
         <div style="margin-bottom: 1rem;">
-            <img src="@Url.Content("~/Content/img/blog/b1.jpg")" alt="Title" >
+            <img src="@Url.Content("~/Content/img/blog/b1.jpg")" alt="Title">
         </div>
         <div class="blog-content">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
@@ -29,15 +31,37 @@
         <section id="comments" style="margin-top: 2rem;">
             <h3>Comments</h3>
             <div style="margin-top: 1rem;">
-                <div class="comment">
-                    <img src="@Url.Content("~/Content/img/people/1.png")" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 1rem;">
-                    <div>
-                        <strong>Minh</strong>
-                        <p>Hay quá</p>
-                        <small style="color: #888;">16/11/2003</small>
-                    </div>
-                </div>
 
+                @foreach (var model in Model.Comments)
+                {
+                    var id = model.Id;
+                    <div class="comment" id="comment-@id">
+                        <img src="@Url.Content("~/Content/img/people/1.png")" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 1rem;">
+                        <div>
+                            <strong>model.User.FullName</strong>
+                            <p>
+                                <span class="short-content">
+
+                                    @if (model.Content.Length > 100)
+                                    {
+                                        model.Content.Substring(0, 100);
+
+                                        <a href="#" onclick="showFullComment(@id); return false;"> Show more</a>;
+                                    }
+                                    else
+                                    {
+                                        model.Content.ToString();
+                                    }
+                                </span>
+                                <span class="full-content" style="display:none;">
+                                    model.Content.ToString();
+                                    <a href="#" onclick="showShortComment(@id); return false;">Hide</a>
+                                </span>
+                            </p>
+                            <small style="color: #888;">16/11/2003</small>
+                        </div>
+                    </div>
+                }
 
                 <form method="post" action="@Url.Action("AddComment", "Blog")" style="margin-top: 2rem;">
                     <input type="hidden" name="BlogId" value="1" />
@@ -65,3 +89,26 @@
         </ul>
     </div>
 </section>
+
+<section id="newsletter" class="section-p1 section-m1">
+    <div class="newstext">
+        <h4>Sign Up For Newsletters</h4>
+        <p>Get E-mail updates about our latest shop and <span>special offers.</span></p>
+    </div>
+    <div class="form">
+        <input type="text" placeholder="Your email address">
+        <button class="normal">Sign Up</button>
+    </div>
+</section>
+
+<script>
+    function showFullComment(commentId) {
+        document.querySelector(`#comment-${commentId} .short-content`).style.display = 'none';
+        document.querySelector(`#comment-${commentId} .full-content`).style.display = 'inline';
+    }
+
+    function showShortComment(commentId) {
+        document.querySelector(`#comment-${commentId} .short-content`).style.display = 'inline';
+        document.querySelector(`#comment-${commentId} .full-content`).style.display = 'none';
+    }
+</script>

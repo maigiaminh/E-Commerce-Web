@@ -14,6 +14,6 @@ namespace E_Commerce_Web.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public string Author { get; set; } 
 
-        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
