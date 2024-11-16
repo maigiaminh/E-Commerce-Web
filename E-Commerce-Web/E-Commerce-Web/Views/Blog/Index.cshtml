@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<E_Commerce_Web.Models.Blog>
+
+@{
     ViewBag.Title = "Blog";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,59 +10,67 @@
 </section>
 
 <section id="blog">
-    <div class="blog-box">
-        <div class="blog-img">
-            <img src="@Url.Content("~/Content/img/blog/b1.jpg")" alt="">
-        </div>
-        <div class="blog-details">
-            <h4>The Cotton-Jersey Zip-Up Hoodie</h4>
-            <p>Kickstarter man braid godard coloring book. Raclette waistcoat selfies yr wolf chartreuse hexagon irony, godrad...</p>
-            <a href="#">CONTINUE READING</a>
-        </div>
-        <h1>04/11</h1>
-    </div>
+    @if (Model.Count > 0)
+    {
+        foreach (var blog in Model)
+        {
+            <div class="blog-box">
+                <div class="blog-img">
+                    <img src="@Url.Content("~/Content/img/blog/") + @blog.ImageUrl" alt="">
+                </div>
+                <div class="blog-details">
+                    <h4>@blog.Title</h4>
+                    <p>@blog.Content.Substring(0, 100)...</p>
+                    <a href="@Url.Action("BlogDetail", "Blog", new { id = blog.Id })">CONTINUE READING</a>
+                </div>
+                <h1>@blog.CreatedAt.ToString("dd/MM")</h1>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No blogs available.</p>
+    }
 
-    <div class="blog-box">
-        <div class="blog-img">
-            <img src="@Url.Content("~/Content/img/blog/b2.jpg")" alt="">
-        </div>
-        <div class="blog-details">
-            <h4>The Cotton-Jersey Zip-Up Hoodie</h4>
-            <p>Kickstarter man braid godard coloring book. Raclette waistcoat selfies yr wolf chartreuse hexagon irony, godrad...</p>
-            <a href="#">CONTINUE READING</a>
-        </div>
-        <h1>04/11</h1>
-    </div>
-
-    <div class="blog-box">
-        <div class="blog-img">
-            <img src="@Url.Content("~/Content/img/blog/b3.jpg")" alt="">
-        </div>
-        <div class="blog-details">
-            <h4>The Cotton-Jersey Zip-Up Hoodie</h4>
-            <p>Kickstarter man braid godard coloring book. Raclette waistcoat selfies yr wolf chartreuse hexagon irony, godrad...</p>
-            <a href="#">CONTINUE READING</a>
-        </div>
-        <h1>04/11</h1>
-    </div>
-
-    <div class="blog-box">
-        <div class="blog-img">
-            <img src="@Url.Content("~/Content/img/blog/b4.jpg")" alt="">
-        </div>
-        <div class="blog-details">
-            <h4>The Cotton-Jersey Zip-Up Hoodie</h4>
-            <p>Kickstarter man braid godard coloring book. Raclette waistcoat selfies yr wolf chartreuse hexagon irony, godrad...</p>
-            <a href="#">CONTINUE READING</a>
-        </div>
-        <h1>04/11</h1>
-    </div>
 </section>
 
+
 <section id="pagination" class="section-p1">
-    <a href="#">1</a>
-    <a href="#">2</a>
-    <a href="#"><i class="fal fa-long-arrow-alt-right"></i></a>
+    @if (ViewBag.CurrentPage > 1)
+    {
+        <a class="prev" href="@Url.Action("Index", "Blog", new { page = ViewBag.CurrentPage - 1 })">
+            <i class="fal fa-long-arrow-alt-left"></i>
+        </a>
+    }
+
+    @{
+        int startPage = Math.Max(1, ViewBag.CurrentPage - 1);
+        int endPage = Math.Min(ViewBag.TotalPages, ViewBag.CurrentPage + 1);
+
+        if (endPage - startPage < 2)
+        {
+            if (startPage == 1)
+            {
+                endPage = Math.Min(startPage + 2, ViewBag.TotalPages);
+            }
+            else if (endPage == ViewBag.TotalPages)
+            {
+                startPage = Math.Max(1, endPage - 2);
+            }
+        }
+    }
+
+    @for (int i = startPage; i <= endPage; i++)
+    {
+        <a class="@(i == ViewBag.CurrentPage ? "selected" : "")" href="@Url.Action("Index", "Blog", new { page = i })">@i</a>
+    }
+
+    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("Index", "Blog", new { page = ViewBag.CurrentPage + 1 })">
+            <i class="fal fa-long-arrow-alt-right"></i>
+        </a>
+    }
 </section>
 
 <section id="newsletter" class="section-p1 section-m1">

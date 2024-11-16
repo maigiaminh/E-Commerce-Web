@@ -36,9 +36,9 @@
                 {
                     var id = model.Id;
                     <div class="comment" id="comment-@id">
-                        <img src="@Url.Content("~/Content/img/people/1.png")" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 1rem;">
+                        <img src="@Url.Content("~/Content/img/avt/") + @(model.User.Avatar) " alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 1rem;">
                         <div>
-                            <strong>model.User.FullName</strong>
+                            <strong>@(model.User.FullName)</strong>
                             <p>
                                 <span class="short-content">
 
@@ -54,22 +54,24 @@
                                     }
                                 </span>
                                 <span class="full-content" style="display:none;">
-                                    model.Content.ToString();
+                                    @(model.Content.ToString());
                                     <a href="#" onclick="showShortComment(@id); return false;">Hide</a>
                                 </span>
                             </p>
-                            <small style="color: #888;">16/11/2003</small>
+                            <small style="color: #888;">@(model.CreatedAt.ToString("dd/MM/yyyy"))</small>
                         </div>
                     </div>
                 }
 
-                <form method="post" action="@Url.Action("AddComment", "Blog")" style="margin-top: 2rem;">
-                    <input type="hidden" name="BlogId" value="1" />
-                    <textarea name="Content" placeholder="Write your comment here..." rows="4"></textarea>
-                    <button type="submit" class="comment-btn">
-                        Comment
-                    </button>
-                </form>
+                @if (Session["UserID"] != null)
+                {
+                    <form method="post" action="@Url.Action("AddComment", "Blog")" style="margin-top: 2rem;">
+                        <input type="hidden" name="BlogId" value="@Model.Id" />
+                        <textarea name="Content" placeholder="Write your comment here..." rows="4"></textarea>
+                        <button type="submit" class="comment-btn">Comment</button>
+                    </form>
+                }
+
             </div>
         </section>
     </div>
@@ -77,15 +79,18 @@
     <div class="blog-list">
         <h3>Newest Blogs</h3>
         <ul>
-            <li>
-                <img src="@Url.Content("~/Content/img/blog/b1.jpg")" alt="Blog Image" style="width: 80px; height: 80px; object-fit: cover; margin-right: 1rem; border-radius: 8px;">
-                <div>
-                    <a href="@Url.Action("Detail", "Blog", new { id = 1 })" style="text-decoration: none; color: #333;">
-                        <h4 style="margin: 0;">Title</h4>
-                        <small style="color: #666;">16/11/2024</small>
-                    </a>
-                </div>
-            </li>
+            @foreach (var blog in ViewBag.RecentBlogs as List<E_Commerce_Web.Models.Blog>)
+            {
+                <li>
+                    <img src="@Url.Content("~/Content/img/blog/") + @(blog.ImageUrl)" alt="Blog Image" style="width: 80px; height: 80px; object-fit: cover; margin-right: 1rem; border-radius: 8px;">
+                    <div>
+                        <a href="@Url.Action("Detail", "Blog", new { id = 1 })" style="text-decoration: none; color: #333;">
+                            <h4 style="margin: 0;">@blog.Title</h4>
+                            <small style="color: #666;">@blog.CreatedAt.ToString("dd/MM/yyyy")</small>
+                        </a>
+                    </div>
+                </li>
+            }
         </ul>
     </div>
 </section>
