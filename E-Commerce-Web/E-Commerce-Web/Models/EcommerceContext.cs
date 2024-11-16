@@ -15,5 +15,8 @@ namespace E_Commerce_Web.Models
         public DbSet<Coupon> Coupons { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
     }
 }

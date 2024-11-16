@@ -23,7 +23,7 @@
             <ul id="navbar">
                 <li><a class="@(currentController == "Home" && currentAction == "Index" ? "active" : "")" href="@Url.Action("Index", "Home")">Home</a></li>
                 <li><a class="@(currentController == "Product" && (currentAction == "Shop" || currentAction == "ProductDetails") ? "active" : "")" href="@Url.Action("Shop", "Product")">Shop</a></li>
-                <li><a class="@(currentController == "Home" && currentAction == "Blog" ? "active" : "")" href="@Url.Action("Blog", "Home")">Blog</a></li>
+                <li><a class="@(currentController == "Blog" && currentAction == "Index" ? "active" : "")" href="@Url.Action("Index", "Blog")">Blog</a></li>
                 <li><a class="@(currentController == "Home" && currentAction == "About" ? "active" : "")" href="@Url.Action("About", "Home")">About</a></li>
                 <li><a class="@(currentController == "Home" && currentAction == "Contact" ? "active" : "")" href="@Url.Action("Contact", "Home")">Contact</a></li>
                 <li id="lg-bag"><a class="@(currentController == "Cart" && currentAction == "Index" ? "active" : "")" href="@Url.Action("Index", "Cart")"><i class="far fa-shopping-bag"></i></a></li>

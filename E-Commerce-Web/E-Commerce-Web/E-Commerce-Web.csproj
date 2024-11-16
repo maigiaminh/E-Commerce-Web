@@ -306,6 +306,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -355,7 +356,17 @@
     <Compile Include="Migrations\202411130842361_paymentmethod.Designer.cs">
       <DependentUpon>202411130842361_paymentmethod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202411160605561_AddBlogAndCommentModels.cs" />
+    <Compile Include="Migrations\202411160605561_AddBlogAndCommentModels.Designer.cs">
+      <DependentUpon>202411160605561_AddBlogAndCommentModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411161748264_Update-Comment-Blog.cs" />
+    <Compile Include="Migrations\202411161748264_Update-Comment-Blog.Designer.cs">
+      <DependentUpon>202411161748264_Update-Comment-Blog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Blog\Blog.cs" />
+    <Compile Include="Models\Blog\Comment.cs" />
     <Compile Include="Models\Payment\PaymentDtos.cs" />
     <Compile Include="Models\Payment\PaymentLinkDtos.cs" />
     <Compile Include="Models\Payment\PaymentReturnDtos.cs" />
@@ -398,7 +409,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Product\Shop.cshtml" />
@@ -411,6 +422,7 @@
     <Content Include="Views\Cart\Payment.cshtml" />
     <Content Include="Views\Order\OrderDetails.cshtml" />
     <Content Include="Views\Payments\PaymentCallbackVnpay.cshtml" />
+    <Content Include="Views\Blog\BlogDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -448,6 +460,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202411130842361_paymentmethod.resx">
       <DependentUpon>202411130842361_paymentmethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411160605561_AddBlogAndCommentModels.resx">
+      <DependentUpon>202411160605561_AddBlogAndCommentModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411161748264_Update-Comment-Blog.resx">
+      <DependentUpon>202411161748264_Update-Comment-Blog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
