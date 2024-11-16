@@ -49,7 +49,14 @@ namespace E_Commerce_Web.Controllers
                 .Take(5)
                 .ToList();
 
+            var comments = _context.Comments
+                .Where(c => c.BlogId == id)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToList();
+
+
             ViewBag.RecentBlogs = recentBlogs;
+            ViewBag.Comments = comments; 
             return View(blog);
         }
 

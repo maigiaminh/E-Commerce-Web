@@ -364,6 +364,10 @@
     <Compile Include="Migrations\202411161748264_Update-Comment-Blog.Designer.cs">
       <DependentUpon>202411161748264_Update-Comment-Blog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202411162033394_Update-UserID-In-Comment.cs" />
+    <Compile Include="Migrations\202411162033394_Update-UserID-In-Comment.Designer.cs">
+      <DependentUpon>202411162033394_Update-UserID-In-Comment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog\Blog.cs" />
     <Compile Include="Models\Blog\Comment.cs" />
@@ -466,6 +470,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202411161748264_Update-Comment-Blog.resx">
       <DependentUpon>202411161748264_Update-Comment-Blog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411162033394_Update-UserID-In-Comment.resx">
+      <DependentUpon>202411162033394_Update-UserID-In-Comment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

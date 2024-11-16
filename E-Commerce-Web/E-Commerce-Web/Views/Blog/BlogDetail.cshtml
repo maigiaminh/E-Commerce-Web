@@ -31,36 +31,42 @@
         <section id="comments" style="margin-top: 2rem;">
             <h3>Comments</h3>
             <div style="margin-top: 1rem;">
-
-                @foreach (var model in Model.Comments)
+                @if (ViewBag.Comments != null && ViewBag.Comments.Count > 0)
                 {
-                    var id = model.Id;
-                    <div class="comment" id="comment-@id">
-                        <img src="@Url.Content("~/Content/img/avt/") + @(model.User.Avatar) " alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 1rem;">
-                        <div>
-                            <strong>@(model.User.FullName)</strong>
-                            <p>
-                                <span class="short-content">
+                    @foreach (var model in ViewBag.Comments)
+                    {
+                        var id = model.Id;
+                        <div class="comment" id="comment-@id">
+                            <img src="@Url.Content("~/Content/img/avt/") + @(model.User.Avatar) " alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 1rem;">
+                            <div>
+                                <strong>@(model.User.FullName)</strong>
+                                <p>
+                                    <span class="short-content">
 
-                                    @if (model.Content.Length > 100)
-                                    {
-                                        model.Content.Substring(0, 100);
+                                        @if (model.Content.Length > 100)
+                                        {
+                                            model.Content.Substring(0, 100);
 
-                                        <a href="#" onclick="showFullComment(@id); return false;"> Show more</a>;
-                                    }
-                                    else
-                                    {
-                                        model.Content.ToString();
-                                    }
-                                </span>
-                                <span class="full-content" style="display:none;">
-                                    @(model.Content.ToString());
-                                    <a href="#" onclick="showShortComment(@id); return false;">Hide</a>
-                                </span>
-                            </p>
-                            <small style="color: #888;">@(model.CreatedAt.ToString("dd/MM/yyyy"))</small>
+                                            <a href="#" onclick="showFullComment(@id); return false;"> Show more</a>;
+                                        }
+                                        else
+                                        {
+                                            model.Content.ToString();
+                                        }
+                                    </span>
+                                    <span class="full-content" style="display:none;">
+                                        @(model.Content.ToString());
+                                        <a href="#" onclick="showShortComment(@id); return false;">Hide</a>
+                                    </span>
+                                </p>
+                                <small style="color: #888;">@(model.CreatedAt.ToString("dd/MM/yyyy"))</small>
+                            </div>
                         </div>
-                    </div>
+                    }
+                }
+                else
+                {
+                    <p>No comments yet. Be the first to comment!</p>
                 }
 
                 @if (Session["UserID"] != null)

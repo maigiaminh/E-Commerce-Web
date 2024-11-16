@@ -37,40 +37,49 @@
         
     </div>
     <div class="pro-container">
-        @foreach (var product in Model)
+        @if (Model != null && Model.Count > 0)
         {
-            <div class="pro" onclick="window.location.href='@Url.Action("ProductDetails", "Product", new { productId = product.ProductID })'">
-                <img src="@Url.Content("~/Content/img/products/" + product.ImagePath)" alt="@product.ProductName">
-                <div class="des">
-                    <span>@product.Category.CategoryName</span>
-                    <h5>@product.ProductName</h5>
-                    <div class="star">
-                        @for (int i = 0; i < 5; i++)
-                        {
-                            <i class="fas fa-star"></i>
-                        }
+            foreach (var product in Model)
+            {
+                <div class="pro" onclick="window.location.href='@Url.Action("ProductDetails", "Product", new { productId = product.ProductID })'">
+                    <img src="@Url.Content("~/Content/img/products/" + product.ImagePath)" alt="@product.ProductName">
+                    <div class="des">
+                        <span>@product.Category.CategoryName</span>
+                        <h5>@product.ProductName</h5>
+                        <div class="star">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <i class="fas fa-star"></i>
+                            }
+                        </div>
+                        <h4>@product.Price.ToString("C")</h4>
                     </div>
-                    <h4>@product.Price.ToString("C")</h4>
+                    <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
                 </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
+            }
         }
+        else
+        { 
+            <h1 style="text-align:center;">No products available.</h1>
+        }
+
     </div>
 </section>
 
 <section id="pagination" class="section-p1">
-    @if (ViewBag.CurrentPage > 1)
+    @if (ViewBag.TotalPages > 1)
     {
-        <a class="prev" href="@Url.Action("Shop", new {
-                             page = ViewBag.CurrentPage - 1, 
-                             sortOption = ViewBag.SortOption, 
-                             categoryId = ViewBag.SelectedCategoryId 
-                         })">
-            <i class="fal fa-long-arrow-alt-left"></i>
-        </a>
-    }
+        if (ViewBag.CurrentPage > 1)
+        {
+            <a class="prev" href="@Url.Action("Shop", new {
+                         page = ViewBag.CurrentPage - 1,
+                         sortOption = ViewBag.SortOption,
+                         categoryId = ViewBag.SelectedCategoryId
+                     })">
+                <i class="fal fa-long-arrow-alt-left"></i>
+            </a>
+        }
 
-    @{
         int startPage = Math.Max(1, ViewBag.CurrentPage - 1);
         int endPage = Math.Min(ViewBag.TotalPages, ViewBag.CurrentPage + 1);
 
@@ -85,23 +94,25 @@
                 startPage = Math.Max(1, endPage - 2);
             }
         }
-    }
+        
 
-    @for (int i = startPage; i <= endPage; i++)
-    {
-        <a class="@(i == ViewBag.CurrentPage ? "selected" : "")" href="@Url.Action("Shop", new { page = i, sortOption = ViewBag.SortOption, categoryId = ViewBag.SelectedCategoryId })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
-    }
+        for (int i = startPage; i <= endPage; i++)
+        {
+            <a class="@(i == ViewBag.CurrentPage ? "selected" : "")" href="@Url.Action("Shop", new { page = i, sortOption = ViewBag.SortOption, categoryId = ViewBag.SelectedCategoryId })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
 
-    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
-    {
-        <a href="@Url.Action("Shop", new { 
-                page = ViewBag.CurrentPage + 1, 
-                sortOption = ViewBag.SortOption, 
-                categoryId = ViewBag.SelectedCategoryId 
+        if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Shop", new {
+                page = ViewBag.CurrentPage + 1,
+                sortOption = ViewBag.SortOption,
+                categoryId = ViewBag.SelectedCategoryId
             })">
-            <i class="fal fa-long-arrow-alt-right"></i>
-        </a>
+                <i class="fal fa-long-arrow-alt-right"></i>
+            </a>
+        }
     }
+
 </section>
 
 <section id="newsletter" class="section-p1 section-m1">
