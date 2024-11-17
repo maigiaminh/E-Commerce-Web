@@ -34,7 +34,7 @@
                 <option value="dateDesc" @(ViewBag.SortOption == "dateDesc" ? "selected" : "")>Sort by Date: Newest to Oldest</option>
             </select>
         </div>
-        
+
     </div>
     <div class="pro-container">
         @if (Model != null && Model.Count > 0)
@@ -59,7 +59,7 @@
             }
         }
         else
-        { 
+        {
             <h1 style="text-align:center;">No products available.</h1>
         }
 
@@ -94,7 +94,7 @@
                 startPage = Math.Max(1, endPage - 2);
             }
         }
-        
+
 
         for (int i = startPage; i <= endPage; i++)
         {
@@ -115,16 +115,7 @@
 
 </section>
 
-<section id="newsletter" class="section-p1 section-m1">
-    <div class="newstext">
-        <h4>Sign Up For Newsletters</h4>
-        <p>Get E-mail updates about our latest shop and <span>special offers.</span></p>
-    </div>
-    <div class="form">
-        <input type="text" placeholder="Your email address">
-        <button class="normal">Sign Up</button>
-    </div>
-</section>
+@Html.Partial("_Newsletter")
 
 <script>
     function sortProducts(select) {

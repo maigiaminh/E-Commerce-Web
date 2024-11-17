@@ -1,0 +1,50 @@
+﻿<section id="newsletter" class="section-p1 section-m1">
+    <div class="form">
+        <input type="text" id="newsletterEmail" placeholder="Your email address">
+        <button id="newsletterSignup" class="normal">Sign Up</button>
+    </div>
+    <div class="newstext">
+        <h4>Sign Up For Newsletters</h4>
+        <p>Get E-mail updates about our latest shop and <span>special offers.</span></p>
+    </div>
+    <p id="newsletterMessage" style="margin-top: 20px; padding-left: 20px; color: green; display: none; "></p>
+    <div id="newsletterSpinner" style="display: none; color: green;">Sending...</div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>$(document).ready(function () {
+    $('#newsletterSignup').on('click', function (e) {
+        e.preventDefault();
+
+        var email = $('#newsletterEmail').val();
+        var message = $('#newsletterMessage');
+
+        message.hide().text('');
+
+        if (email.trim() === '') {
+            message.css('color', 'red').text('Empty Email! Please enter your email address.').fadeIn();
+            return;
+        }
+
+        $.ajax({
+            url: '/Newsletter/SignUpAjax',
+            type: 'POST',
+            data: { email: email },
+            beforeSend: function () {
+                $('#newsletterSpinner').show();
+            },
+            success: function (response) {
+                $('#newsletterSpinner').hide();
+                if (response.success) {
+                    message.css('color', 'green').text(response.message).fadeIn();
+                } else {
+                    message.css('color', 'red').text(response.message).fadeIn();
+                }
+            },
+            error: function () {
+                $('#newsletterSpinner').hide();
+                message.css('color', 'red').text('An unexpected error occurred. Please try again.').fadeIn();
+            }
+        });
+    });
+});</script>

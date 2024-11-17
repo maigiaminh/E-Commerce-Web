@@ -480,6 +480,7 @@ body {
 
 #newsletter {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;

@@ -11,13 +11,13 @@
 </section>
 
 <section id="prodetails" class="section-p1">
-    <div class="single-pro-image"">
+    <div class="single-pro-image" ">
         <img src="@Url.Content("~/Content/img/products/" + Model.ImagePath)" width="100%" id="MainImg" alt="">
     </div>
     <div class="single-pro-details">
         <h6>
-            <a href="@Url.Action("Shop", "Product")">Shop</a>  
-            / 
+            <a href="@Url.Action("Shop", "Product")">Shop</a>
+            /
             <a href="@Url.Action("Shop", new { categoryId = @Model.Category.CategoryID})">@Model.Category.CategoryName</a>
         </h6>
         <h4 style="font-size: 32px">@Model.ProductName</h4>
@@ -42,7 +42,7 @@
             <input type="hidden" name="productId" value="@Model.ProductID">
             <button class="normal" type="submit">Add To Cart</button>
         </form>
-            <h4>Product Details</h4>
+        <h4>Product Details</h4>
         <span>@Model.Description</span>
     </div>
 </section>
@@ -73,13 +73,4 @@
     </div>
 </section>
 
-<section id="newsletter" class="section-p1 section-m1">
-    <div class="newstext">
-        <h4>Sign Up For Newsletters</h4>
-        <p>Get E-mail updates about our latest shop and <span>special offers.</span></p>
-    </div>
-    <div class="form">
-        <input type="text" placeholder="Your email address">
-        <button class="normal">Sign Up</button>
-    </div>
-</section>
+@Html.Partial("_Newsletter")
