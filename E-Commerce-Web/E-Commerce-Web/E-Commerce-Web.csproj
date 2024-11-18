@@ -372,6 +372,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog\Blog.cs" />
     <Compile Include="Models\Blog\Comment.cs" />
+    <Compile Include="Models\Contact\ContactFormViewModel.cs" />
     <Compile Include="Models\Payment\PaymentDtos.cs" />
     <Compile Include="Models\Payment\PaymentLinkDtos.cs" />
     <Compile Include="Models\Payment\PaymentReturnDtos.cs" />

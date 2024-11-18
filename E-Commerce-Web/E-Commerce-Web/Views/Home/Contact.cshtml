@@ -38,14 +38,16 @@
 </section>
 
 <section id="form-details">
-    <form action="">
+    <form id="contactForm">
         <span>LEAVE A MESSAGE</span>
         <h2>We love to hear from you</h2>
-        <input type="text" placeholder="Your Name">
-        <input type="text" placeholder="Email">
-        <input type="text" placeholder="Subject">
-        <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
-        <button class="normal">Submit</button>
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" id="subject" placeholder="Subject" required>
+        <textarea id="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+        <button type="submit" class="normal">Submit</button>
+        <p id="formMessage" style="margin-top: 10px; display: none;"></p>
+
     </form>
 
     <div class="people">
@@ -63,3 +65,40 @@
 
 @Html.Partial("_Newsletter")
 
+
+<script>document.getElementById("contactForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formMessage = document.getElementById("formMessage");
+        formMessage.style.display = "none";
+
+        const formData = {
+            Name: document.getElementById("name").value,
+            Email: document.getElementById("email").value,
+            Subject: document.getElementById("subject").value,
+            Message: document.getElementById("message").value
+        };
+
+        try {
+            const response = await fetch('/Home/SubmitContactForm', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+            formMessage.style.display = "block";
+            formMessage.style.color = result.success ? "green" : "red";
+            formMessage.textContent = result.message;
+
+            if (result.success) {
+                document.getElementById("contactForm").reset();
+            }
+        } catch (error) {
+            formMessage.style.display = "block";
+            formMessage.style.color = "red";
+            formMessage.textContent = "An error occurred. Please try again.";
+        }
+    });</script>

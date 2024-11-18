@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Commerce_Web.Models.Contact;
+using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Net;
@@ -11,6 +12,8 @@ namespace E_Commerce_Web.Utilities
         private static readonly string SmtpHost = ConfigurationManager.AppSettings["SMTPHost"];
         private static readonly int SmtpPort = int.Parse(ConfigurationManager.AppSettings["SMTPPort"]);
         private static readonly string SmtpUser = ConfigurationManager.AppSettings["SMTPUser"];
+        private static readonly string SmtpAdmin = ConfigurationManager.AppSettings["SMTPAdmin"];
+
         private static readonly string SmtpPassword = ConfigurationManager.AppSettings["SMTPPassword"];
 
         public static void SendEmailConfirmation(string recipientEmail, string confirmationLink)
@@ -135,15 +138,20 @@ namespace E_Commerce_Web.Utilities
                 }
             }
         }
-        /*
-        public static void SendEmailFromUser()
+        
+        public static void SendEmailFromUser(ContactFormViewModel model)
         {
             Debug.WriteLine("Email đang gửi");
             var message = new MailMessage();
             message.From = new MailAddress(SmtpUser);
-            message.To.Add(new MailAddress(""));
-            message.Subject = "Confirm your email";
-            message.Body = $"Please confirm your email by clicking this link: <a href='{confirmationLink}'>Confirm Email</a>";
+            message.To.Add(new MailAddress(SmtpAdmin));
+            message.Subject = $"New Contact Message from {model.Name}";
+            message.Body = $@"
+                <h3>Contact Details:</h3>
+                <p><strong>Name:</strong> {model.Name}</p>
+                <p><strong>Email:</strong> {model.Email}</p>
+                <p><strong>Subject:</strong> {model.Subject}</p>
+                <p><strong>Message:</strong><br>{model.Message}</p>";
             message.IsBodyHtml = true;
 
             using (var smtp = new SmtpClient())
@@ -164,6 +172,6 @@ namespace E_Commerce_Web.Utilities
                     Debug.WriteLine("Email không thể gửi: " + ex.Message);
                 }
             }
-        }*/
+        }
     }
 }

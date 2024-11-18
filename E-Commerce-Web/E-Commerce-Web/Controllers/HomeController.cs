@@ -1,4 +1,5 @@
 ﻿using E_Commerce_Web.Models;
+using E_Commerce_Web.Models.Contact;
 using E_Commerce_Web.Utilities;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,26 @@ namespace E_Commerce_Web.Controllers
             return View();
         }
 
-        
+        [HttpPost]
+        public JsonResult SubmitContactForm(ContactFormViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    EmailHelper.SendEmailFromUser(model);
+
+                    return Json(new { success = true, message = "Your message has been sent successfully!" });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { success = false, message = $"An error occurred: {ex.Message}" });
+                }
+            }
+
+            return Json(new { success = false, message = "Please fill all the required fields." });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
