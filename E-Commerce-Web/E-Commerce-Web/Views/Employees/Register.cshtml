@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="page-header" class="register-header">
+    <h2>Register</h2>
+    <p>Create a new account to join us.</p>
+</section>
+
+<section id="form-details" class="section-p1 register">
+    <div class="form-image register">
+        <img src="@Url.Content("~/Content/img/about/a6.jpg")" alt="">
+    </div>
+    <form action="@Url.Action("Register", "Employees")" method="post" class="register-form">
+        <span>CREATE YOUR ACCOUNT</span>
+        <h2>Enter your information</h2>
+        <input type="text" name="username" placeholder="Full Name" value="@ViewBag.EmployeeName" required>
+        <input type="email" name="email" placeholder="Email" value="@ViewBag.Email" required>
+        <input type="password" name="password" placeholder="Password" value="@ViewBag.Password" required>
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" value="@ViewBag.ConfirmPassword" required>
+        <button type="submit" class="normal">Register</button>
+        <p>Already have an account? <a href="@Url.Action("Login", "Employees")">Login here</a></p>
+    </form>
+</section>
+<div class="modal" id="errorModal">
+    <div class="modal-content">
+        <img src="@Url.Content("~/Content/img/icon/error.png")" alt="Error Icon" class="modal-icon">
+        <h1 class="modal-title">
+            Error</h2>
+            <p id="errorMessage">There was an error with your registration.</p>
+            <button type="reset" onclick="closeErrorModal()" class="modal-button">Close</button>
+    </div>
+</div>
+
+<div class="modal" id="successModal">
+    <div class="modal-content">
+        <img src="@Url.Content("~/Content/img/icon/success.png")" alt="Success Icon" class="modal-icon">
+        <h1 class="modal-title success-title">
+            Success</h2>
+            <p id="successMessage">Registration successful, please verify your account via the email sent to you.</p>
+            <button type="reset" onclick="closeSuccessModal()" class="modal-button button-success">Close</button>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        var errorMessage = '@ViewBag.ErrorMessage';
+        var successMessage = '@ViewBag.SuccessMessage';
+        if (errorMessage) {
+            document.getElementById("errorMessage").innerText = errorMessage;
+            document.getElementById("errorModal").style.display = "flex";
+        }
+
+        else if (successMessage) {
+            document.getElementById("successMessage").innerText = successMessage;
+            document.getElementById("successModal").style.display = "flex";
+        }
+    }
+
+    function closeErrorModal() {
+        document.getElementById("errorModal").style.display = "none";
+    }
+
+    function closeSuccessModal() {
+        document.getElementById("successModal").style.display = "none";
+    }
+</script>
+
