@@ -428,6 +428,7 @@
     <Content Include="Views\Order\OrderDetails.cshtml" />
     <Content Include="Views\Payments\PaymentCallbackVnpay.cshtml" />
     <Content Include="Views\Blog\BlogDetail.cshtml" />
+    <Content Include="Views\Shared\_Newsletter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -478,7 +479,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\Momo\Lib\" />
-    <Folder Include="Views\Newsletter\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

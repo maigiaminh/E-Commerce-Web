@@ -135,5 +135,35 @@ namespace E_Commerce_Web.Utilities
                 }
             }
         }
+        /*
+        public static void SendEmailFromUser()
+        {
+            Debug.WriteLine("Email đang gửi");
+            var message = new MailMessage();
+            message.From = new MailAddress(SmtpUser);
+            message.To.Add(new MailAddress(""));
+            message.Subject = "Confirm your email";
+            message.Body = $"Please confirm your email by clicking this link: <a href='{confirmationLink}'>Confirm Email</a>";
+            message.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient())
+            {
+                smtp.Host = SmtpHost;
+                smtp.Port = SmtpPort;
+                smtp.Credentials = new NetworkCredential(SmtpUser, SmtpPassword);
+                smtp.EnableSsl = true;
+
+                try
+                {
+                    smtp.Send(message);
+                    Debug.WriteLine("Email đã gửi");
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Email không thể gửi: " + ex.Message);
+                }
+            }
+        }*/
     }
 }

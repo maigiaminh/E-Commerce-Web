@@ -61,9 +61,10 @@ namespace E_Commerce_Web.Controllers
             {
                 try
                 {
+                    int userID = Convert.ToInt32(Session["UserID"]);
                     var newOrder = new Order
                     {
-                        UserID = Convert.ToInt32(Session["UserID"]),
+                        UserID = userID,
                         OrderDate = DateTime.Now,
                         Discount = Discount,
                         ShippingFee = Shipping,
@@ -74,8 +75,9 @@ namespace E_Commerce_Web.Controllers
                         RecipientName = RecipientName,
                         RecipientPhone = RecipientPhone,
                         RecipientAddress = Address,
-                        Note = Note
-                    };
+                        Note = Note,
+                        User = _context.Users.FirstOrDefault(o => o.UserID == userID)
+                };
 
                     _context.Orders.Add(newOrder);
                     _context.SaveChanges();
@@ -176,6 +178,8 @@ namespace E_Commerce_Web.Controllers
                         double amount = (double)Math.Round(newOrder.TotalAmount * 25345);
 
                         Debug.WriteLine("AMOUNT " + amount);
+                        Debug.WriteLine("DESCRIPTION: " + newOrder.OrderID.ToString());
+                        Debug.WriteLine("Name: " + newOrder.User.FullName);
                         PaymentInformationModel model = new PaymentInformationModel()
                         {
                             OrderType = "other",
