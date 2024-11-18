@@ -13,7 +13,7 @@ namespace E_Commerce_Web.Controllers
 {
     public class EmployeesController : Controller
     {
-        private EcommerceContext db = new EcommerceContext();
+        private readonly EcommerceContext db;
 
         public EmployeesController()
         {
@@ -23,7 +23,7 @@ namespace E_Commerce_Web.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            if (Session["UserID"] != null)
+            if (Session["EmployeeID"] != null)
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -34,18 +34,10 @@ namespace E_Commerce_Web.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
-            var user = db.Users.FirstOrDefault(u => u.Email == email);
-            if (user != null && HashHelper.VerifyPassword(password, user.PasswordHash))
+            var employee = db.Employees.FirstOrDefault(u => u.Email == email);
+            if (employee != null && HashHelper.VerifyPassword(password, employee.PasswordHash))
             {
-                if (!user.Active)
-                {
-                    ViewBag.ErrorMessage = "Your account is not activated. Please check your email.";
-                    ViewBag.Email = email;
-                    ViewBag.Password = password;
-                    return View();
-                }
-                Session["UserID"] = user.UserID;
-                Session["Avatar"] = user.Avatar;
+                Session["EmployeeID"] = employee.EmployeeID;
                 return RedirectToAction("Index", "Admin");
             }
             else
@@ -60,7 +52,7 @@ namespace E_Commerce_Web.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            if (Session["UserID"] != null)
+            if (Session["EmployeeID"] != null)
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -72,7 +64,7 @@ namespace E_Commerce_Web.Controllers
         public ActionResult Register(string username, string email, string password, string confirmPassword)
         {
 
-            var existingEmployee = db.Users.FirstOrDefault(u => u.Email == email);
+            var existingEmployee = db.Employees.FirstOrDefault(u => u.Email == email);
             if (existingEmployee != null)
             {
                 ViewBag.ErrorMessage = "Email already exists. Please try again!";
