@@ -1,4 +1,5 @@
 ﻿using E_Commerce_Web.Models;
+using E_Commerce_Web.Utilities;
 using iText.StyledXmlParser.Jsoup.Nodes;
 using System;
 using System.Collections.Generic;
@@ -71,18 +72,20 @@ namespace E_Commerce_Web.Controllers
             if (Session["UserID"] != null)
             {
                 int userID = Convert.ToInt32(Session["UserID"]);
+                
+                var filteredComment = FilterHelper.FilterProhibitedWordsWithoutRegex(Content);
                 var comment = new E_Commerce_Web.Models.Comment
                 {
                     BlogId = BlogId,
                     UserId = userID,
-                    Content = Content,
+                    Content = filteredComment,
                     CreatedAt = DateTime.Now
                 };
                 _context.Comments.Add(comment);
                 _context.SaveChanges();
             }
 
-            return RedirectToAction("Detail", new { id = BlogId });
+            return RedirectToAction("BlogDetail", new { id = BlogId });
         }
     }
 }

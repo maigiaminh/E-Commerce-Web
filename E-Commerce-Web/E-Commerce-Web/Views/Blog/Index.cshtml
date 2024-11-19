@@ -16,11 +16,18 @@
         {
             <div class="blog-box">
                 <div class="blog-img">
-                    <img src="@Url.Content("~/Content/img/blog/") + @blog.ImageUrl" alt="">
+                    <img src="@Url.Content("~/Content/img/blog/"  + blog.ImageUrl)" alt="">
                 </div>
                 <div class="blog-details">
                     <h4>@blog.Title</h4>
-                    <p>@blog.Content.Substring(0, 100)...</p>
+                    @if (blog.Content.Length > 100)
+                    {
+                        <p>@blog.Content.ToString().Substring(0, 100) ...</p>
+                    }
+                    else
+                    {
+                        <p>@blog.Content ...</p>
+                    }
                     <a href="@Url.Action("BlogDetail", "Blog", new { id = blog.Id })">CONTINUE READING</a>
                 </div>
                 <h1>@blog.CreatedAt.ToString("dd/MM")</h1>

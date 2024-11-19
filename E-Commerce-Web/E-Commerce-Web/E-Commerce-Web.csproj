@@ -228,6 +228,7 @@
     <Content Include="Content\img\blog\b5.jpg" />
     <Content Include="Content\img\blog\b6.jpg" />
     <Content Include="Content\img\blog\b7.jpg" />
+    <Content Include="Content\img\blog\blog.jpg" />
     <Content Include="Content\img\button.png" />
     <Content Include="Content\img\features\f1.png" />
     <Content Include="Content\img\features\f2.png" />
@@ -403,6 +404,7 @@
     <Compile Include="Service\VNPay\VnPayService.cs" />
     <Compile Include="Utilities\EmailHelper.cs" />
     <Compile Include="Service\Momo\Config\MomoConfig.cs" />
+    <Compile Include="Utilities\FilterHelper.cs" />
     <Compile Include="Utilities\HashHelper.cs" />
     <Compile Include="Utilities\PDFGenerator.cs" />
     <Compile Include="Utilities\QueryStringHelper.cs" />
