@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<E_Commerce_Web.Models.Product>
+
+@{
     Layout = null;
 }
 
@@ -11,7 +13,75 @@
 </head>
 <body>
     <p>
-        Index
+        @Html.ActionLink("Create New", "Create")
     </p>
+    <table class="table">
+        <tr>
+            <th>
+                @ViewBag.Categories
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th></th>
+        </tr>
+        @if (Model.Count() > 0 && Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImagePath)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                    </td>
+                </tr>
+            }
+        }
+
+
+    </table>
 </body>
 </html>
