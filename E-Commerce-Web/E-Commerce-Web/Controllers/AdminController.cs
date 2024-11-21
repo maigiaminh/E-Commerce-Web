@@ -15,18 +15,45 @@ namespace E_Commerce_Web.Controllers
         {
             _context = new EcommerceContext(); 
         }
-        // GET: Admin
         public ActionResult Index()
+        {
+
+            return View("~/Views/Admin/Dashboard.cshtml");
+        }
+
+        public ActionResult Dashboard()
+        {
+            return View("~/Views/Admin/Dashboard.cshtml");
+        }
+
+        public ActionResult Products()
         {
             List<Category> categories = _context.Categories.ToList();
             ViewBag.Categories = categories;
             List<Product> products = _context.Products.ToList();
-            return View(products);
+
+            return View("~/Views/Admin/Products/Products.cshtml", products);
         }
 
-        public ActionResult ManagementProducts()
+        public ActionResult Orders()
         {
-            return View();
+            return View("~/Views/Admin/Orders.cshtml");
         }
+
+        public ActionResult Coupons()
+        {
+            return View("~/Views/Admin/Coupons.cshtml");
+        }
+
+        public ActionResult Users()
+        {
+            return View("~/Views/Admin/Users.cshtml");
+        }
+
+        public ActionResult Blogs()
+        {
+            return View("~/Views/Admin/Blogs.cshtml");
+        }
+
     }
 }

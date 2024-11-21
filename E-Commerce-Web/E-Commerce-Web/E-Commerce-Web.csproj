@@ -503,16 +503,6 @@
     <Content Include="wwwroot\img\layouts\layout-fluid-light.png" />
     <Content Include="wwwroot\img\layouts\layout-without-menu-light.png" />
     <Content Include="wwwroot\img\layouts\layout-without-navbar-light.png" />
-    <Content Include="wwwroot\js\config.js" />
-    <Content Include="wwwroot\js\dashboards-analytics.js" />
-    <Content Include="wwwroot\js\extended-ui-perfect-scrollbar.js" />
-    <Content Include="wwwroot\js\form-basic-inputs.js" />
-    <Content Include="wwwroot\js\main.js" />
-    <Content Include="wwwroot\js\pages-account-settings-account.js" />
-    <Content Include="wwwroot\js\site.js" />
-    <Content Include="wwwroot\js\ui-modals.js" />
-    <Content Include="wwwroot\js\ui-popover.js" />
-    <Content Include="wwwroot\js\ui-toasts.js" />
     <Content Include="wwwroot\vendor\css\core.css" />
     <Content Include="wwwroot\vendor\css\pages\page-account-settings.css" />
     <Content Include="wwwroot\vendor\css\pages\page-auth.css" />
@@ -771,6 +761,12 @@
     <Content Include="Views\Shared\Sections\_Styles.cshtml" />
     <Content Include="Views\Shared\Sections\_Variables.cshtml" />
     <Content Include="Views\Shared\Sections\Menu\_VerticalMenu.cshtml" />
+    <Content Include="Views\Admin\Dashboard.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
+    <Content Include="Views\Admin\Orders.cshtml" />
+    <Content Include="Views\Admin\Coupons.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\Blogs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
