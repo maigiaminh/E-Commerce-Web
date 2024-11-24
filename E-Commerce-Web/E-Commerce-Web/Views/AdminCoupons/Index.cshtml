@@ -1,0 +1,47 @@
+﻿@model IEnumerable<E_Commerce_Web.Models.Coupon>
+
+@{
+    ViewBag.Title = "Coupons";
+    Layout = "~/Views/Shared/Sections/Menu/_VerticalMenu.cshtml";
+}
+
+<link rel="stylesheet" href="~/wwwroot/css/CRUD_Theme.css" />
+
+<h2>Coupons</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-sm" })
+</p>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Code)</th>
+                <th>@Html.DisplayNameFor(model => model.Discount)</th>
+                <th>@Html.DisplayNameFor(model => model.ExpirationDate)</th>
+                <th>@Html.DisplayNameFor(model => model.IsActive)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0 && Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Discount)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ExpirationDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IsActive)</td>
+                        <td class="action-links">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.CouponID }, new { @class = "btn btn-info btn-sm" })
+                            @Html.ActionLink("Details", "Details", new { id = item.CouponID }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CouponID }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

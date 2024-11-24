@@ -4,10 +4,11 @@
     string currentController = ViewContext.RouteData.Values["controller"].ToString();
     string currentAction = ViewContext.RouteData.Values["action"].ToString();
 }
-
-<div  style="display: flex">
-    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
+<div style="display: flex;">
+    <button id="menu-toggle" class="menu-toggle-button d-xl-none" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
+        <i class="bx bx-menu" style="font-size: 24px;"></i>
+    </button>
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme hidden-on-mobile">
         <div class='app-brand demo @((@ViewData["navbarFull"] != null && Convert.ToBoolean(@ViewData["navbarFull"])) ? "d-xl-none" : "")'>
             <a asp-controller="Dashboards" asp-action="Index" class="app-brand-link">
                 <span class="app-brand-logo demo">
@@ -28,129 +29,155 @@
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Admin page</span>
             </li>
-
             <li class='menu-item@(currentPage.StartsWith("/Pages/Account") ? " active open" : "")'>
-                <a href="@Url.Action("Dashboard", "Admin")" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                    <div>Dashboard</div>
-                </a>
-            </li>
-            <li class='menu-item@(currentPage.StartsWith("/Pages/Account") ? " active open" : "")'>
-                <a href="@Url.Action("Products", "Admin")" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <a href="@Url.Action("Index", "AdminProducts")" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-package"></i> 
                     <div>Products</div>
                 </a>
-                <ul class="menu-sub">
-                    <li class='menu-item@(currentPage == "/Pages/AccountSettings" ? " active" : "")'>
-                        <a asp-controller="Pages" asp-action="AccountSettings" class="menu-link">
-                            <div>Account</div>
-                        </a>
-                    </li>
-                    <li class='menu-item@(currentPage == "/Pages/AccountSettingsNotifications" ? " active" : "")'>
-                        <a asp-controller="Pages" asp-action="AccountSettingsNotifications" class="menu-link">
-                            <div>Notifications</div>
-                        </a>
-                    </li>
-                    <li class='menu-item@(currentPage == "/Pages/AccountSettingsConnections" ? " active" : "")'>
-                        <a asp-controller="Pages" asp-action="AccountSettingsConnections" class="menu-link">
-                            <div>Connections</div>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class='menu-item@(currentPage.StartsWith("/Admin/Blogs") ? " active open" : "")'>
-                <a href="@Url.Action("Blogs", "Admin")" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <a href="@Url.Action("Index", "AdminBlogs")" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-edit"></i> 
                     <div>Blogs</div>
                 </a>
-                <ul class="menu-sub">
-                    <li class='menu-item@(currentPage == "/Auth/LoginBasic" ? " active" : "")'>
-                        <a asp-controller="Auth" asp-action="LoginBasic" class="menu-link" target="_blank">
-                            <div>Login</div>
-                        </a>
-                    </li>
-                    <li class='menu-item@(currentPage == "/Auth/RegisterBasic" ? " active" : "")'>
-                        <a asp-controller="Auth" asp-action="RegisterBasic" class="menu-link" target="_blank">
-                            <div>Register</div>
-                        </a>
-                    </li>
-                    <li class='menu-item@(currentPage == "/Auth/ForgotPasswordBasic" ? " active" : "")'>
-                        <a asp-controller="Auth" asp-action="ForgotPasswordBasic" class="menu-link" target="_blank">
-                            <div>Forgot Password</div>
-                        </a>
-                    </li>
-                </ul>
             </li>
-            <li class='menu-item@(currentPage.StartsWith("/Pages/Misc") ? " active open" : "")'>
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+            <li class='menu-item@(currentPage.StartsWith("/Admin/Orders") ? " active open" : "")'>
+                <a href="@Url.Action("Index", "AdminOrders")" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-cart-alt"></i> 
                     <div>Orders</div>
                 </a>
-                <ul class="menu-sub">
-                    <li class='menu-item@(currentPage == "/Pages/MiscError" ? " active" : "")'>
-                        <a asp-controller="Pages" asp-action="MiscError" class="menu-link" target="_blank">
-                            <div>Error</div>
-                        </a>
-                    </li>
-                    <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                        <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" target="_blank">
-                            <div>Under Maintenance</div>
-                        </a>
-                    </li>
-                </ul>
             </li>
-            <li class='menu-item@(currentPage.StartsWith("/Pages/Misc") ? " active open" : "")'>
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+            <li class='menu-item@(currentPage.StartsWith("/Admin/Users") ? " active open" : "")'>
+                <a href="@Url.Action("Index", "AdminUsers")" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i> 
                     <div>Users</div>
                 </a>
-                <ul class="menu-sub">
-                    <li class='menu-item@(currentPage == "/Pages/MiscError" ? " active" : "")'>
-                        <a asp-controller="Pages" asp-action="MiscError" class="menu-link" target="_blank">
-                            <div>Error</div>
-                        </a>
-                    </li>
-                    <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                        <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" target="_blank">
-                            <div>Under Maintenance</div>
-                        </a>
-                    </li>
-                </ul>
             </li>
-
-            <li class='menu-item@(currentPage.StartsWith("/Pages/Misc") ? " active open" : "")'>
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+            <li class='menu-item@(currentPage.StartsWith("/Admin/Coupons") ? " active open" : "")'>
+                <a href="@Url.Action("Index", "AdminCoupons")" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-gift"></i>
                     <div>Coupons</div>
                 </a>
-                <ul class="menu-sub">
-                    <li class='menu-item@(currentPage == "/Pages/MiscError" ? " active" : "")'>
-                        <a asp-controller="Pages" asp-action="MiscError" class="menu-link" target="_blank">
-                            <div>Error</div>
-                        </a>
-                    </li>
-                    <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                        <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" target="_blank">
-                            <div>Under Maintenance</div>
-                        </a>
-                    </li>
-                </ul>
             </li>
+
+            <!-- New Category: Category -->
+            <li class='menu-item@(currentPage.StartsWith("/Admin/Category") ? " active open" : "")'>
+                <a href="@Url.Action("Index", "AdminCategories")" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-category"></i>
+                    <div>Category</div>
+                </a>
+            </li>
+
+            <!-- New Size: Size -->
+            <li class='menu-item@(currentPage.StartsWith("/Admin/Size") ? " active open" : "")'>
+                <a href="@Url.Action("Index", "AdminSizes")" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-ruler"></i>
+                    <div>Size</div>
+                </a>
+            </li>
+
         </ul>
 
     </aside>
-
+    <!-- Overlay (lớp phủ mờ) -->
+    <div id="menu-overlay" class="menu-overlay"></div>
 
     <div class="container">
         @RenderBody()
     </div>
 </div>
 
+
+<script>
+    // Lấy các phần tử HTML
+    const menu = document.getElementById("layout-menu");
+    const toggleButton = document.getElementById("menu-toggle");
+    const overlay = document.getElementById("menu-overlay");
+    const container = document.getElementById("main-container");
+
+    // Hàm xử lý khi nhấn nút toggle
+    toggleButton.addEventListener("click", () => {
+        const isVisible = menu.classList.toggle("visible");
+        menu.classList.toggle("hidden-on-mobile", !isVisible);
+
+        // Hiển thị overlay
+        overlay.classList.toggle("visible", isVisible);
+
+        // Làm mờ container
+        if (isVisible) {
+            container.classList.add("blurred");
+        } else {
+            container.classList.remove("blurred");
+        }
+
+        // Ẩn nút toggle
+        toggleButton.style.display = isVisible ? "none" : "block";
+    });
+
+    // Đóng menu khi nhấn vào overlay
+    overlay.addEventListener("click", () => {
+        menu.classList.remove("visible");
+        menu.classList.add("hidden-on-mobile");
+        overlay.classList.remove("visible");
+        container.classList.remove("blurred");
+
+        // Hiện lại nút toggle
+        toggleButton.style.display = "block";
+    });
+
+    // Khi khởi chạy lần đầu, tự kiểm tra kích thước màn hình
+    const handleMenuState = () => {
+        if (window.innerWidth >= 1200) {
+            // Desktop: luôn hiển thị menu
+            menu.classList.remove("hidden-on-mobile");
+            menu.classList.add("visible");
+            overlay.classList.remove("visible");
+            container.classList.remove("blurred");
+
+            // Luôn ẩn nút toggle trên desktop
+            toggleButton.style.display = "none";
+        } else {
+            // Mobile: ẩn menu và overlay
+            menu.classList.remove("visible");
+            menu.classList.add("hidden-on-mobile");
+            overlay.classList.remove("visible");
+            container.classList.remove("blurred");
+
+            // Hiện nút toggle trên mobile
+            toggleButton.style.display = "block";
+        }
+    };
+
+    // Gọi hàm khi tải trang và khi thay đổi kích thước màn hình
+    window.addEventListener("resize", handleMenuState);
+    window.addEventListener("load", handleMenuState);
+</script>
+
+
+<environment include="Development">
+    <script src="~/wwwroot/vendor/libs/jquery/jquery.js"></script>
+    <script src="~/wwwroot/vendor/libs/popper/popper.js"></script>
+    <script src="~/wwwroot/vendor/js/bootstrap.js"></script>
+    <!-- `perfect-scrollbar` library required by SideNav plugin -->
+    <script src="~/wwwroot/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/wwwroot/vendor/js/menu.js"></script>
+    <script src="~/wwwroot/js/site.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/wwwroot/vendor/libs/jquery/jquery.js" asp-append-version="true"></script>
+    <script src="~/wwwroot/vendor/libs/popper/popper.js" asp-append-version="true"></script>
+    <script src="~/wwwroot/vendor/js/bootstrap.js" asp-append-version="true"></script>
+    <script src="~/wwwroot/vendor/libs/perfect-scrollbar/perfect-scrollbar.js" asp-append-version="true"></script>
+    <script src="~/wwwroot/vendor/js/menu.js" asp-append-version="true"></script>
+    <script src="~/wwwroot/js/site.js" asp-append-version="true"></script>
+</environment>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <environment include="Development1">
     <link rel="stylesheet" href="~/wwwroot/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="~/wwwroot/css/adminCss.css" />
 
     <link rel="stylesheet" href="~/wwwroot/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="~/wwwroot/vendor/css/theme-default.css" class="template-customizer-theme-css" />

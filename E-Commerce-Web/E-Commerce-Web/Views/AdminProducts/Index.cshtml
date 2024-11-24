@@ -1,0 +1,50 @@
+﻿@model IEnumerable<E_Commerce_Web.Models.Product>
+
+@{
+    Layout = "~/Views/Shared/Sections/Menu/_VerticalMenu.cshtml";
+}
+
+<link rel="stylesheet" href="~/wwwroot/css/CRUD_Theme.css" />
+
+<h2>Products</h2>
+
+<!-- BÊN DƯỚI LÀ THÔNG TIN CÁ NHÂN CỦA TÔI <p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-sm" })
+</p>-->
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Category)</th>
+                <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.Stock)</th>
+                <th>@Html.DisplayNameFor(model => model.ImagePath)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0 && Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Stock)</td>
+                        <td>
+                            <img src="@Url.Content("~/images/" + item.ImagePath)" alt="Product Image" width="50" />
+                        </td>
+                        <td class="action-links">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-info btn-sm" })
+                            @Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

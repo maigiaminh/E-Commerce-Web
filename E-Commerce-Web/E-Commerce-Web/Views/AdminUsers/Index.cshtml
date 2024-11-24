@@ -1,0 +1,63 @@
+﻿@model IEnumerable<E_Commerce_Web.Models.User>
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/Sections/Menu/_VerticalMenu.cshtml";
+}
+
+<link rel="stylesheet" href="~/wwwroot/css/CRUD_Theme.css" />
+
+<h2>Users</h2>
+
+<!-- BÊN DƯỚI LÀ THÔNG TIN CÁ NHÂN CỦA TÔI <p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-sm" })
+</p>-->
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <th>@Html.DisplayNameFor(model => model.Phone)</th>
+                <th>@Html.DisplayNameFor(model => model.Address)</th>
+                <th>@Html.DisplayNameFor(model => model.Province)</th>
+                <th>@Html.DisplayNameFor(model => model.District)</th>
+                <th>@Html.DisplayNameFor(model => model.Active)</th>
+                <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
+                <th>@Html.DisplayNameFor(model => model.Avatar)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Province)</td>
+                        <td>@Html.DisplayFor(modelItem => item.District)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Active)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Avatar)</td>
+                        <td class="action-links">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.UserID }, new { @class = "btn btn-info btn-sm" })
+                            @Html.ActionLink("Details", "Details", new { id = item.UserID }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.UserID }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="10" class="text-center">No users found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
