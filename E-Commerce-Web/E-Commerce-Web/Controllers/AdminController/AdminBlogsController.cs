@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,10 +47,17 @@ namespace E_Commerce_Web.Controllers.AdminController
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Content,ImageUrl,CreatedAt,Author")] Blog blog)
+        public ActionResult Create([Bind(Include = "Id,Title,Content,ImageUrl,CreatedAt,Author")] Blog blog, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(ImageFile.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/img/blog"), fileName);
+                    ImageFile.SaveAs(path);
+                    blog.ImageUrl = fileName;
+                }
                 db.Blogs.Add(blog);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,10 +86,18 @@ namespace E_Commerce_Web.Controllers.AdminController
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,ImageUrl,CreatedAt,Author")] Blog blog)
+        public ActionResult Edit([Bind(Include = "Id,Title,Content,ImageUrl,CreatedAt,Author")] Blog blog, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(ImageFile.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/img/blog"), fileName);
+                    ImageFile.SaveAs(path);
+                    blog.ImageUrl = fileName;
+                }
+
                 db.Entry(blog).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

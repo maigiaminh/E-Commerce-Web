@@ -35,7 +35,7 @@
                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                         <td>@Html.DisplayFor(modelItem => item.Stock)</td>
                         <td>
-                            <img src="@Url.Content("~/images/" + item.ImagePath)" alt="Product Image" width="50" />
+                            <img src="@Url.Content("~/Content/img/products/" + item.ImagePath)" alt="Product Image" width="50" />
                         </td>
                         <td class="action-links">
                             @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-info btn-sm" })

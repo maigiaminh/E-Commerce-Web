@@ -12,7 +12,7 @@
 
 <div class="container mt-4">
     <h2 class="mb-4">Edit Product</h2>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -81,10 +81,20 @@
                 </div>
 
                 <div class="mb-3 row">
-                    @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    @Html.Label("Upload Image", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
                     <div class="col-sm-9">
-                        @Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                        <input type="file" name="ImageFile" class="form-control"  id="ImageFileInput" onchange="previewProduct(event)" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-sm-3">
+                        <label>Current Image</label>
+                    </div>
+                    <div class="col-sm-9">
+                        @if (!string.IsNullOrEmpty(Model.ImagePath))
+                        {
+                            <img src="@Url.Content("~/Content/img/products/" + Model.ImagePath)" alt="Product Image" class="img-thumbnail" style="max-width: 200px;" id="productPreview"/>
+                        }
                     </div>
                 </div>
             </div>
@@ -98,3 +108,13 @@
         </div>
     }
 </div>
+<script>
+    function previewProduct(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById("productPreview").src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+

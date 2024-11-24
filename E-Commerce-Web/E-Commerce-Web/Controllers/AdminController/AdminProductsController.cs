@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using E_Commerce_Web.Models;
 
 namespace E_Commerce_Web.Controllers
@@ -48,10 +50,19 @@ namespace E_Commerce_Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,CategoryID,ProductName,Description,Price,Stock,CreatedBy,CreatedAt,ImagePath")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,CategoryID,ProductName,Description,Price,Stock,CreatedBy,CreatedAt,ImagePath")] Product product, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+
+                    string fileName = Path.GetFileName(ImageFile.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/img/products"), fileName);
+                    ImageFile.SaveAs(path);
+
+                    product.ImagePath = fileName;
+                }
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,10 +93,19 @@ namespace E_Commerce_Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,Description,Price,Stock,CreatedBy,CreatedAt,ImagePath")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,CategoryID,ProductName,Description,Price,Stock,CreatedBy,CreatedAt,ImagePath")] Product product, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
+                if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+                    string fileName = System.IO.Path.GetFileName(ImageFile.FileName);
+                    string path = Server.MapPath("~/Content/img/products/" + fileName);
+                    ImageFile.SaveAs(path);
+
+                    product.ImagePath = fileName;
+                }
+
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
