@@ -1742,6 +1742,40 @@ button.modal-button.button-success:hover {
     color: #eee;
     background-color: #eee;
 }
+
+/* Error Page */
+#error-page {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+#error-page h1 {
+    font-size: 5rem;
+    color: #ff0000;
+    margin-bottom: 20px;
+}
+
+#error-page h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#error-page p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+#error-page .normal {
+    padding: 10px 20px;
+    background-color: #041e42;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#error-page .normal:hover {
+    background-color: #00295f;
+}
 /* Start Media Query */
 @media (max-width: 1280px) {
     .section-p2 {

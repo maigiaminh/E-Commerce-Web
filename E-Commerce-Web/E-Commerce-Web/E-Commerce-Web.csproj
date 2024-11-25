@@ -542,6 +542,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsletterController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -805,6 +806,7 @@
     <Content Include="Views\AdminProductSizes\Details.cshtml" />
     <Content Include="Views\AdminProductSizes\Edit.cshtml" />
     <Content Include="Views\AdminProductSizes\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -859,6 +861,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\Momo\Lib\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\ConfigureAwaitChecker.Analyzer.5.0.0.1\analyzers\dotnet\cs\ConfigureAwaitChecker.Analyzer.dll" />
