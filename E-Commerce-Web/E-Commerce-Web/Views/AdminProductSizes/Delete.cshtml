@@ -1,0 +1,44 @@
+﻿@model E_Commerce_Web.Models.ProductSize
+
+@{
+    ViewBag.Title = "Delete Product Size";
+    Layout = "~/Views/Shared/Sections/Menu/_VerticalMenu.cshtml";
+}
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<div class="container my-5">
+    <h2 class="mb-4 text-danger">Delete Product Size</h2>
+    <h4 class="mb-3">Are you sure you want to delete this product size?</h4>
+
+    <div class="card border-danger mb-4">
+        <div class="card-header bg-danger text-white fw-bold">
+            Product Size Details
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Product Name</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Product.ProductName)</dd>
+
+                <dt class="col-sm-3">Size Name</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Size.Name)</dd>
+
+                <dt class="col-sm-3">Stock</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Stock)</dd>
+            </dl>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="d-flex justify-content-between">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

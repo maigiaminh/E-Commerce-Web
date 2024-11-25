@@ -31,25 +31,25 @@
             </li>
             <li class='menu-item@(currentPage.StartsWith("/Pages/Account") ? " active open" : "")'>
                 <a href="@Url.Action("Index", "AdminProducts")" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-package"></i> 
+                    <i class="menu-icon tf-icons bx bx-package"></i>
                     <div>Products</div>
                 </a>
             </li>
             <li class='menu-item@(currentPage.StartsWith("/Admin/Blogs") ? " active open" : "")'>
                 <a href="@Url.Action("Index", "AdminBlogs")" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-edit"></i> 
+                    <i class="menu-icon tf-icons bx bx-edit"></i>
                     <div>Blogs</div>
                 </a>
             </li>
             <li class='menu-item@(currentPage.StartsWith("/Admin/Orders") ? " active open" : "")'>
                 <a href="@Url.Action("Index", "AdminOrders")" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-cart-alt"></i> 
+                    <i class="menu-icon tf-icons bx bx-cart-alt"></i>
                     <div>Orders</div>
                 </a>
             </li>
             <li class='menu-item@(currentPage.StartsWith("/Admin/Users") ? " active open" : "")'>
                 <a href="@Url.Action("Index", "AdminUsers")" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-user-circle"></i> 
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
                     <div>Users</div>
                 </a>
             </li>
@@ -76,6 +76,13 @@
                 </a>
             </li>
 
+            <!-- New Size: Size -->
+            <li class='menu-item@(currentPage.StartsWith("/Admin/Size") ? " active open" : "")'>
+                <a href="@Url.Action("Index", "AdminProductSizes")" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-box"></i>
+                    <div>Products Stock</div>
+                </a>
+            </li>
         </ul>
 
     </aside>

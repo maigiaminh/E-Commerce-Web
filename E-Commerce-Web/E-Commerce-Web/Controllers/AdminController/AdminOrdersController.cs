@@ -39,6 +39,14 @@ namespace E_Commerce_Web.Controllers.AdminController
         // GET: AdminOrders/Create
         public ActionResult Create()
         {
+            // List of status options
+            ViewBag.StatusList = new SelectList(new[]
+            {
+                new { Value = "Paid", Text = "Paid" },
+                new { Value = "Delivering", Text = "Delivering" },
+                new { Value = "Delivered", Text = "Delivered" },
+                new { Value = "Confirmed", Text = "Confirmed" }
+            }, "Value", "Text");
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName");
             return View();
         }
@@ -52,10 +60,20 @@ namespace E_Commerce_Web.Controllers.AdminController
         {
             if (ModelState.IsValid)
             {
+                // Add the new order to the database
                 db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            // If validation fails, pass the status list again
+            ViewBag.StatusList = new SelectList(new[]
+            {
+                new { Value = "Paid", Text = "Paid" },
+                new { Value = "Delivering", Text = "Delivering" },
+                new { Value = "Delivered", Text = "Delivered" },
+                new { Value = "Confirmed", Text = "Confirmed" }
+            }, "Value", "Text", order.Status);
 
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", order.UserID);
             return View(order);
@@ -68,11 +86,21 @@ namespace E_Commerce_Web.Controllers.AdminController
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Order order = db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
             }
+
+            // List of status options
+            ViewBag.StatusList = new SelectList(new[]
+            {
+                new { Value = "Paid", Text = "Paid" },
+                new { Value = "Delivering", Text = "Delivering" },
+                new { Value = "Delivered", Text = "Delivered" },
+                new { Value = "Confirmed", Text = "Confirmed" }
+            }, "Value", "Text", order.Status);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", order.UserID);
             return View(order);
         }
@@ -86,10 +114,40 @@ namespace E_Commerce_Web.Controllers.AdminController
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
-                db.SaveChanges();
+                // Check if the order exists
+                var existingOrder = db.Orders.Find(order.OrderID);
+                if (existingOrder != null)
+                {
+                    // Update the order status
+                    existingOrder.Status = order.Status;  // Update the status from the form
+
+                    // Update other fields as necessary
+                    existingOrder.OrderDate = order.OrderDate;
+                    existingOrder.Discount = order.Discount;
+                    existingOrder.ShippingFee = order.ShippingFee;
+                    existingOrder.TotalAmount = order.TotalAmount;
+                    existingOrder.Subtotal = order.Subtotal;
+                    existingOrder.PaymentMethod = order.PaymentMethod;
+                    existingOrder.RecipientName = order.RecipientName;
+                    existingOrder.RecipientPhone = order.RecipientPhone;
+                    existingOrder.RecipientAddress = order.RecipientAddress;
+                    existingOrder.Note = order.Note;
+
+                    db.Entry(existingOrder).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
+
+            // If validation fails, pass the status list again
+            ViewBag.StatusList = new SelectList(new[]
+            {
+                new { Value = "Paid", Text = "Paid" },
+                new { Value = "Delivering", Text = "Delivering" },
+                new { Value = "Delivered", Text = "Delivered" },
+                new { Value = "Confirmed", Text = "Confirmed" }
+            }, "Value", "Text", order.Status);
             ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", order.UserID);
             return View(order);
         }

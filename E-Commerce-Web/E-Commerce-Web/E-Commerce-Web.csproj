@@ -536,6 +536,7 @@
     <Compile Include="Controllers\AdminController\AdminCouponsController.cs" />
     <Compile Include="Controllers\AdminController\AdminOrdersController.cs" />
     <Compile Include="Controllers\AdminController\AdminProductsController.cs" />
+    <Compile Include="Controllers\AdminController\AdminProductSizesController.cs" />
     <Compile Include="Controllers\AdminController\AdminSizesController.cs" />
     <Compile Include="Controllers\AdminController\AdminUsersController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -799,6 +800,11 @@
     <Content Include="Views\AdminSizes\Details.cshtml" />
     <Content Include="Views\AdminSizes\Edit.cshtml" />
     <Content Include="Views\AdminSizes\Index.cshtml" />
+    <Content Include="Views\AdminProductSizes\Create.cshtml" />
+    <Content Include="Views\AdminProductSizes\Delete.cshtml" />
+    <Content Include="Views\AdminProductSizes\Details.cshtml" />
+    <Content Include="Views\AdminProductSizes\Edit.cshtml" />
+    <Content Include="Views\AdminProductSizes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
