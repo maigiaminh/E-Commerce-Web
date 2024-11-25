@@ -54,23 +54,45 @@ namespace E_Commerce_Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Get the current Employee ID from the session
+                var currentEmployeeId = Session["EmployeeID"] as int?;
+
+                if (currentEmployeeId.HasValue)
+                {
+                    product.CreatedBy = currentEmployeeId.Value;
+                }
+                else
+                {
+                    // Handle the case where the EmployeeID is not in the session
+                    ModelState.AddModelError("", "Employee not logged in.");
+                    return View(product);
+                }
+
+                // Handle the image file upload
                 if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
-
                     string fileName = Path.GetFileName(ImageFile.FileName);
                     string path = Path.Combine(Server.MapPath("~/Content/img/products"), fileName);
                     ImageFile.SaveAs(path);
-
                     product.ImagePath = fileName;
                 }
+
+                // Set the CreatedAt field to the current time
+                product.CreatedAt = DateTime.Now;
+
+                // Add the product to the database and save changes
                 db.Products.Add(product);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
+            // Populate the Category dropdown list in case of validation failure
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
         }
+
+
 
         // GET: AdminProducts/Edit/5
         public ActionResult Edit(int? id)

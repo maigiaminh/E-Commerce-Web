@@ -393,6 +393,7 @@
     <Content Include="Content\img\icon\error.png" />
     <Content Include="Content\img\icon\success.png" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\MiKiLogo.png" />
     <Content Include="Content\img\order\active_line.png" />
     <Content Include="Content\img\order\confirm-bill-active.png" />
     <Content Include="Content\img\order\confirm-bill-selected.png" />

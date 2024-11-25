@@ -13,8 +13,13 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        Welcome to Admin Page!!!
-    </p>
+    @if (Session["EmployeeID"] != null)
+    {
+        <p>Welcome, Employee #@Session["EmployeeID"]</p>
+    }
+    else
+    {
+        <p>You are not logged in.</p>
+    }
 </body>
 </html>
