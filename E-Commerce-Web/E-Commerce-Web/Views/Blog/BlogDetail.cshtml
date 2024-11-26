@@ -7,10 +7,10 @@
 
 <section id="blog-detail" class="section-p3">
     <div class="blog-content">
-        <h1 class="title">TEST</h1>
+        <h1 class="title">@Model.Title</h1>
         <div class="subtitle">
-            <span>Author: Mai Gia Minh</span>
-            <span>16/11/2024</span>
+            <span>Author: @Model.Author</span>
+            <span>@Model.CreatedAt.ToString("dd/MM/yyyy")</span>
         </div>
         <div style="margin-bottom: 1rem;">
             <img src="@Url.Content("~/Content/img/blog/" + Model.ImageUrl)" alt="Title">
@@ -81,7 +81,7 @@
                 <li>
                     <img src="@Url.Content("~/Content/img/blog/" + blog.ImageUrl) " alt="Blog Image" style="width: 80px; height: 80px; object-fit: cover; margin-right: 1rem; border-radius: 8px;">
                     <div>
-                        <a href="@Url.Action("BlogDetail", "Blog", new { id = 1 })" style="text-decoration: none; color: #333;">
+                        <a href="@Url.Action("BlogDetail", "Blog", new { id = blog.Id })" style="text-decoration: none; color: #333;">
                             <h4 style="margin: 0; margin-bottom: 10px;">@blog.Title</h4>
                             <small style="color: #666">@blog.CreatedAt.ToString("dd/MM/yyyy")</small>
                         </a>
