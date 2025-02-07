@@ -35,9 +35,6 @@
 ---
 
 ## 📸 Screenshots
-### 🖥️ Mockup
-![Mockup Screenshot](https://raw.githubusercontent.com/maigiaminh/E-Commerce-Web/main/assets/images/ecommerce-mockup.png)
-
 ### 🏠 Homepage
 ![Homepage Screenshot](https://raw.githubusercontent.com/maigiaminh/E-Commerce-Web/main/assets/images/ecommerce-homepage.png)
 
