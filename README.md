@@ -50,7 +50,7 @@
 ---
 
 ## 🎥 Video Demo
-[![Watch the video](https://raw.githubusercontent.com/maigiaminh/E-Commerce-Web/main/assets/images/ecommerce-demo-thumbnail.png)](https://raw.githubusercontent.com/maigiaminh/E-Commerce-Web/main/assets/videos/ecommerce-demo.mp4)
+[![Watch the video](https://img.youtube.com/vi/8yPZAbMdChk/maxresdefault.jpg)](https://www.youtube.com/watch?v=8yPZAbMdChk)
 
 ---
 
