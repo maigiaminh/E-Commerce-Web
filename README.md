@@ -38,19 +38,29 @@
 ### 🏠 Homepage
 ![Homepage Screenshot](https://raw.githubusercontent.com/maigiaminh/E-Commerce-Web/main/assets/images/ecommerce-homepage.png)
 
+
+
 ### 🛍️ Product Page
 ![Product Page Screenshot](https://raw.githubusercontent.com/maigiaminh/E-Commerce-Web/main/assets/images/ecommerce-product.png)
+
+
 
 ### 🛒 Shopping Cart
 ![Shopping Cart Screenshot](https://raw.githubusercontent.com/maigiaminh/E-Commerce-Web/main/assets/images/ecommerce-cart.png)
 
+
+
 ### 🧾 Invoice
 ![Invoice Screenshot](https://raw.githubusercontent.com/maigiaminh/E-Commerce-Web/main/assets/images/ecommerce-invoice.png)
+
+
 
 ---
 
 ## 🎥 Video Demo
 [![Watch the video](https://img.youtube.com/vi/8yPZAbMdChk/maxresdefault.jpg)](https://www.youtube.com/watch?v=8yPZAbMdChk)
+
+
 
 ---
 
