@@ -50,7 +50,7 @@
 ---
 
 ## 🎥 Video Demo
-[![Watch the video](https://img.youtube.com/vi/8yPZAbMdChk/maxresdefault.jpg)](https://www.youtube.com/watch?v=8yPZAbMdChk)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8yPZAbMdChk" frameborder="0" allowfullscreen></iframe>
 
 ---
 
